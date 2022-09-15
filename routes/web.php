@@ -13,10 +13,25 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+/* Route::get('/', function () {
+    return view('frontend');
+}); */
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::middleware("auth")
+    ->name("admin.")
+    ->namespace("Admin")
+    ->prefix("admin")
+    ->group(function () {
+
+        Route::get('/', 'HomeController@index')->name('home');
+
+        
+    });
+Route::get('/backend', 'HomeController@index')->name('backend');
+Route::get('{any?}', function () {
+    return view('frontend');
+})->where("any", ".*");
+
+
