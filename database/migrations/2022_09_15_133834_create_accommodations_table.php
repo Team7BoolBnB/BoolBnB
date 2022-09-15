@@ -21,6 +21,7 @@ class CreateAccommodationsTable extends Migration
             $table->char('address', 255) ;
             $table->char('longitude', 255);
             $table->char('latitude', 255);
+            $table->string('slug', 255);
             $table->char('title', 255)->nullable();
             $table->text('description');
             $table->tinyInteger('rooms')-> unsigned();
