@@ -15,6 +15,20 @@ class CreateAccommodationsTable extends Migration
     {
         Schema::create('accommodations', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('user_id');
+
+            $table->foreign('user_id')->references('id')->on('users');
+            $table->char('address', 255) ;
+            $table->char('longitude', 255);
+            $table->char('latitude', 255);
+            $table->char('title', 255)->nullable();
+            $table->text('description');
+            $table->tinyint('rooms')-> unsigned();
+            $table->tinyint('beds')->unsigned();
+            $table->tinyint('bathrooms')->unsigned();
+            $table->smallint('mt_square')->unsigned(); 
+            $table->char('image', 255); 
+            $table->boolean('available');
             $table->timestamps();
         });
     }
