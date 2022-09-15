@@ -40232,8 +40232,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Users\Biagio\Documents\RepositoryBoolean\BoolBnB\resources\js\backend.js */"./resources/js/backend.js");
-module.exports = __webpack_require__(/*! C:\Users\Biagio\Documents\RepositoryBoolean\BoolBnB\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /Users/lucamatteotti/Documents/BoolBnb/resources/js/backend.js */"./resources/js/backend.js");
+module.exports = __webpack_require__(/*! /Users/lucamatteotti/Documents/BoolBnb/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

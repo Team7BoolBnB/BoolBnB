@@ -5177,7 +5177,7 @@ var render = function render() {
   var _vm = this,
       _c = _vm._self._c;
 
-  return _c("div", [_vm._v("\n    Vue sta funzionando nel frontend\n")]);
+  return _c("div", [_vm._v("\n    Vue \n")]);
 };
 
 var staticRenderFns = [];
@@ -43448,7 +43448,7 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\Users\Biagio\Documents\RepositoryBoolean\BoolBnB\resources\js\frontend.js */"./resources/js/frontend.js");
+module.exports = __webpack_require__(/*! /Users/lucamatteotti/Documents/BoolBnb/resources/js/frontend.js */"./resources/js/frontend.js");
 
 
 /***/ })
