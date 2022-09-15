@@ -18,7 +18,6 @@ class CreateViewsTable extends Migration
             $table->unsignedBigInteger("accomodation_id");
             $table->foreign("accomodation_id")->references("id")->on("accomodations");
             $table->string("ipAddress");
-            $table->integer("counter");
             $table->timestamps();
         });
     }

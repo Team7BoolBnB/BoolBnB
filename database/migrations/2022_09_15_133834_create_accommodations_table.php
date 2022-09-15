@@ -23,9 +23,9 @@ class CreateAccommodationsTable extends Migration
             $table->char('latitude', 255);
             $table->char('title', 255)->nullable();
             $table->text('description');
-            $table->tinyint('rooms')-> unsigned();
-            $table->tinyint('beds')->unsigned();
-            $table->tinyint('bathrooms')->unsigned();
+            $table->tinyInteger('rooms')-> unsigned();
+            $table->tinyInteger('beds')->unsigned();
+            $table->tinyInteger('bathrooms')->unsigned();
             $table->smallint('mt_square')->unsigned(); 
             $table->char('image', 255); 
             $table->boolean('available');
