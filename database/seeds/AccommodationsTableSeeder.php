@@ -12,21 +12,26 @@ class AccommodationsTableSeeder extends Seeder
      */
     public function run(Faker $faker)
     {
-        $typology=["House","Hotel","BnB","Appartment","Guest_House"];
-        for ($i = 0; $i < 10; $i++) {
-            $randomNumber=rand(0,4);
+        
+        for ($i = 0; $i < 100; $i++) {
+            
             $accomodation = new Accommodation();
             
             $accomodation->user_id=$i+1;
-            $accomodation->typology =$typology[$randomNumber];
-            $accomodation->counter = $faker->numberBetween(0,1000000);
-            $accomodation->indirizzo = $faker->address();
-            $accomodation->longitudine = $faker->randomNumber();
-            $accomodation->latitudine = $faker->randomNumber();
-            $accomodation->titolo = $faker->name();
-            $accomodation->stanze = $faker->numberBetween(1,4);
-            $accomodation->letti = $faker->numberBetween(1,4);
-            $accomodation->bagni = $faker->numberBetween(1,3);
+            $accomodation->address = $faker->address();
+            $accomodation->longitude = $faker->randomNumber();
+            $accomodation->latitude = $faker->randomNumber();
+            $accomodation->slug = $faker->name();
+            $accomodation->title = $faker->name();
+            $accomodation->description=$faker->nema();
+            $accomodation->rooms = $faker->numberBetween(1,4);
+            $accomodation->beds = $faker->numberBetween(1,4);
+            $accomodation->bathrooms = $faker->numberBetween(1,3);
+            $accomodation->mt_square = $faker->numberBetween(1,3);
+            $accomodation->image = $faker->numberBetween(1,3);
+             $accomodation->available = $faker->numberBetween(1,3);
+
+
 
 
 
