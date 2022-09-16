@@ -6,6 +6,20 @@ use Illuminate\Database\Eloquent\Model;
 
 class Accommodation extends Model
 {
+
+    public $fillable = [
+    "address",
+    "longitude",
+    "latitude",
+    "title",
+    "description",
+    "rooms",
+    "beds",
+    "bathrooms",
+    "mt_square",
+    "image",
+    "available"];
+
     public function views(){
         return $this->hasMany("App\View");
     }
