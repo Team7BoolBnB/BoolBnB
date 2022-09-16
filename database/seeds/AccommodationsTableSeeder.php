@@ -13,13 +13,13 @@ class AccommodationsTableSeeder extends Seeder
     public function run(Faker $faker)
     {
         
-        for ($i = 0; $i < 10; $i++) {
+        for ($i = 0; $i < 100; $i++) {
             
             $accomodation = new Accommodation();
             
             
-            $accomodation->user_id=$i+1;
-            $accomodation->typology_id=2;
+            $accomodation->user_id=$faker->numberBetween(10,80);
+            $accomodation->typology_id=$faker->numberBetween(1,4);
 
             $accomodation->address = $faker->address();
             $accomodation->longitude = $faker->randomFloat(4, 11, 13.7);
