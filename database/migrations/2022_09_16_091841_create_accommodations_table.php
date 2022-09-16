@@ -16,7 +16,8 @@ class CreateAccommodationsTable extends Migration
         Schema::create('accommodations', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
-
+            $table->unsignedBigInteger("typology_id");
+            $table->foreign("typology_id")->references("id")->on("typologies");
             $table->foreign('user_id')->references('id')->on('users');
             $table->char('address', 255) ;
             $table->char('longitude', 255);
@@ -27,7 +28,7 @@ class CreateAccommodationsTable extends Migration
             $table->tinyInteger('rooms')-> unsigned();
             $table->tinyInteger('beds')->unsigned();
             $table->tinyInteger('bathrooms')->unsigned();
-            $table->smallint('mt_square')->unsigned(); 
+            $table->smallInteger('mt_square')->unsigned(); 
             $table->char('image', 255); 
             $table->boolean('available');
             $table->timestamps();

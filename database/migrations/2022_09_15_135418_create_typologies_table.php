@@ -15,8 +15,6 @@ class CreateTypologiesTable extends Migration
     {
         Schema::create('typologies', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger("accomodation_id");
-            $table->foreign("accomodation_id")->references("id")->on("accomodations");
             $table->char("type",255);
             $table->timestamps();
         });
