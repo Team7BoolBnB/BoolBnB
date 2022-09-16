@@ -16,16 +16,13 @@ class UsersTableSeeder extends Seeder
 
         for ($i = 0; $i < 100; $i++) {
             $user = new User();
-            $user->firstName = $faker->address();
-            $user->lastName = $faker->address();
-            $user->email = $faker->address();
-            $user->dateOfBirth = $faker->address();
-            $user->password = $faker->address();
+            $user->firstName = $faker->firstName();
+            $user->lastName = $faker->lastName();
+            $user->email = $faker->email();
+            $user->dateOfBirth = $faker->dateTimeBetween("-80 year","-18year");
+            $user->password = $faker->regexify("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[*.!@$%^&(){}[]:;<>,.?/~_+-=|\]).{8,15}$");
 
-            
-
-
-
+            $user->save();
         }
     }
 }

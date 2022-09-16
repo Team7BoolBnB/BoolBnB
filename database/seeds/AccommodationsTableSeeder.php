@@ -1,8 +1,8 @@
 <?php
-use Faker\Generator as Faker;
+use Faker\Generator as Faker ;
 use App\Accommodation;
 use Illuminate\Database\Seeder;
-
+use Illuminate\Support\Str;
 class AccommodationsTableSeeder extends Seeder
 {
     /**
@@ -13,23 +13,28 @@ class AccommodationsTableSeeder extends Seeder
     public function run(Faker $faker)
     {
         
-        for ($i = 0; $i < 100; $i++) {
+        for ($i = 0; $i < 10; $i++) {
             
             $accomodation = new Accommodation();
             
+            
             $accomodation->user_id=$i+1;
+            $accomodation->typology_id=2;
+
             $accomodation->address = $faker->address();
-            $accomodation->longitude = $faker->randomNumber();
-            $accomodation->latitude = $faker->randomNumber();
-            $accomodation->slug = $faker->name();
-            $accomodation->title = $faker->name();
-            $accomodation->description=$faker->nema();
-            $accomodation->rooms = $faker->numberBetween(1,4);
-            $accomodation->beds = $faker->numberBetween(1,4);
-            $accomodation->bathrooms = $faker->numberBetween(1,3);
-            $accomodation->mt_square = $faker->numberBetween(1,3);
-            $accomodation->image = $faker->numberBetween(1,3);
-             $accomodation->available = $faker->numberBetween(1,3);
+            $accomodation->longitude = $faker->randomFloat(4, 11, 13.7);
+            $accomodation->latitude = $faker->randomFloat(4, 35.5, 45.5);
+            $accomodation->title = $faker->sentence(5);
+            $slug = Str::slug($accomodation->title, '-');
+            $accomodation->slug = $slug;
+            $accomodation->description=$faker->paragraph();
+            $accomodation->rooms = $faker->numberBetween(1,10);
+            $accomodation->beds = $faker->numberBetween(1,10);
+            $accomodation->bathrooms = $faker->numberBetween(1,6);
+            $accomodation->mt_square = $faker->numberBetween(50,500);
+            $k=$i+450;
+            $accomodation->image = "https://picsum.photos/id/". $k ."/1920/1080";
+            $accomodation->available = $faker->boolean();
 
 
 
