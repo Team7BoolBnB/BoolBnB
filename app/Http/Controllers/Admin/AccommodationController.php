@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use App\Accommodation;
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 class AccommodationController extends Controller
@@ -43,9 +44,9 @@ class AccommodationController extends Controller
             "latitude" => "required|min:5|max:15",
             "title" => "required",
             "description" => "required|min:80|max:255",
-            "rooms" => "required|min:1|max:5",
-            "beds" => "required|min:1|max:5",
-            "bathrooms" => "required|min:1|max:5",
+            "rooms" => "required|min:1|max:10",
+            "beds" => "required|min:1|max:10",
+            "bathrooms" => "required|min:1|max:6",
             "mt_square" => "required|min:25|max:300",
             "image" => "required",
             "available" => "required"
@@ -102,9 +103,9 @@ class AccommodationController extends Controller
             "latitude" => "required|min:5|max:15",
             "title" => "required",
             "description" => "required|min:80|max:255",
-            "rooms" => "required|min:1|max:5",
-            "beds" => "required|min:1|max:5",
-            "bathrooms" => "required|min:1|max:5",
+            "rooms" => "required|min:1|max:10",
+            "beds" => "required|min:1|max:10",
+            "bathrooms" => "required|min:1|max:6",
             "mt_square" => "required|min:25|max:300",
             "image" => "required",
             "available" => "required"
