@@ -13,7 +13,7 @@ class ServicesTableSeeder extends Seeder
      */
     public function run(Faker $faker)
     {
-        $type = ["Wi-fi", "Cucina", "Parcheggio gratuito nella proprietà", "Vasca da bagno","Vista sul mare","TV","Riscaldamento"];
+        $type = ["Wi-Fi", "Cucina", "Parcheggio gratuito nella proprietà", "Vasca da bagno","Vista sul mare","TV","Riscaldamento"];
         $icon = ["fa-solid fa-wifi", "fa-solid fa-kitchen-set", "fa-solid fa-car", "fa-solid fa-bath", "fa-solid fa-umbrella-beach","fa-solid fa-tv","fa-solid fa-temperature-arrow-up"];
 
 
