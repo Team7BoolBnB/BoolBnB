@@ -27,7 +27,8 @@ Route::middleware("auth")
 
         Route::get('/', 'HomeController@index')->name('home');
 
-        
+        Route::resource("accommodation", "AccommodationController");
+        Route::resource('sponsorship', 'SponsorshipController');
     });
 Route::get('/backend', 'HomeController@index')->name('backend');
 Route::get('{any?}', function () {
