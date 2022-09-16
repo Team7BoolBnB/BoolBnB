@@ -15,8 +15,8 @@ class CreateViewsTable extends Migration
     {
         Schema::create('views', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger("accomodation_id");
-            $table->foreign("accomodation_id")->references("id")->on("accomodations");
+            $table->unsignedBigInteger("accommodation_id");
+            $table->foreign("accommodation_id")->references("id")->on("accommodations");
             $table->string("ipAddress");
             $table->timestamps();
         });
