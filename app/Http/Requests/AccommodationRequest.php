@@ -25,6 +25,7 @@ class AccommodationRequest extends FormRequest
     {
         return [
             "address" => "required|min:6|max:255",
+            "typology_id"=>"required",
             "longitude" => "required|min:5|max:15",
             "latitude" => "required|min:5|max:15",
             "title" => "required",

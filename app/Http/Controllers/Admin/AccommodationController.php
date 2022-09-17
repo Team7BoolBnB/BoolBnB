@@ -10,6 +10,7 @@ use App\Typology;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class AccommodationController extends Controller
 {
@@ -19,10 +20,11 @@ class AccommodationController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {   $user_id=Auth::id();
-        
-        $accommodations = Accommodation::where("user_id",$user_id)->get()->first();
-       
+    {
+        $user_id = Auth::id();
+
+        $accommodations = Accommodation::where("user_id", $user_id)->get()->first();
+
 
         return view("admin.accommodation.index", compact("accommodations"));
     }
@@ -33,10 +35,11 @@ class AccommodationController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {   $services=Service::all();
-       $typologies=Typology::all();
+    {
+        $services = Service::all();
+        $typologies = Typology::all();
 
-        return view("admin.accommodation.create",compact("services", "typologies"));
+        return view("admin.accommodation.create", compact("services", "typologies"));
     }
 
     /**
@@ -45,12 +48,29 @@ class AccommodationController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(AccommodationRequest $request)
     {
-        $data = $request->validated();
-        $newAccommodation = Accommodation::create($data);
+        $accommodation = new Accommodation();
 
-        return  redirect()->route("admin.accommodation.show", $newAccommodation->id);
+        $data = $request->validated();
+
+        $accommodation->fill($data);
+
+        $accommodation->user_id = Auth::user()->id;
+
+        $coverImg = Storage::put("/accommodation", $data["image"]);
+    
+        $accommodation->image = $coverImg;
+
+
+
+        $accommodation->save();
+
+        if (key_exists("services", $data)) {
+            $accommodation->services()->attach($data["services"]);
+        }
+
+        return  redirect()->route("admin.accommodation.show", $accommodation->id);
     }
 
     /**
@@ -61,7 +81,7 @@ class AccommodationController extends Controller
      */
     public function show($id)
     {
-        $accommodation = Accommodation:: findOrFail($id);
+        $accommodation = Accommodation::findOrFail($id);
 
         return view("admin.accommodation.show", compact("accommodation"));
     }
@@ -74,11 +94,11 @@ class AccommodationController extends Controller
      */
     public function edit($id)
     {
-        $accommodation = Accommodation:: findOrFail($id);
-        $services=Service::all();
-        $typologies=Typology::all();
+        $accommodation = Accommodation::findOrFail($id);
+        $services = Service::all();
+        $typologies = Typology::all();
 
-        return view("admin.accommodation.edit", compact("accommodation","services","typologies"));
+        return view("admin.accommodation.edit", compact("accommodation", "services", "typologies"));
     }
 
     /**
@@ -90,9 +110,20 @@ class AccommodationController extends Controller
      */
     public function update(AccommodationRequest $request, $id)
     {
-        $accommodation = Accommodation:: findOrFail($id);
+        $accommodation = Accommodation::findOrFail($id);
 
         $data = $request->validated();
+
+        Storage::delete($accommodation->image);
+        $accommodation->image=Storage::put("/accommodation", $data["image"]);
+         
+        if (key_exists("services", $data)) {
+            
+            $accommodation->services()->sync($data["services"]);
+        } else {
+            $accommodation->services()->sync([]);
+        }
+
         $accommodation->update($data);
 
         return  redirect()->route("admin.accommodation.show", $accommodation->id);
@@ -108,7 +139,15 @@ class AccommodationController extends Controller
     {
         $accommodation = Accommodation::findOrFail($id);
 
-        $accommodation -> delete();
+
+        if($accommodation->trashed()){
+            $accommodation->services()->detach();
+            $accommodation->forceDelete();
+        }
+        else{
+            $accommodation->delete();
+        }
+        $accommodation->delete();
 
         return redirect()->route("admin.accommodation.index");
     }
