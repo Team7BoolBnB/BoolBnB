@@ -3,7 +3,7 @@
 @section('content')
     <div class="container">
 
-        <form action="{{ route('admin.accommodation.update', '$accommodation->id') }}" method="post">
+        <form action="{{ route('admin.accommodation.update', $accommodation->id) }}" method="post">
 
             @csrf
             @method("PATCH")
