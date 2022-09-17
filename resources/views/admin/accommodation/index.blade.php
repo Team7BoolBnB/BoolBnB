@@ -21,10 +21,10 @@
                             <a href="{{ route('admin.accommodation.show', $accommodation->id) }}" class="btn btn-secondary py-0 px-1">
                                 <i class="fa-solid fa-eye fa-xs"></i>
                             </a>
-                            {{-- <a href="{{ route('admin.accommodation.edit', $accommodation->id) }}" class="btn btn-primary py-0 px-1">
+                            <a href="{{ route('admin.accommodation.edit', $accommodation->id) }}" class="btn btn-primary py-0 px-1">
                                 <i class="fa-solid fa-pencil fa-xs"></i>
                             </a>
-                            <form action="{{ route('admin.accommodation.destroy', $accommodation->id) }}" method="POST"
+                            {{-- <form action="{{ route('admin.accommodation.destroy', $accommodation->id) }}" method="POST"
                                 class="form-delete d-inline">
                                 @csrf
                                 @method('DELETE')
