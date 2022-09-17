@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Admin;
 
 use App\Accommodation;
 use App\Http\Controllers\Controller;
+use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class AccommodationController extends Controller
 {
@@ -14,10 +16,12 @@ class AccommodationController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-        $accommodations = Accommodation::all();
+    {   $user_id=Auth::id();
+        
+        $accommodations = Accommodation::where("user_id",$user_id)->get()->first();
+       
 
-        return view("admin.accomodation.index", compact("accomodations"));
+        return view("admin.accommodation.index", compact("accommodations"));
     }
 
     /**
@@ -53,7 +57,7 @@ class AccommodationController extends Controller
         ]);
         $newAccommodation = Accommodation::create($data);
 
-        return  redirect()->route("admin.accomodation.show", $newAccommodation->id);
+        return  redirect()->route("admin.accommodation.show", $newAccommodation->id);
     }
 
     /**
@@ -66,9 +70,7 @@ class AccommodationController extends Controller
     {
         $accommodation = Accommodation:: findOrFail($id);
 
-        return view("admin.accommodation.show", [
-            "accommodation" => $accommodation
-        ]);
+        return view("admin.accommodation.show", compact("accommodation"));
     }
 
     /**
@@ -81,9 +83,7 @@ class AccommodationController extends Controller
     {
         $accommodation = Accommodation:: findOrFail($id);
 
-        return view("admin.accommodation.edit", [
-            "accommodation" => $accommodation
-        ]);
+        return view("admin.accommodation.edit", compact("accommodation"));
     }
 
     /**
@@ -112,7 +112,7 @@ class AccommodationController extends Controller
         ]);
         $accommodation->update($data);
 
-        return  redirect()->route("admin.accomodation.show", $accommodation->id);
+        return  redirect()->route("admin.accommodation.show", $accommodation->id);
     }
 
     /**
