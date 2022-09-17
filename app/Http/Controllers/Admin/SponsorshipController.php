@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Accommodation;
 use App\Http\Controllers\Controller;
 use App\Sponsorship;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class SponsorshipController extends Controller
 {
@@ -14,10 +16,13 @@ class SponsorshipController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-        $sponsorships = Sponsorship::all();
 
-        return view("admin.sponsorship.index", compact("sponsorships"));
+    {
+        $userId = Auth::id();
+        $accommodations = Accommodation::where("user_id",$userId);
+
+
+        return view("admin.sponsorship.index", compact("accommodations"));
     }
 
     /**
@@ -42,7 +47,7 @@ class SponsorshipController extends Controller
             "name" => "required",
             "period" => "required",
             "price" => "required",
-            
+
         ]);
         $newSponsorship = Sponsorship::create($data);
 
