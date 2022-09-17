@@ -1,0 +1,43 @@
+@extends('layouts.app')
+
+@section('content')
+
+    <div class="container">
+
+        <div class="pb-4">
+            <a href="{{ route('admin.accommodation.index') }}" class="btn btn-secondary py-1 px-3">
+                <i class="fa-solid fa-arrow-left"></i> Back
+            </a>
+        </div>
+
+        <img src="{{ $accommodation->image }}" alt="{{ $accommodation->title }}" width="100%">
+
+        <h5 class="pt-4">{{ $accommodation->title }}</h5>
+
+        <p class="py-4"><strong>Description:</strong><br>{{ $accommodation->description }}</p>
+
+        <p><strong>Longitude:</strong><br>{{ $accommodation->longitude }}</p>
+        <p><strong>Latitude:</strong><br> € {{ $accommodation->latitude }}</p>
+        <p><strong>Rooms:</strong><br> € {{ $accommodation->rooms }}</p>
+        <p><strong>Beds:</strong><br> € {{ $accommodation->beds }}</p>
+        <p><strong>Bathrooms:</strong><br> € {{ $accommodation->mt_square }}</p>
+        <p><strong>Mt Square:</strong><br> € {{ $accommodation->latitude }}</p>
+        <p><strong>Available:</strong><br> € {{ $accommodation->available }}</p>
+
+        {{-- <div>
+            <a href="{{ route('admin.accommodation.edit', $accommodation->id) }}" class="cdBtn btn btn-primary">
+                <i class="fa-solid fa-pencil fa-xs"></i> Edit
+            </a>
+            <form action="{{ route('admin.accommodation.destroy', $accommodation->id) }}" method="POST" class="form-delete d-inline">
+                @csrf
+                @method('DELETE')
+
+                <button type="submit" class="cdBtn btn btn-danger">
+                    <i class="fa-solid fa-trash-can"></i> Delete
+                </button>
+            </form>
+        </div> --}}
+
+    </div>
+
+@endsection

@@ -21,8 +21,8 @@ class AccommodationController extends Controller
     public function index()
     {   $user_id=Auth::id();
         
-        $accommodations = Accommodation::where("user_id",$user_id)->get()->first();
-       
+        //Get all the accommodations of logged user
+        $accommodations = Accommodation::where("user_id",$user_id)->get();
 
         return view("admin.accommodation.index", compact("accommodations"));
     }
@@ -61,7 +61,7 @@ class AccommodationController extends Controller
      */
     public function show($id)
     {
-        $accommodation = Accommodation:: findOrFail($id);
+        $accommodation = Accommodation::findOrFail($id);
 
         return view("admin.accommodation.show", compact("accommodation"));
     }
