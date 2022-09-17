@@ -99,6 +99,7 @@ class AccommodationController extends Controller
     public function edit($id)
     {
         $accommodation = Accommodation::findOrFail($id);
+
         $services = Service::all();
         $typologies = Typology::all();
 

@@ -17,12 +17,12 @@
         <p class="py-4"><strong>Description:</strong><br>{{ $accommodation->description }}</p>
 
         <p><strong>Longitude:</strong><br>{{ $accommodation->longitude }}</p>
-        <p><strong>Latitude:</strong><br> € {{ $accommodation->latitude }}</p>
-        <p><strong>Rooms:</strong><br> € {{ $accommodation->rooms }}</p>
-        <p><strong>Beds:</strong><br> € {{ $accommodation->beds }}</p>
-        <p><strong>Bathrooms:</strong><br> € {{ $accommodation->mt_square }}</p>
-        <p><strong>Mt Square:</strong><br> € {{ $accommodation->latitude }}</p>
-        <p><strong>Available:</strong><br> € {{ $accommodation->available }}</p>
+        <p><strong>Latitude:</strong><br>{{ $accommodation->latitude }}</p>
+        <p><strong>Rooms:</strong><br>{{ $accommodation->rooms }}</p>
+        <p><strong>Beds:</strong><br>{{ $accommodation->beds }}</p>
+        <p><strong>Bathrooms:</strong><br>{{ $accommodation->mt_square }}</p>
+        <p><strong>Mt Square:</strong><br>{{ $accommodation->latitude }}</p>
+        <p><strong>Available:</strong><br>{{ $accommodation->available }}</p>
 
         {{-- <div>
             <a href="{{ route('admin.accommodation.edit', $accommodation->id) }}" class="cdBtn btn btn-primary">
