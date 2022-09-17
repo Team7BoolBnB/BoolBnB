@@ -116,7 +116,7 @@ class AccommodationController extends Controller
     public function update(AccommodationRequest $request, $id)
     {
         $accommodation = Accommodation::findOrFail($id);
-
+        
         $data = $request->validated();
 
         Storage::delete($accommodation->image);

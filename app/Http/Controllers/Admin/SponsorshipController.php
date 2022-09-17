@@ -16,14 +16,14 @@ class SponsorshipController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-
     {
-        $userId = Auth::id();
-        $accommodations = Accommodation::where("user_id",$userId);
 
-
-        return view("admin.sponsorship.index", compact("accommodations"));
+        
+        $accommodation = Accommodation::findOrFail(Auth::id());
+        
+        return view("admin.sponsorship.index", compact("accommodation"));
     }
+
 
     /**
      * Show the form for creating a new resource.

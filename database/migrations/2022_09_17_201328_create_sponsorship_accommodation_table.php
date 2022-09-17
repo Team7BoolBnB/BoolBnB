@@ -15,10 +15,8 @@ class CreateSponsorshipAccommodationTable extends Migration
     {
         Schema::create('sponsorship_accommodation', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger("accommodation_id");
-            $table->foreign("accommodation_id")->references("id")->on("accommodations");
-            $table->unsignedBigInteger("sponsorship_id");
-            $table->foreign("sponsorship_id")->references("id")->on("sponsorships");
+            $table->foreignId("sponsorship_id")->constrained();
+            $table->foreignId("accommodation_id")->constrained();
             $table->timestamps();
         });
     }
