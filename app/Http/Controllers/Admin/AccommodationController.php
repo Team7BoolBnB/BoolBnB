@@ -20,10 +20,14 @@ class AccommodationController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-        $user_id = Auth::id();
 
-        $accommodations = Accommodation::where("user_id", $user_id)->get();
+   
+
+
+    {   $user_id=Auth::id();
+        
+        //Get all the accommodations of logged user
+        $accommodations = Accommodation::where("user_id",$user_id)->get();
 
 
         return view("admin.accommodation.index", compact("accommodations"));
