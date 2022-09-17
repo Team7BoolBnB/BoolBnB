@@ -17,7 +17,7 @@ class AccommodationController extends Controller
     {
         $accommodations = Accommodation::all();
 
-        return view("admin.accomodation.index", compact("accomodations"));
+        return view("admin.accommodation.index", compact("accomodations"));
     }
 
     /**
@@ -53,7 +53,7 @@ class AccommodationController extends Controller
         ]);
         $newAccommodation = Accommodation::create($data);
 
-        return  redirect()->route("admin.accomodation.show", $newAccommodation->id);
+        return  redirect()->route("admin.accommodation.show", $newAccommodation->id);
     }
 
     /**
@@ -112,7 +112,7 @@ class AccommodationController extends Controller
         ]);
         $accommodation->update($data);
 
-        return  redirect()->route("admin.accomodation.show", $accommodation->id);
+        return  redirect()->route("admin.accommodation.show", $accommodation->id);
     }
 
     /**
