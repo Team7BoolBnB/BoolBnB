@@ -4,6 +4,9 @@ namespace App\Http\Controllers\Admin;
 
 use App\Accommodation;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\AccommodationRequest;
+use App\Service;
+use App\Typology;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -30,8 +33,10 @@ class AccommodationController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {
-        return view("admin.accommodation.create");
+    {   $services=Service::all();
+       $typologies=Typology::all();
+
+        return view("admin.accommodation.create",compact("services", "typologies"));
     }
 
     /**
@@ -42,19 +47,7 @@ class AccommodationController extends Controller
      */
     public function store(Request $request)
     {
-        $data = $request->validate([
-            "address" => "required|min:6|max:255",
-            "longitude" => "required|min:5|max:15",
-            "latitude" => "required|min:5|max:15",
-            "title" => "required",
-            "description" => "required|min:80|max:255",
-            "rooms" => "required|min:1|max:10",
-            "beds" => "required|min:1|max:10",
-            "bathrooms" => "required|min:1|max:6",
-            "mt_square" => "required|min:25|max:300",
-            "image" => "required",
-            "available" => "required"
-        ]);
+        $data = $request->validated();
         $newAccommodation = Accommodation::create($data);
 
         return  redirect()->route("admin.accommodation.show", $newAccommodation->id);
@@ -82,8 +75,10 @@ class AccommodationController extends Controller
     public function edit($id)
     {
         $accommodation = Accommodation:: findOrFail($id);
+        $services=Service::all();
+        $typologies=Typology::all();
 
-        return view("admin.accommodation.edit", compact("accommodation"));
+        return view("admin.accommodation.edit", compact("accommodation","services","typologies"));
     }
 
     /**
@@ -93,23 +88,11 @@ class AccommodationController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(AccommodationRequest $request, $id)
     {
         $accommodation = Accommodation:: findOrFail($id);
 
-        $data = $request->validate([
-            "address" => "required|min:6|max:255",
-            "longitude" => "required|min:5|max:15",
-            "latitude" => "required|min:5|max:15",
-            "title" => "required",
-            "description" => "required|min:80|max:255",
-            "rooms" => "required|min:1|max:10",
-            "beds" => "required|min:1|max:10",
-            "bathrooms" => "required|min:1|max:6",
-            "mt_square" => "required|min:25|max:300",
-            "image" => "required",
-            "available" => "required"
-        ]);
+        $data = $request->validated();
         $accommodation->update($data);
 
         return  redirect()->route("admin.accommodation.show", $accommodation->id);
