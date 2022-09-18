@@ -25,7 +25,7 @@ class Accommodation extends Model
  //sponsorship_accommodation ma lui internamente non ne voleva sentire e lasciava come tabella in memoria accommodation_sponsorship
  // aggiungendo dopo belongs to many la tabella che vogliamo lui la sovrascrive in memoria d usa quella che gli diciamo...dio assassino
     public function sponsorship(){
-        return $this->belongsToMany("App\Sponsorship",'sponsorship_accommodation');
+        return $this->belongsToMany("App\Sponsorship",'sponsorship_accommodation')->withPivot("endTime");
     }
     public function services(){
         return $this->belongsToMany("App\Service",'service_accommodation');
