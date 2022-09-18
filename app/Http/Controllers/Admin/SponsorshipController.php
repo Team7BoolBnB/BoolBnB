@@ -19,10 +19,11 @@ class SponsorshipController extends Controller
     public function index()
     {
 
-        
-        $accommodation = Accommodation::findOrFail(Auth::id());
-        dd($accommodation);
-        return view("admin.sponsorship.index", compact("accommodation"));
+        $accommodations=Accommodation::where("user_id",Auth::id())->get();
+        /* dd($accommodations);
+        $sponsorships = Accommodation::find(Auth::id())->sponsorship()->get();
+         */
+        return view("admin.sponsorship.index", compact("accommodations"));
     }
 
 

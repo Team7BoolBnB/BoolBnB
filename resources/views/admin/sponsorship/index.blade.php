@@ -11,25 +11,33 @@
         <table class="table table-striped table-hover">
             <thead>
                 <tr>
-                    <th scope="col">ID</th>
+                    <th scope="col">Sponsorship ID</th>
+                    <th scope="col">Accommodation ID</th>
                     <th scope="col">Type</th>
                     <th scope="col">Period</th>
                     <th scope="col">Price</th>
                     <th scope="col">Created at</th>
+                    
                 </tr>
             </thead>
             <tbody>
-                @foreach ($accommodation->sponsorship as $sponsorship)
-                    <tr>
+                @foreach ($accommodations as $accommodation)
+                    @foreach ($accommodation->sponsorship as $sponsorship)
+                        <tr>
+                          
 
-                        <td scope="col">{{ $sponsorship->id }}</td>
-                        <td scope="col">{{ $sponsorship->type }}</td>
-                        <td scope="col">{{ $sponsorship->period }}</td>
-                        <td scope="col">{{ $sponsorship->price }}</td>
-                        <td scope="col">{{ $sponsorship->created_at }}</td>
-
-                    </tr>
+                            <td scope="col">{{ $sponsorship->id }}</td>
+                            <td scope="col">{{ $accommodation->id }}</td>
+                            <td scope="col">{{ $sponsorship->name }}</td>
+                            <td scope="col">{{ $sponsorship->period }}</td>
+                            <td scope="col">{{ $sponsorship->price }}</td>
+                            <td scope="col">{{ $sponsorship->created_at }}</td>
+                        </tr>
+                    @endforeach
                 @endforeach
+                <tr>
+
+                </tr>
             </tbody>
         </table>
     </div>
