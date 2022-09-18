@@ -1,7 +1,14 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container">
+
+    <div class="pageHeader d-flex align-items-center">
+        <div class="container text-white">
+            <h2>Accommodations</h2>
+        </div>
+    </div>
+
+    <div class="container pt-5">
         <table class="table table-striped table-hover">
             <thead>
                 <tr>

@@ -43448,7 +43448,7 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /Users/lucamatteotti/Documents/BoolBnb/resources/js/frontend.js */"./resources/js/frontend.js");
+module.exports = __webpack_require__(/*! /Users/daniele/Documents/Boolean/Repository/BoolBnb/resources/js/frontend.js */"./resources/js/frontend.js");
 
 
 /***/ })
