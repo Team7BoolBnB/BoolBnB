@@ -12,11 +12,11 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach ($accommodations as $accommodation)
+                @foreach ($accommodationn as $sponsorship)
                     <tr>
-                        <th scope="row">{{ $accommodation->title }}</th>
-                        <td>{{ $accommodation->address }}</td>
-                        <td>{{ $accommodation->description }}</td>
+                        <th scope="row">{{ $sponsorship->title }}</th>
+                        <td>{{ $sponsorship->address }}</td>
+                        <td>{{ $sponsorship->description }}</td>
                         <td>
                             <a href="{{ route('admin.accommodation.show', $accommodation->id) }}" class="btn btn-secondary py-0 px-1">
                                 <i class="fa-solid fa-eye fa-xs"></i>

@@ -19,13 +19,16 @@
                 </tr>
             </thead>
             <tbody>
-               
                 @foreach ($accommodation->sponsorship as $sponsorship)
-                <td scope="col">{{$sponsorship->id}}</td>
-                <td scope="col">{{$sponsorship->type}}</td>
-                <td scope="col">{{$sponsorship->period}}</td>
-                <td scope="col">{{$sponsorship->price}}</td>
-                <td scope="col">{{$sponsorship->created_at}}</td>
+                    <tr>
+
+                        <td scope="col">{{ $sponsorship->id }}</td>
+                        <td scope="col">{{ $sponsorship->type }}</td>
+                        <td scope="col">{{ $sponsorship->period }}</td>
+                        <td scope="col">{{ $sponsorship->price }}</td>
+                        <td scope="col">{{ $sponsorship->created_at }}</td>
+
+                    </tr>
                 @endforeach
             </tbody>
         </table>

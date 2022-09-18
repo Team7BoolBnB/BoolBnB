@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Accommodation;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\SponsorshipRequest;
 use App\Sponsorship;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -20,7 +21,7 @@ class SponsorshipController extends Controller
 
         
         $accommodation = Accommodation::findOrFail(Auth::id());
-        
+        dd($accommodation);
         return view("admin.sponsorship.index", compact("accommodation"));
     }
 
@@ -41,14 +42,9 @@ class SponsorshipController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(SponsorshipRequest $request)
     {
-        $data = $request->validate([
-            "name" => "required",
-            "period" => "required",
-            "price" => "required",
-
-        ]);
+        $data = $request->validated();
         $newSponsorship = Sponsorship::create($data);
 
         return  redirect()->route("admin.sponsorship.show", $newSponsorship->id);
