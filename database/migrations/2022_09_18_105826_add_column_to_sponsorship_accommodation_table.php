@@ -14,7 +14,11 @@ class AddColumnToSponsorshipAccommodationTable extends Migration
     public function up()
     {
         Schema::table('sponsorship_accommodation', function (Blueprint $table) {
-            $table->integer("endTime")->unsigned();
+            $table->dateTime("startTime")->unsigned();
+            $table->dateTime("endTime")->unsigned();
+
+
+
         });
     }
 
@@ -26,7 +30,9 @@ class AddColumnToSponsorshipAccommodationTable extends Migration
     public function down()
     {
         Schema::table('sponsorship_accommodation', function (Blueprint $table) {
+            $table->dropColumn('startTime');
             $table->dropColumn('endTime');
+
         });
     }
 }
