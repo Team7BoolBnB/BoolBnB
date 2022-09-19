@@ -124,6 +124,9 @@ class AccommodationController extends Controller
         if (key_exists("services", $data)) {
             $accommodation->services()->attach($data["services"]);
         }
+        if (key_exists("sponsorships", $data)) {
+            $accommodation->sponsorships()->attach($data["sponsorships"]);
+        }
 
         return  redirect()->route("admin.accommodation.show", $accommodation->slug);
     }
@@ -186,6 +189,12 @@ class AccommodationController extends Controller
         } else {
             $accommodation->services()->sync([]);
         }
+        if (key_exists("sponsorships", $data)) {
+            
+            $accommodation->sponsorships()->sync($data["sponsorships"]);
+        } else {
+            $accommodation->sponsorships()->sync([]);
+        }
 
         $accommodation->update($data);
 
@@ -200,17 +209,22 @@ class AccommodationController extends Controller
      */
     public function destroy($slug)
     {
+
         $accommodation = $this->findBySlug($slug);
 
+        
+        $accommodation->services()->detach();
+        $accommodation->forceDelete();
 
-        if($accommodation->trashed()){
+
+       /*  if($accommodation->trashed()){
             $accommodation->services()->detach();
             $accommodation->forceDelete();
         }
         else{
             $accommodation->delete();
-        }
-        $accommodation->delete();
+        } */
+        
 
         return redirect()->route("admin.accommodation.index");
     }
