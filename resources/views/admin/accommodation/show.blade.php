@@ -20,8 +20,8 @@
         <p><strong>Latitude:</strong><br>{{ $accommodation->latitude }}</p>
         <p><strong>Rooms:</strong><br>{{ $accommodation->rooms }}</p>
         <p><strong>Beds:</strong><br>{{ $accommodation->beds }}</p>
-        <p><strong>Bathrooms:</strong><br>{{ $accommodation->mt_square }}</p>
-        <p><strong>Mt Square:</strong><br>{{ $accommodation->latitude }}</p>
+        <p><strong>Bathrooms:</strong><br>{{ $accommodation->bathrooms }}</p>
+        <p><strong>Square Metre:</strong><br>{{ $accommodation->mt_square }}</p>
         <p><strong>Available:</strong><br>{{ $accommodation->available }}</p>
 
         {{-- <div>

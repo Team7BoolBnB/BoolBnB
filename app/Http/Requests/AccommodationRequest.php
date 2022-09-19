@@ -33,7 +33,7 @@ class AccommodationRequest extends FormRequest
             "rooms" => "required|min:1|max:10",
             "beds" => "required|min:1|max:10",
             "bathrooms" => "required|min:1|max:6",
-            "mt_square" => "required|min:25|max:300",
+            "mt_square" => "required",
             "image" => "required",
             "available" => "required"
         ];
