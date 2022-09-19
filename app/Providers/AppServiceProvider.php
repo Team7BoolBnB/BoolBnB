@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Providers;
-
+use Braintree\Gateway;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
 
@@ -26,7 +26,7 @@ class AppServiceProvider extends ServiceProvider
     {
         //Per fare questo abbiamo modificato file in .env e creato il ostro file di configurazione
         $this->app->singleton(Gateway::class, function($app){
-            return new Braintree\Configuration(config("services.braintree"));
+            return new Gateway(config("services.braintree"));
         });
 
 
