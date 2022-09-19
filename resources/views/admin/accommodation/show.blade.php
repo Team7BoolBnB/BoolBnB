@@ -1,7 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-
     <div class="pageHeader d-flex align-items-center">
         <div class="container text-white">
             <h2>Accommodation "{{ $accommodation->title }}"</h2>
@@ -16,6 +15,7 @@
 
         <p class="py-4"><strong>Description:</strong><br>{{ $accommodation->description }}</p>
 
+        <p><strong>Slug:</strong><br>{{ $accommodation->slug }}</p>
         <p><strong>Longitude:</strong><br>{{ $accommodation->longitude }}</p>
         <p><strong>Latitude:</strong><br>{{ $accommodation->latitude }}</p>
         <p><strong>Rooms:</strong><br>{{ $accommodation->rooms }}</p>
@@ -46,21 +46,21 @@
                 </a>
             </div>
             <div class="d-flex align-items-center">
-                <form action="{{ route('admin.accommodation.destroy', $accommodation->id) }}" method="POST" class="form-delete d-inline">
+                <form action="{{ route('admin.accommodation.destroy', $accommodation->slug) }}" method="POST"
+                    class="form-delete d-inline">
                     @csrf
                     @method('DELETE')
-    
                     <button type="submit" class="basicBtn bigBtn primaryBtn">
                         <i class="fa-regular fa-trash-can"></i>
                         Delete
                     </button>
                 </form>
-                <a href="{{ route('admin.accommodation.edit', $accommodation->id) }}" class="basicBtn bigBtn secondaryBtn ms-2">
+                <a href="{{ route('admin.accommodation.edit', $accommodation->slug) }}"
+                    class="basicBtn bigBtn secondaryBtn ms-2">
                     Edit
                 </a>
             </div>
         </div>
 
     </div>
-
 @endsection

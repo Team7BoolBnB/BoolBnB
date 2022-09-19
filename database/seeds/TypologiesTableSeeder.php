@@ -19,8 +19,7 @@ class TypologiesTableSeeder extends Seeder
 
         for ($i = 0; $i < count($type); $i++) {
             $typology = new Typology();
-            $typology->name = $type[$i];
-            $typology->icon = $icon[$i];
+            $typology->type = $type[$i];
             $typology->save();
         }
     }
