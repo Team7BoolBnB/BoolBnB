@@ -1,0 +1,106 @@
+// Typography
+
+h1 {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 3rem !important;
+    font-weight: 600 !important;
+}
+
+h2 {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 1.75rem !important;
+}
+
+h3 {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 1.5rem !important;
+}
+
+h4 {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 1.25rem !important;
+}
+
+h5 {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 1rem !important;
+    font-weight: 600 !important;
+}
+
+h6 {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    text-transform: uppercase;
+    font-size: 0.75rem !important;
+    font-weight: 700 !important;
+}
+
+p, a {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
+
+// Buttons
+
+.basicBtn {
+    text-decoration: none;
+    display: inline-block;
+    border-radius: 10px;
+    z-index: 1;
+    position: relative;
+
+    &:before {
+        position: absolute;
+        content: "";
+        top: 0;
+        right: 0;
+        left: 0;
+        bottom: 0;
+        z-index: -1;
+        border-radius: 10px;
+        transition: opacity 0.3s linear;
+        opacity: 0;
+    }
+
+    &:hover::before {
+        opacity: 1;
+        border-radius: 10px;
+    }
+
+    &.bigBtn {
+        padding: 15px 40px;
+    }
+
+    &.smallBtn {
+        padding: 7px 25px;
+    }
+
+    &.primaryBtn {
+        background-image: linear-gradient(135deg, rgba(255,56,92,1) 0%, rgba(217,9,99,1) 100%);
+        color: #ffffff !important;
+        border: 1px solid $primaryColor;
+
+        &:before {
+            background-image: linear-gradient(135deg, rgba(217,9,99,1) 0%, rgba(255,56,92,1) 100%);
+            color: #ffffff !important;
+        }
+
+        &:hover::before {
+            color: #ffffff !important;
+        }
+    }
+
+    &.secondaryBtn {
+        color: $quaternaryColor !important;
+        border: 1px solid $quaternaryColor;
+
+        &:before {
+            background-image: linear-gradient(135deg, rgba(240,240,240,1) 0%, rgba(240,240,240,1) 100%);
+            color: $quaternaryColor !important;
+        }
+
+        &:hover::before {
+            color: $quaternaryColor !important;
+        }
+    }
+
+}

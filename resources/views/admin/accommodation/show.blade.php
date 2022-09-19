@@ -2,13 +2,13 @@
 
 @section('content')
 
-    <div class="container">
-
-        <div class="pb-4">
-            <a href="{{ route('admin.accommodation.index') }}" class="btn btn-secondary py-1 px-3">
-                <i class="fa-solid fa-arrow-left"></i> Back
-            </a>
+    <div class="pageHeader d-flex align-items-center">
+        <div class="container text-white">
+            <h2>Accommodation "{{ $accommodation->title }}"</h2>
         </div>
+    </div>
+
+    <div class="container pt-5">
 
         <img src="{{ $accommodation->image }}" alt="{{ $accommodation->title }}" width="100%">
 
@@ -37,6 +37,29 @@
                 </button>
             </form>
         </div> --}}
+
+        <div class="d-flex justify-content-between py-5">
+            <div>
+                <a href="{{ route('admin.accommodation.index') }}" class="basicBtn bigBtn secondaryBtn">
+                    <i class="fa-solid fa-arrow-left pe-2"></i>
+                    Back
+                </a>
+            </div>
+            <div class="d-flex align-items-center">
+                <form action="{{ route('admin.accommodation.destroy', $accommodation->id) }}" method="POST" class="form-delete d-inline">
+                    @csrf
+                    @method('DELETE')
+    
+                    <button type="submit" class="basicBtn bigBtn primaryBtn">
+                        <i class="fa-regular fa-trash-can"></i>
+                        Delete
+                    </button>
+                </form>
+                <a href="{{ route('admin.accommodation.edit', $accommodation->id) }}" class="basicBtn bigBtn secondaryBtn ms-2">
+                    Edit
+                </a>
+            </div>
+        </div>
 
     </div>
 

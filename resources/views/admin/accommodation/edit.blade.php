@@ -1,7 +1,14 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container">
+
+    <div class="pageHeader d-flex align-items-center">
+        <div class="container text-white">
+            <h2>Edit "{{ $accommodation->title }}"</h2>
+        </div>
+    </div>
+
+    <div class="container pt-5">
 
         @if ($errors->any())
             <div class="alert alert-danger">
@@ -124,8 +131,13 @@
                 </div>
             </div>
 
-            <button type="submit" class="btn btn-success mt-3 mb-1">Save</button>
-            <a href="{{ route('admin.accommodation.index') }}" class="btn btn-secondary mt-3 mb-1">Cancel</a>
+            <div class="d-flex align-items-center py-5">
+                <a href="{{ route('admin.accommodation.index') }}" class="basicBtn bigBtn secondaryBtn me-2">
+                    <i class="fa-solid fa-arrow-left pe-2"></i>
+                    Cancel
+                </a>
+                <button type="submit" class="basicBtn bigBtn primaryBtn">Save</button>
+            </div>
 
         </form>
 

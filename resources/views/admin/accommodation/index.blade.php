@@ -1,6 +1,15 @@
 @extends('layouts.app')
 
 @section('content')
+
+    <div class="pageHeader d-flex align-items-center">
+        <div class="container text-white">
+            <h2>Accommodations</h2>
+        </div>
+    </div>
+
+    <div class="container pt-5">
+
     <div class="container">
         <div class="d-flex justify-content-center py-3">
             <a href="{{ route('admin.accommodation.create') }}" class="btn btn-secondary py-0 px-1">

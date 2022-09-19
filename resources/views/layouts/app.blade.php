@@ -28,27 +28,30 @@
 <body>
     <div id="app">
 
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
-            <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
-                </a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText"
-                    aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarText">
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                        <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="/admin">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('admin.accommodation.index') }}">Accommodations</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('admin.sponsorship.index') }}">Sponsorship</a>
-                        </li>
-                    </ul>
+        {{-- Navbar --}}
+        <nav class="navbar navbar-expand-md navbar-light bg-white">
+            <div class="container-fluid d-flex justify-content-between">
+
+                {{-- Logo --}}
+                <div>
+                    <a class="navbar-brand" href="{{ url('/') }}">
+                        <img src="{{ asset('/img/logo.png') }}" alt="BoolBnb Logo" width="120">
+                    </a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText"
+                        aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                </div>
+
+                {{-- Menu --}}
+                <div class="collapse navbar-collapse d-flex justify-content-center" id="navbarText">
+                    <a class="nav-link {{ Request::route()->getName() === 'admin.home' ? 'navActivePage' : '' }}" aria-current="page" href="/admin">Home</a>
+                    <a class="nav-link {{ Request::route()->getName() === 'admin.accommodation.index' ? 'navActivePage' : '' }}" href="{{ route('admin.accommodation.index') }}">Accommodations</a>
+                    <a class="nav-link {{ Request::route()->getName() === 'admin.sponsorship.index' ? 'navActivePage' : '' }}" href="{{ route('admin.sponsorship.index') }}">Sponsorship</a>
+                </div>
+
+                {{-- User --}}
+                <div>
                     <span class="navbar-text">
                         <!-- Authentication Links -->
                         @guest
@@ -70,7 +73,7 @@
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                         onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
+                                                         document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}
                                     </a>
 
@@ -82,12 +85,15 @@
                         @endguest
                     </span>
                 </div>
+
             </div>
         </nav>
 
-        <main class="py-4">
+        {{-- Main content --}}
+        <main>
             @yield('content')
         </main>
+
     </div>
 </body>
 
