@@ -34,7 +34,9 @@ class SponsorshipController extends Controller
      */
     public function create()
     {
-        return view("admin.sponsorship.create");
+        $sponsorships = Sponsorship::all();
+
+        return view("admin.sponsorship.create", compact("sponsorships"));
     }
 
     /**
