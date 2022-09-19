@@ -54,6 +54,7 @@ class AccommodationController extends Controller
      */
     public function store(AccommodationRequest $request)
     {
+
         $accommodation = new Accommodation();
 
         $data = $request->validated();
@@ -65,8 +66,6 @@ class AccommodationController extends Controller
         $coverImg = Storage::put("/accommodation", $data["image"]);
     
         $accommodation->image = $coverImg;
-
-
 
         $accommodation->save();
 

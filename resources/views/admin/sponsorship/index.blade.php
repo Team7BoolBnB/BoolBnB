@@ -32,15 +32,13 @@
                 @foreach ($accommodations as $accommodation)
                     @foreach ($accommodation->sponsorship as $sponsorship)
                         <tr>
-                          
-
                             <td scope="col">{{ $accommodation->title }}</td>
                             <td scope="col">{{ $accommodation->address }}</td>
                             <td scope="col">{{ $sponsorship->name }}</td>
                             <td scope="col">{{ $sponsorship->period }}</td>
                             <td scope="col">{{ $sponsorship->price }}</td>
                             <td scope="col">{{ $sponsorship->created_at }}</td>
-                            <td scope="col">{{ $sponsorship->endTime }}</td>
+                            {{-- <td scope="col">{{ $sponsorship->endTime }}</td> --}}
                         </tr>
                     @endforeach
                 @endforeach
