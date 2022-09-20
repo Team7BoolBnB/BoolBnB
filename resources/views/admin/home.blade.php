@@ -9,7 +9,7 @@
 
     {{-- sezione accommodations --}}
     @if(!$visible)
-        <div class="container">
+        <div class="container py-5 mt-5 mb-5">
             @include('admin/partials/noContent')
         </div>
     @else
@@ -85,17 +85,17 @@
     @endif
 
     {{-- sezione sponsorships --}}
-    @if(!$active)
-        <div class="container">
+    @if(count($sponzorizedAccommodation)<=0)
+        <div class="container py-5">
             @include('admin/partials/noContent')
         </div>
     @else
         <div class="container pt-5">
             <h3>Latest sponsorships</h3>
             <div class="row py-4 justify-content-between">
-                @foreach ($accommodations as $accommodation)
-                        @foreach ($accommodation->sponsorship as $sponsorship)
-                            @if($sponsorship)
+                
+                        @foreach ($sponzorizedAccommodation as $accommodation)
+                            
                             <div class="col-sm-5">
                                 <div class="card_admin">
                                     <div class="available_info">
@@ -151,9 +151,9 @@
                                     </div>
                                 </div>
                             </div>
-                            @endif
+                          
                         @endforeach
-                    @endforeach
+                    
 
                 <div class="col-sm-2">
                     <div>

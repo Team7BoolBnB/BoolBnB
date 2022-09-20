@@ -1,61 +1,51 @@
-<table class="table table-striped table-hover">
-    <thead>
-        <tr>
-            <th scope="col">Title</th>
-            <th scope="col">Address</th>
-            <th scope="col">Description</th>
-            <th scope="col">Actions</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach ($accommodations as $sponsorship)
-            <tr>
-                <th scope="row">{{ $sponsorship->title }}</th>
-                <td>{{ $sponsorship->address }}</td>
-                <td>{{ $sponsorship->description }}</td>
-                <td>
-                    <a href="{{ route('admin.accommodation.show', $sponsorship->slug) }}" class="btn btn-secondary py-0 px-1">
-                        <i class="fa-solid fa-eye fa-xs"></i>
-                    </a>
-                    <a href="{{ route('admin.accommodation.edit', $sponsorship->slug) }}" class="btn btn-primary py-0 px-1">
-                        <i class="fa-solid fa-pencil fa-xs"></i>
-                    </a>
-                    {{-- <form action="{{ route('admin.accommodation.destroy', $accommodation->id) }}" method="POST"
-                        class="form-delete d-inline">
-                        @csrf
-                        @method('DELETE')
+@extends('layouts.app')
 
 @section('content')
 
     <div class="pageHeader d-flex align-items-center">
         <div class="container text-white">
-            <h2>Sponsorships</h2>
+            <h2>Sponsorship</h2>
         </div>
     </div>
 
-    @if (!$active)
-        <div class="contai">
-            @include('admin/partials/noContent')
-        </div>
-    @else
-        <div class="container pt-5">
-            <div class="row row-cols-3 py-4 g-4">
-                <div class="col">
-                    <div>
-                        <a class="card_link d-flex flex-column" href="{{ route('admin.sponsorship.create') }}">
-                            Add New
-                            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
-                                class="bi bi-plus-circle-fill" viewBox="0 0 16 16">
-                                <path
-                                    d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z" />
-                            </svg>
-                        </a>
+    <div class="container pt-5">
+
+        @if (count($sponzorizedAccommodation) <= 0)
+        
+            <div class="container pt-5">
+
+                <div class="row row-cols-3 py-4 g-4 justify-content-center">
+                    <div class="col">
+                        <div>
+                            <a class="card_link d-flex flex-column" href="{{ route('admin.sponsorship.create') }}">
+                                Add New
+                                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
+                                    class="bi bi-plus-circle-fill" viewBox="0 0 16 16">
+                                    <path
+                                        d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z" />
+                                </svg>
+                            </a>
+                        </div>
                     </div>
                 </div>
+            </div>
+        @else
+            <div class="container pt-5">
+                <div class="row row-cols-3 py-4 g-4">
+                    <div class="col">
+                        <div>
+                            <a class="card_link d-flex flex-column" href="{{ route('admin.sponsorship.create') }}">
+                                Add New
+                                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
+                                    class="bi bi-plus-circle-fill" viewBox="0 0 16 16">
+                                    <path
+                                        d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z" />
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
 
-                @foreach ($accommodations as $accommodation)
-                    @foreach ($accommodation->sponsorship as $sponsorship)
-
+                    @foreach ($sponzorizedAccommodation as $accommodation)
                         <div class="col">
                             <div class="card_admin">
                                 <div class="available_info">
@@ -112,21 +102,10 @@
                                 </div>
                             </div>
                         </div>
-                        
                     @endforeach
-                @endforeach
+
+
+                </div>
             </div>
-        </div>
-    @endif
-@endsection
-                        <button type="submit" class="btn btn-danger py-0 px-1">
-                            <i class="fa-solid fa-trash-can"></i>
-                        </button>
-                    </form> --}}
-                </td>
-            </tr>
-        @endforeach
-    </tbody>
-</table>
-</div>
-@endsection
+        @endif
+    @endsection
