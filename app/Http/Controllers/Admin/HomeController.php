@@ -30,6 +30,21 @@ class HomeController extends Controller
 
         $accommodations = Accommodation::where("user_id",$user_id)->orderBy("created_at", "desc")->get()->take(2);
 
+        /*  $data = [];
+
+        if(count($accommodations) >= 2) {
+
+            for($i = 0; $i <= 1; $i++) {
+                $data[] = $accommodations[$i];
+            }
+
+        } else {
+            for($i = 0; $i <= count($accommodations) -1; $i++) {
+                $data[] = $accommodations[$i];
+            }
+        }
+        
+        $accommodations = $data; */
 
         if(count($accommodations) == 0) {
             $visible = false;
@@ -47,24 +62,6 @@ class HomeController extends Controller
                 }
             }
         }
-
-
-        /*  $data = [];
-
-        if(count($accommodations) >= 2) {
-
-            for($i = 0; $i <= 1; $i++) {
-                $data[] = $accommodations[$i];
-            }
-
-        } else {
-            for($i = 0; $i <= count($accommodations) -1; $i++) {
-                $data[] = $accommodations[$i];
-            }
-        }
-        
-        $accommodations = $data; */
-
 
         
         return view('admin.home', compact("accommodations", "visible", "active"));

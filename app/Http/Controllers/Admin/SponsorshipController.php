@@ -35,6 +35,8 @@ class SponsorshipController extends Controller
             }
         }
 
+        /* $active = false; */
+
         return view("admin.sponsorship.index", compact("accommodations", "active"));
     }
 
