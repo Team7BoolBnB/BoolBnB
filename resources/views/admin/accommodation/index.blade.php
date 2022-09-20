@@ -8,8 +8,13 @@
         </div>
     </div>
 
-    <div class="container pt-5">
+    {{-- <div class="container pt-5"> --}}
 
+    @if(!$visible)
+    <div class="container">
+        non ci sta niente
+    </div>
+    @else
     <div class="container">
         <div class="d-flex justify-content-center py-3">
             <a href="{{ route('admin.accommodation.create') }}" class="btn btn-secondary py-0 px-1">
@@ -55,4 +60,5 @@
             </tbody>
         </table>
     </div>
+    @endif
 @endsection

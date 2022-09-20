@@ -8,6 +8,11 @@
         </div>
     </div>
 
+    @if(!$active)
+    <div class="contai">
+        non ci sta niente
+    </div>
+    @else
     <div class="container pt-5">
         <div class="d-flex justify-content-center py-3">
             <a href="{{ route('admin.sponsorship.create') }}" class="btn btn-secondary py-0 px-1">
@@ -50,4 +55,5 @@
             </tbody>
         </table>
     </div>
+    @endif
 @endsection
