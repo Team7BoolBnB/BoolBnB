@@ -35,3 +35,37 @@ nav {
     
 
 }
+
+
+// Creation form
+
+.creationCol {
+    width: 50vw;
+    height: 100vh;
+    padding: 2rem 3rem;
+
+    &.leftCol {
+        background: rgb(65,43,157);
+        background: linear-gradient(0deg, rgba(65,43,157,1) 0%, rgba(207,35,119,1) 100%);
+
+        .logoCol {
+            width: 100%;
+        }
+    }
+
+    &.rightCol {
+        overflow: auto;
+    }
+}
+
+.form-control {
+    height: 3rem;
+
+    &.formTextArea {
+        height: 9rem;
+    }
+}
+
+.form-check {
+    
+}

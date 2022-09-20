@@ -9,6 +9,7 @@ class Accommodation extends Model
 
     public $fillable = [
     "address",
+    "slug",
     "user_id",
     "typology_id",
     "longitude",

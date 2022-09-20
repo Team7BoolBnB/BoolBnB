@@ -103,6 +103,7 @@ class AccommodationController extends Controller
      */
     public function store(AccommodationRequest $request)
     {
+
         $accommodation = new Accommodation();
 
         $data = $request->validated();
@@ -116,6 +117,14 @@ class AccommodationController extends Controller
         $coverImg = Storage::put("/accommodation", $data["image"]);
     
         $accommodation->image = $coverImg;
+
+
+        // Check if the 'available' toggle is on
+        if (key_exists("available", $data)) {
+            $accommodation->available = 1;
+        } else {
+            $accommodation->available = 0;
+        }
 
         $accommodation->slug = $this->generateSlug($accommodation->title);
 

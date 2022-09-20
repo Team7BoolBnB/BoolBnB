@@ -35,7 +35,8 @@ class AccommodationRequest extends FormRequest
             "bathrooms" => "required|min:1|max:6",
             "mt_square" => "required",
             "image" => "required",
-            "available" => "required"
+            "available" => "required",
+            "services" => "required",
         ];
     }
 }

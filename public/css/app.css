@@ -12729,6 +12729,46 @@ a {
   color: #222222 !important;
 }
 
+.basicBtn.formBtn {
+  color: #222222 !important;
+  width: 100%;
+  border: 1px solid #cecece;
+}
+
+.basicBtn.formBtn:before {
+  background-image: linear-gradient(135deg, rgb(240, 240, 240) 0%, rgb(240, 240, 240) 100%);
+  color: #222222 !important;
+}
+
+.basicBtn.formBtn:hover::before {
+  color: #222222 !important;
+}
+
+.textLink {
+  font-weight: 600;
+  color: #222222;
+}
+
+.textLink:hover {
+  color: #484848;
+}
+
+.formSwitch {
+  width: 3em !important;
+  height: 1.5em;
+  margin-right: 1em;
+}
+
+.cardForm > [type=checkbox]:checked + label {
+  background-image: linear-gradient(135deg, rgb(240, 240, 240) 0%, rgb(240, 240, 240) 100%);
+  border: 1px solid #222222 !important;
+}
+
+.cardForm > [type=radio]:checked + label {
+  background-image: linear-gradient(135deg, rgb(240, 240, 240) 0%, rgb(240, 240, 240) 100%);
+  border: 1px solid #222222 !important;
+}
+
 button {
   background-color: none;
 }
@@ -12759,5 +12799,32 @@ nav .nav-link:hover {
 
 nav .nav-link.navActivePage {
   color: #222222;
+}
+
+.creationCol {
+  width: 50vw;
+  height: 100vh;
+  padding: 2rem 3rem;
+}
+
+.creationCol.leftCol {
+  background: rgb(65, 43, 157);
+  background: linear-gradient(0deg, rgb(65, 43, 157) 0%, rgb(207, 35, 119) 100%);
+}
+
+.creationCol.leftCol .logoCol {
+  width: 100%;
+}
+
+.creationCol.rightCol {
+  overflow: auto;
+}
+
+.form-control {
+  height: 3rem;
+}
+
+.form-control.formTextArea {
+  height: 9rem;
 }
 
