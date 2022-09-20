@@ -11,9 +11,58 @@ use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class AccommodationController extends Controller
 {
+
+
+    private function findBySlug($slug)
+    {
+        $accommodation = Accommodation::where("slug", $slug)->first();
+
+        if (!$accommodation) {
+            abort(404);
+        }
+
+        return $accommodation;
+    }
+
+    private function generateSlug($text)
+    {
+        $toReturn = null;
+
+        $counter = 0;
+        do {
+            //genero uno slug partendo dal titolo
+            $slug = Str::slug($text);
+
+            //se il counter è maggiore di zero, allego al suo valore lo slug
+            if ($counter > 0) {
+
+                $slug .= "-" . $counter;
+            }
+
+            //controllo nel databse se esiste un slug uguale 
+            $slug_exist = Accommodation::where("slug", $slug)->first();
+
+            if ($slug_exist) {
+                //se esiste lo slug incremento il valore del counter per il giro successivo
+                $counter++;
+            } else {
+                //altrimenti salvo lo slugnei dati del nuovo post
+                $toReturn = $slug;
+            }
+        } while ($slug_exist);
+
+        return $toReturn;
+    }
+
+
+
+
+
+
     /**
      * Display a listing of the resource.
      *
@@ -63,9 +112,12 @@ class AccommodationController extends Controller
 
         $accommodation->user_id = Auth::user()->id;
 
+        
+
         $coverImg = Storage::put("/accommodation", $data["image"]);
     
         $accommodation->image = $coverImg;
+
 
         // Check if the 'available' toggle is on
         if (key_exists("available", $data)) {
@@ -74,13 +126,15 @@ class AccommodationController extends Controller
             $accommodation->available = 0;
         }
 
+        $accommodation->slug = $this->generateSlug($accommodation->title);
+
         $accommodation->save();
 
         if (key_exists("services", $data)) {
             $accommodation->services()->attach($data["services"]);
         }
 
-        return  redirect()->route("admin.accommodation.show", $accommodation->id);
+        return  redirect()->route("admin.accommodation.show", $accommodation->slug);
     }
 
     /**
@@ -89,9 +143,9 @@ class AccommodationController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($slug)
     {
-        $accommodation = Accommodation::findOrFail($id);
+        $accommodation = $this->findBySlug($slug);
 
         return view("admin.accommodation.show", compact("accommodation"));
     }
@@ -102,9 +156,9 @@ class AccommodationController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($slug)
     {
-        $accommodation = Accommodation::findOrFail($id);
+        $accommodation = $this->findBySlug($slug);
 
         $services = Service::all();
         $typologies = Typology::all();
@@ -119,11 +173,18 @@ class AccommodationController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(AccommodationRequest $request, $id)
+    public function update(AccommodationRequest $request, $slug)
     {
-        $accommodation = Accommodation::findOrFail($id);
         
         $data = $request->validated();
+
+        $accommodation = $this->findBySlug($slug);
+
+        if ($data["title"] !== $accommodation->title) {
+            //genero un nuovo slug
+            $accommodation->slug = $this->generateSlug($data["title"]);
+        }
+
 
         Storage::delete($accommodation->image);
         $accommodation->image=Storage::put("/accommodation", $data["image"]);
@@ -137,7 +198,7 @@ class AccommodationController extends Controller
 
         $accommodation->update($data);
 
-        return  redirect()->route("admin.accommodation.show", $accommodation->id);
+        return  redirect()->route("admin.accommodation.show", $accommodation->slug);
     }
 
     /**
@@ -146,9 +207,9 @@ class AccommodationController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($slug)
     {
-        $accommodation = Accommodation::findOrFail($id);
+        $accommodation = $this->findBySlug($slug);
 
 
         if($accommodation->trashed()){
