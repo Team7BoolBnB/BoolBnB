@@ -13,7 +13,7 @@ class AccommodationRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -25,6 +25,7 @@ class AccommodationRequest extends FormRequest
     {
         return [
             "address" => "required|min:6|max:255",
+            "typology_id"=>"required",
             "longitude" => "required|min:5|max:15",
             "latitude" => "required|min:5|max:15",
             "title" => "required",
@@ -32,9 +33,10 @@ class AccommodationRequest extends FormRequest
             "rooms" => "required|min:1|max:10",
             "beds" => "required|min:1|max:10",
             "bathrooms" => "required|min:1|max:6",
-            "mt_square" => "required|min:25|max:300",
+            "mt_square" => "required",
             "image" => "required",
-            "available" => "required"
+            "available" => "required",
+            "services" => "required",
         ];
     }
 }

@@ -2,9 +2,13 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Accommodation;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\SponsorshipRequest;
 use App\Sponsorship;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class SponsorshipController extends Controller
 {
@@ -15,10 +19,18 @@ class SponsorshipController extends Controller
      */
     public function index()
     {
-        $sponsorships = Sponsorship::all();
 
-        return view("admin.sponsorship.index", compact("sponsorships"));
+        $sponzorizedAccommodation = DB::table('accommodations')
+            ->join('sponsorship_accommodation', 'accommodations.id', '=', 'sponsorship_accommodation.accommodation_id')
+            ->join('sponsorships', 'sponsorship_accommodation.sponsorship_id', '=', 'sponsorships.id')
+            ->select('sponsorships.*',"accommodations.*")->where("user_id",Auth::id())->orderBy("endTime","desc")
+            ->get();
+
+        /* $active = false; */
+
+        return view("admin.sponsorship.index", compact("sponzorizedAccommodation"));
     }
+
 
     /**
      * Show the form for creating a new resource.
@@ -27,7 +39,9 @@ class SponsorshipController extends Controller
      */
     public function create()
     {
-        return view("admin.sponsorship.create");
+        $sponsorships = Sponsorship::all();
+
+        return view("admin.sponsorship.create", compact("sponsorships"));
     }
 
     /**
@@ -36,14 +50,9 @@ class SponsorshipController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(SponsorshipRequest $request)
     {
-        $data = $request->validate([
-            "name" => "required",
-            "period" => "required",
-            "price" => "required",
-            
-        ]);
+        $data = $request->validated();
         $newSponsorship = Sponsorship::create($data);
 
         return  redirect()->route("admin.sponsorship.show", $newSponsorship->id);

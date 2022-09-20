@@ -13,6 +13,6 @@ class Sponsorship extends Model
     "price",];
 
     public function accommodations(){
-        return $this->belongsToMany("App\Accommodation");
+        return $this->belongsToMany("App\Accommodation",'sponsorship_accommodation');
     }
 }
