@@ -67,6 +67,13 @@ class AccommodationController extends Controller
     
         $accommodation->image = $coverImg;
 
+        // Check if the 'available' toggle is on
+        if (key_exists("available", $data)) {
+            $accommodation->available = 1;
+        } else {
+            $accommodation->available = 0;
+        }
+
         $accommodation->save();
 
         if (key_exists("services", $data)) {
