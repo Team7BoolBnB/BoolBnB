@@ -49,9 +49,9 @@
             </div>
 
             <div class="mb-3">
-                <label for="thumbInput" class="form-label">Image</label>
+                <label for="imageInput" class="form-label">Image</label>
                 <input type="text" class="form-control {{ $errors->has('image') ? 'is-invalid' : '' }}" name="image"
-                    id="thumbInput" placeholder="Insert an image..." value="{{ old('image') ?? $accommodation->image }}">
+                    id="imageInput" placeholder="Insert an image..." value="{{ old('image') ?? $accommodation->image }}">
                 <div class="invalid-feedback">
                     @foreach ($errors->get('image') as $error)
                         {{ $error }}<br>
