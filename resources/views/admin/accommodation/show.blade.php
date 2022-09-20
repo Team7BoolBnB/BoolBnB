@@ -46,7 +46,7 @@
                 </a>
             </div>
             <div class="d-flex align-items-center">
-                <form action="{{ route('admin.accommodation.destroy', $accommodation->id) }}" method="POST" class="form-delete d-inline">
+                <form action="{{ route('admin.accommodation.destroy', $accommodation->slug) }}" method="POST" class="form-delete d-inline">
                     @csrf
                     @method('DELETE')
     
@@ -55,7 +55,7 @@
                         Delete
                     </button>
                 </form>
-                <a href="{{ route('admin.accommodation.edit', $accommodation->id) }}" class="basicBtn bigBtn secondaryBtn ms-2">
+                <a href="{{ route('admin.accommodation.edit', $accommodation->slug) }}" class="basicBtn bigBtn secondaryBtn ms-2">
                     Edit
                 </a>
             </div>
