@@ -9,6 +9,8 @@
     "license": "MIT",
     "require": {
         "php": "^7.2.5",
+        "braintree/braintree_php": "^6.9",
+        "curl/curl": "^2.4",
         "doctrine/dbal": "^2.13",
         "fakerphp/faker": "*",
         "fideloper/proxy": "^4.2",
@@ -37,7 +39,10 @@
     },
     "autoload": {
         "psr-4": {
-            "App\\": "app/"
+            
+            "App\\": "app/",
+            "Libraries\\": "lib/"
+
         },
         "classmap": [
             "database/seeds",
@@ -47,6 +52,8 @@
     "autoload-dev": {
         "psr-4": {
             "Tests\\": "tests/"
+            
+
         }
     },
     "minimum-stability": "dev",
