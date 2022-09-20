@@ -78,8 +78,15 @@ class AccommodationController extends Controller
         //Get all the accommodations of logged user
         $accommodations = Accommodation::where("user_id",$user_id)->get();
 
+        /* $accommodations = []; */
 
-        return view("admin.accommodation.index", compact("accommodations"));
+        if(count($accommodations) == 0) {
+            $visible = false;
+        } else {
+            $visible = true;
+        }
+
+        return view("admin.accommodation.index", compact("accommodations", "visible"));
     }
 
     /**

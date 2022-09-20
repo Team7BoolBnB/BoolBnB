@@ -23,7 +23,21 @@ class SponsorshipController extends Controller
         /* dd($accommodations);
         $sponsorships = Accommodation::find(Auth::id())->sponsorship()->get();
          */
-        return view("admin.sponsorship.index", compact("accommodations"));
+
+        foreach ($accommodations as $accommodation) {
+
+            foreach ($accommodation->sponsorship as $sponsor) {
+                if($sponsor) {
+                    $active = true;
+                } else {
+                    $active = false;
+                }
+            }
+        }
+
+        /* $active = false; */
+
+        return view("admin.sponsorship.index", compact("accommodations", "active"));
     }
 
 
