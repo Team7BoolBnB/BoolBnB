@@ -43448,11 +43448,7 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-<<<<<<< HEAD
 module.exports = __webpack_require__(/*! C:\Users\Biagio\Documents\RepositoryBoolean\BoolBnB\resources\js\frontend.js */"./resources/js/frontend.js");
-=======
-module.exports = __webpack_require__(/*! /Users/daniele/Documents/Boolean/Repository/BoolBnb/resources/js/frontend.js */"./resources/js/frontend.js");
->>>>>>> controller_changes
 
 
 /***/ })
