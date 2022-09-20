@@ -12766,7 +12766,7 @@ nav .nav-link.navActivePage {
   border: 1px solid #FF385C;
   border-radius: 0.5rem;
   z-index: 2;
-  background: #dddddd;
+  background: white;
   position: absolute;
   top: 5%;
   right: 5%;
@@ -12885,7 +12885,7 @@ nav .nav-link.navActivePage {
   color: #FF385C;
 }
 
-.see_all_link {
+.card_link {
   background-image: linear-gradient(135deg, rgb(255, 56, 92) 0%, rgb(217, 9, 99) 100%);
   height: 280px;
   display: flex;
@@ -12898,7 +12898,7 @@ nav .nav-link.navActivePage {
   color: white;
 }
 
-.see_all_link:hover {
+.card_link:hover {
   text-decoration: none;
   color: white;
   cursor: pointer;
