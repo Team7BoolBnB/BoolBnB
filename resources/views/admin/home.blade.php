@@ -7,7 +7,7 @@
         </div>
     </div>
 
-    {{-- sezione accommodations --}}
+    {{--  --}}
     @if(!$visible)
         <div class="container py-5 mt-5 mb-5">
             @include('admin/partials/noContent')
