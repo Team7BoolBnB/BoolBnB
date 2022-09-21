@@ -27,7 +27,7 @@
             </div>
         @endif
 
-        <form action="{{ route('admin.accommodation.update', $accommodation->id) }}" method="post">
+        <form action="{{ route('admin.accommodation.update', $accommodation->slug) }}" method="post">
 
             @csrf
             @method('PATCH')
@@ -223,7 +223,7 @@
             <div class="row gx-5 mb-5">
                 @foreach ($services as $service)
                     <div class="col-6 form-check cardForm">
-                        <input class="form-check-input my-4 d-none" name="services[]" type="checkbox"
+                        <input class="form-check-input my-4 d-none" name="services[]" type="checkbox" {{ in_array($service->name,$control) ? 'checked' : '' }}
                             value="{{ $service->id }}" id="{{ $service->name }}">
                         <label class="form-check-label basicBtn formBtn ms-1 px-4 py-3 my-2"
                             for="{{ $service->name }}"><i

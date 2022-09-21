@@ -171,7 +171,15 @@ class AccommodationController extends Controller
         $services = Service::all();
         $typologies = Typology::all();
 
-        return view("admin.accommodation.edit", compact("accommodation", "services", "typologies"));
+        $control=[];
+
+        foreach ($accommodation->services as $serviceOnThisAccommodation) {
+            $control[]=$serviceOnThisAccommodation->name;
+        };
+        
+       
+
+        return view("admin.accommodation.edit", compact("accommodation", "services", "typologies", "control"));
     }
 
     /**
@@ -200,11 +208,21 @@ class AccommodationController extends Controller
         if (key_exists("services", $data)) {
 
             $accommodation->services()->sync($data["services"]);
-            $accommodation->sponsorships()->sync($data["sponsorships"]);
+           
 
         } else {
             $accommodation->services()->sync([]);
-            $accommodation->sponsorships()->sync([]);
+           
+
+        }
+        if (key_exists("sponsorships", $data)) {
+
+           
+            $accommodation->sponsorship()->sync($data["sponsorships"]);
+
+        } else {
+           
+            $accommodation->sponsorship()->sync([]);
 
         }
 
