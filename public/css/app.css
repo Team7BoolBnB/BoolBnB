@@ -12971,3 +12971,8 @@ nav .nav-link.navActivePage {
   height: 9rem;
 }
 
+.deleteButton {
+  background: none;
+  border: none;
+}
+
