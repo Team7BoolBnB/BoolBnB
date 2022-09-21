@@ -42,16 +42,18 @@
                     @endforeach
                 </div>
             </div>
+            <div class="d-none">
 
-            <h5>Slug</h5>
-            <div class="form-floating mb-5">
-                <input type="text" class="form-control {{ $errors->has('$slug') ? 'is-invalid' : '' }}" name="slug"
-                    id="slugInput" placeholder="Insert a slug..." value="{{ old('slug') }}">
-                <label for="slugInput">Insert a slug for your accommodation</label>
-                <div class="invalid-feedback">
-                    @foreach ($errors->get('slug') as $error)
-                        {{ $error }}<br>
-                    @endforeach
+                <h5>Slug</h5>
+                <div class="form-floating mb-5">
+                    <input type="text" class="form-control {{ $errors->has('$slug') ? 'is-invalid' : '' }}"
+                        name="slug" id="slugInput" placeholder="Insert a slug..." value="{{ old('slug') }}">
+                    <label for="slugInput">Insert a slug for your accommodation</label>
+                    <div class="invalid-feedback">
+                        @foreach ($errors->get('slug') as $error)
+                            {{ $error }}<br>
+                        @endforeach
+                    </div>
                 </div>
             </div>
 
@@ -85,15 +87,16 @@
             <h5 class="mt-5 mb-4">Typology</h5>
             <div class="row">
                 @foreach ($typologies as $type)
-                <div class="col-6 form-check cardForm mb-4" style="padding-left: 0.5em">
-                    <input class="form-check-input d-none @error('typology_id') is-invalid @enderror" type="radio" name="typology_id" id="{{ $type->id }}" value="{{ $type->id }}">
-                    <label class="form-check-label basicBtn formBtn px-4 py-3" for="{{ $type->id }}">
-                        {{ $type->name }}
-                    </label>
-                </div>
+                    <div class="col-6 form-check cardForm mb-4" style="padding-left: 0.5em">
+                        <input class="form-check-input d-none @error('typology_id') is-invalid @enderror" type="radio"
+                            name="typology_id" id="{{ $type->id }}" value="{{ $type->id }}">
+                        <label class="form-check-label basicBtn formBtn px-4 py-3" for="{{ $type->id }}">
+                            {{ $type->name }}
+                        </label>
+                    </div>
                 @endforeach
                 @error('typology_id')
-                        <div class="invalid-feedback">{{ $message }}</div>
+                    <div class="invalid-feedback">{{ $message }}</div>
                 @enderror
             </div>
             {{-- <div class="form-group mb-5">

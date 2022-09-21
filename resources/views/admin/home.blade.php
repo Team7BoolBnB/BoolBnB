@@ -7,7 +7,7 @@
         </div>
     </div>
 
-    {{--  --}}
+    {{-- sezione accommodations --}}
     @if(!$visible)
         <div class="container py-5 mt-5 mb-5">
             @include('admin/partials/noContent')
@@ -16,7 +16,7 @@
     
         <div class="container pt-5">
             <h3>Your apartments</h3>
-            <div class="row py-4 justify-content-between">
+            <div class="row py-4 ">
 
                 @foreach ($accommodations as $accommodation)
                     <div class="col-sm-5">
@@ -119,6 +119,8 @@
     </div>
     @endforeach
 
+
+    
     {{-- sezione sponsorships --}}
     @if(count($sponzorizedAccommodation)<=0)
         <div class="container py-5">
@@ -127,7 +129,7 @@
     @else
         <div class="container pt-5">
             <h3>Latest sponsorships</h3>
-            <div class="row py-4 justify-content-between">
+            <div class="row py-4 ">
                 
                         @foreach ($sponzorizedAccommodation as $accommodation)
                             
