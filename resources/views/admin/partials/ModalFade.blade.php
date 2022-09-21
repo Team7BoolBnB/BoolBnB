@@ -7,7 +7,7 @@
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-              Sicuro di voler eliminare la seguente accommodation? {{$accommodation->title}}
+              Sicuro di voler eliminare questa accommodation? 
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -15,7 +15,7 @@
               <form class="d-inline-block form-delete"  action="{{ route('admin.accommodation.destroy', $accommodation->slug) }}" method="post">
                 @csrf
                 @method('DELETE')
-                <button  type="submit"  class="deleteButton">
+                <button  type="submit"  class="btn btn-danger">
                     Cancella definitivamente
                 </button>
               </form>

@@ -58,16 +58,19 @@
             </div>
 
             <h5>Image</h5>
-            <div class="form-floating mb-5">
-                <input type="text" class="form-control {{ $errors->has('image') ? 'is-invalid' : '' }}" name="image"
-                    id="thumbInput" placeholder="Insert an image..." value="{{ old('image') }}">
-                <label for="thumbInput">Insert an image for your accommodation</label>
+            <div class="form-group mb-5">
+                
+    
+                <div class="d-flex">
+                  <input type="file" name="image" class="form-control-file @error('image') is-invalid @enderror"
+                    id="image" value="{{ old('image') }}">
+                </div>
                 <div class="invalid-feedback">
                     @foreach ($errors->get('image') as $error)
                         {{ $error }}<br>
                     @endforeach
                 </div>
-            </div>
+              </div>
 
             <h5>Description</h5>
             <div class="form-floating mb-5">

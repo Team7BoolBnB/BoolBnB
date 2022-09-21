@@ -76,7 +76,7 @@
               <form class="d-inline-block form-delete"  action="{{ route('admin.accommodation.destroy', $accommodation->slug) }}" method="post">
                 @csrf
                 @method('DELETE')
-                <button  type="submit"  class="deleteButton">
+                <button  type="submit"  class="btn btn-danger">
                     Cancella definitivamente
                 </button>
               </form>
