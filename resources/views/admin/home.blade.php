@@ -119,6 +119,8 @@
     </div>
     @endforeach
 
+
+    
     {{-- sezione sponsorships --}}
     @if(count($sponzorizedAccommodation)<=0)
         <div class="container py-5">
