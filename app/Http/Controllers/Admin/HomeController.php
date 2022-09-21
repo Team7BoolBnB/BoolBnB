@@ -28,6 +28,8 @@ class HomeController extends Controller
     {
         $user_id=Auth::id();
 
+        $active = null;
+
         $accommodations = Accommodation::where("user_id",$user_id)->orderBy("created_at", "desc")->get()->take(2);
 
         /*  $data = [];
@@ -55,6 +57,7 @@ class HomeController extends Controller
         foreach ($accommodations as $accommodation) {
 
             foreach ($accommodation->sponsorship as $sponsor) {
+
                 if($sponsor) {
                     $active = true;
                 } else {
@@ -62,6 +65,7 @@ class HomeController extends Controller
                 }
             }
         }
+
 
         
         return view('admin.home', compact("accommodations", "visible", "active"));
