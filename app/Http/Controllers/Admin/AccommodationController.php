@@ -200,8 +200,12 @@ class AccommodationController extends Controller
         if (key_exists("services", $data)) {
 
             $accommodation->services()->sync($data["services"]);
+            $accommodation->sponsorships()->sync($data["sponsorships"]);
+
         } else {
             $accommodation->services()->sync([]);
+            $accommodation->sponsorships()->sync([]);
+
         }
 
         $accommodation->update($data);
@@ -219,7 +223,9 @@ class AccommodationController extends Controller
     {
         $accommodation = $this->findBySlug($slug);
         $accommodation->services()->detach();
-        $accommodation->forceDelete();
+        $accommodation->sponsorship()->detach();
+        $accommodation->messages()->delete();
+        $accommodation->delete();
         /* if ($accommodation->trashed()) {
             $accommodation->services()->detach();
             $accommodation->forceDelete();
@@ -228,6 +234,6 @@ class AccommodationController extends Controller
         }
         $accommodation->delete(); */
 
-        return redirect()->route("admin.accommodation.index");
+        return redirect()->route("admin.home");
     }
 }
