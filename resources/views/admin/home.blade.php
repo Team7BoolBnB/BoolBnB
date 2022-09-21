@@ -9,7 +9,7 @@
 
     {{-- sezione accommodations --}}
     @if(!$visible)
-        <div class="container">
+        <div class="container py-5 mt-5 mb-5">
             @include('admin/partials/noContent')
         </div>
     @else
@@ -29,7 +29,7 @@
                             </div>
                             <img class="img-fluid" src="{{ $accommodation->image }}" alt="">
                             <div class="links_card_admin">
-                                <a class="link_admin" href="{{ route('admin.accommodation.show', $accommodation->id) }}"
+                                <a class="link_admin" href="{{ route('admin.accommodation.show', $accommodation->slug) }}"
                                     class="btn btn-primary">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                                         class="bi bi-eye-fill" viewBox="0 0 16 16">
@@ -38,7 +38,7 @@
                                             d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z" />
                                     </svg>
                                 </a>
-                                <a class="link_admin" href="{{ route('admin.accommodation.edit', $accommodation->id) }}"
+                                <a class="link_admin" href="{{ route('admin.accommodation.edit', $accommodation->slug) }}"
                                     class="btn btn-primary">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                                         class="bi bi-pencil-fill" viewBox="0 0 16 16">
@@ -47,14 +47,23 @@
                                     </svg>
                                 </a>
                                 {{-- link delete --}}
-                                <a class="link_admin" href="#" class="btn btn-primary">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                                        class="bi bi-trash-fill" viewBox="0 0 16 16">
-                                        <path
-                                            d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z" />
-                                    </svg>
-                                </a>
-                                <a class="link_admin" href="{{ route('admin.sponsorship.create', $accommodation->id) }}"
+
+                                <form class="d-inline-block" action="{{ route('admin.accommodation.destroy', $accommodation->slug) }}" method="post">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button  type="submit" class="deleteButton">
+                                        <a class="link_admin" href="#" class="">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                                class="bi bi-trash-fill" viewBox="0 0 16 16">
+                                                <path
+                                                    d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z" />
+                                            </svg>
+                                        </a>
+                                    </button>
+                                  </form>
+
+                               
+                                <a class="link_admin" href="{{ route('admin.sponsorship.create', $accommodation->slug) }}"
                                     class="btn btn-primary">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="currentColor">
                                         <!--! Font Awesome Pro 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. -->
@@ -77,7 +86,7 @@
 
                 <div class="col-sm-2">
                     <div>
-                        <a class="card_link" href="{{ route('admin.accommodation.index', $accommodation->id) }}">See all</a>
+                        <a class="card_link" href="{{ route('admin.accommodation.index', $accommodation->slug) }}">See all</a>
                     </div>
                 </div>
             </div>
@@ -85,17 +94,17 @@
     @endif
 
     {{-- sezione sponsorships --}}
-    @if(!$active)
-        <div class="container">
+    @if(count($sponzorizedAccommodation)<=0)
+        <div class="container py-5">
             @include('admin/partials/noContent')
         </div>
     @else
         <div class="container pt-5">
             <h3>Latest sponsorships</h3>
             <div class="row py-4 justify-content-between">
-                @foreach ($accommodations as $accommodation)
-                        @foreach ($accommodation->sponsorship as $sponsorship)
-                            @if($sponsorship)
+                
+                        @foreach ($sponzorizedAccommodation as $accommodation)
+                            
                             <div class="col-sm-5">
                                 <div class="card_admin">
                                     <div class="available_info">
@@ -107,7 +116,7 @@
                                     </div>
                                     <img class="img-fluid" src="{{ $accommodation->image }}" alt="">
                                     <div class="links_card_admin">
-                                        <a class="link_admin" href="{{ route('admin.accommodation.show', $accommodation->id) }}"
+                                        <a class="link_admin" href="{{ route('admin.accommodation.show', $accommodation->slug) }}"
                                             class="btn btn-primary">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                                                 class="bi bi-eye-fill" viewBox="0 0 16 16">
@@ -116,7 +125,7 @@
                                                     d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z" />
                                             </svg>
                                         </a>
-                                        <a class="link_admin" href="{{ route('admin.accommodation.edit', $accommodation->id) }}"
+                                        <a class="link_admin" href="{{ route('admin.accommodation.edit', $accommodation->slug) }}"
                                             class="btn btn-primary">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                                                 class="bi bi-pencil-fill" viewBox="0 0 16 16">
@@ -132,7 +141,7 @@
                                                     d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z" />
                                             </svg>
                                         </a>
-                                        <a class="link_admin" href="{{ route('admin.sponsorship.create', $accommodation->id) }}"
+                                        <a class="link_admin" href="{{ route('admin.sponsorship.create', $accommodation->slug) }}"
                                             class="btn btn-primary">
                                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="currentColor">
                                                 <!--! Font Awesome Pro 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. -->
@@ -151,13 +160,13 @@
                                     </div>
                                 </div>
                             </div>
-                            @endif
+                          
                         @endforeach
-                    @endforeach
+                    
 
                 <div class="col-sm-2">
                     <div>
-                        <a class="card_link" href="{{ route('admin.sponsorship.index', $accommodation->id) }}">See all</a>
+                        <a class="card_link" href="{{ route('admin.sponsorship.index', $accommodation->slug) }}">See all</a>
                     </div>
                 </div>
             </div>

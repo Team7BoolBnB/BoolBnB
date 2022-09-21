@@ -8,6 +8,7 @@ use App\Http\Requests\SponsorshipRequest;
 use App\Sponsorship;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class SponsorshipController extends Controller
 {
@@ -19,25 +20,15 @@ class SponsorshipController extends Controller
     public function index()
     {
 
-        $accommodations=Accommodation::where("user_id",Auth::id())->get();
-        /* dd($accommodations);
-        $sponsorships = Accommodation::find(Auth::id())->sponsorship()->get();
-         */
-
-        foreach ($accommodations as $accommodation) {
-
-            foreach ($accommodation->sponsorship as $sponsor) {
-                if($sponsor) {
-                    $active = true;
-                } else {
-                    $active = false;
-                }
-            }
-        }
+        $sponzorizedAccommodation = DB::table('accommodations')
+            ->join('sponsorship_accommodation', 'accommodations.id', '=', 'sponsorship_accommodation.accommodation_id')
+            ->join('sponsorships', 'sponsorship_accommodation.sponsorship_id', '=', 'sponsorships.id')
+            ->select('sponsorships.*',"accommodations.*")->where("user_id",Auth::id())->orderBy("endTime","desc")
+            ->get();
 
         /* $active = false; */
 
-        return view("admin.sponsorship.index", compact("accommodations", "active"));
+        return view("admin.sponsorship.index", compact("sponzorizedAccommodation"));
     }
 
 
