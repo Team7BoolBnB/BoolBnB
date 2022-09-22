@@ -5,7 +5,7 @@
  */
 
 require('./bootstrap');
-
+require("./backend/tomtomAPI");
 window.Vue = require('vue');
 
 /**

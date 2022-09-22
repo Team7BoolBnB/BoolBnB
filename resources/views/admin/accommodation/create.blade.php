@@ -27,7 +27,7 @@
             </div>
         @endif
 
-        <form action="{{ route('admin.accommodation.store') }}" method="post" enctype="multipart/form-data">
+        <form id="formHandler" action="{{ route('admin.accommodation.store') }}" method="post" enctype="multipart/form-data">
 
             @csrf
 
@@ -59,18 +59,18 @@
 
             <h5>Image</h5>
             <div class="form-group mb-5">
-                
-    
+
+
                 <div class="d-flex">
-                  <input type="file" name="image" class="form-control-file @error('image') is-invalid @enderror"
-                    id="image" value="{{ old('image') }}">
+                    <input type="file" name="image" class="form-control-file @error('image') is-invalid @enderror"
+                        id="image" value="{{ old('image') }}">
                 </div>
                 <div class="invalid-feedback">
                     @foreach ($errors->get('image') as $error)
                         {{ $error }}<br>
                     @endforeach
                 </div>
-              </div>
+            </div>
 
             <h5>Description</h5>
             <div class="form-floating mb-5">
@@ -185,14 +185,14 @@
 
             <h5 class="mt-5">Address</h5>
 
-{{-- <div class="form-floating mb-5">
-    
-    <input class="form-control" list="datalistOptions" id="exampleDataList" placeholder="Type to search...">
-    <datalist id="datalistOptions">
-      
-    </datalist>
-</div> --}}
             <div class="form-floating mb-5">
+
+                <input class="form-control" list="datalistOptions" name="address" id="exampleDataList" placeholder="Type to search..." value="{{old("address")}}">
+                <datalist id="datalistOptions">
+
+                </datalist>
+            </div>
+            {{-- <div class="form-floating mb-5">
                 <input type="text" class="form-control {{ $errors->has('address') ? 'is-invalid' : '' }}"
                     name="address" id="addressInput" placeholder="Insert an address..." value="{{ old('address') }}">
                 <label for="addressInput">Insert an address for your accommodation</label>
@@ -201,37 +201,23 @@
                         {{ $error }}<br>
                     @endforeach
                 </div>
-            </div>
+            </div> --}}
 
-            <div class="row">
+            <div class="row d-none">
 
-                <div class="col-6">
-                    <h5>Latitude</h5>
+
+                <div class="col-6 ">
                     <div class="form-floating mb-5">
-                        <input type="text" class="form-control {{ $errors->has('latitude') ? 'is-invalid' : '' }}"
-                            name="latitude" id="latitudeInput" placeholder="Insert latitude..."
+                        <input type="text" class="form-control" name="latitude" id="latitudeInput"
                             value="{{ old('latitude') }}">
-                        <label for="latitudeInput">Insert the latitude for your accommodation</label>
-                        <div class="invalid-feedback">
-                            @foreach ($errors->get('latitude') as $error)
-                                {{ $error }}<br>
-                            @endforeach
-                        </div>
                     </div>
                 </div>
 
-                <div class="col-6">
-                    <h5>Longitude</h5>
+                {{-- Longitude --}}
+                <div class="col-6 ">
                     <div class="form-floating mb-5">
-                        <input type="text" class="form-control {{ $errors->has('longitude') ? 'is-invalid' : '' }}"
-                            name="longitude" id="longitudeInput" placeholder="Insert longitude..."
+                        <input type="text" class="form-control" name="longitude" id="longitudeInput"
                             value="{{ old('longitude') }}">
-                        <label for="longitudeInput">Insert the longitude for your accommodation</label>
-                        <div class="invalid-feedback">
-                            @foreach ($errors->get('longitude') as $error)
-                                {{ $error }}<br>
-                            @endforeach
-                        </div>
                     </div>
                 </div>
 
