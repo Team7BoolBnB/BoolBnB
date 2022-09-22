@@ -41,7 +41,11 @@ class SponsorshipController extends Controller
     {
         $sponsorships = Sponsorship::all();
 
-        return view("admin.sponsorship.create", compact("sponsorships"));
+        //Get all the accommodations of logged user
+        $user_id = Auth::id();
+        $accommodations = Accommodation::where("user_id", $user_id)->get();
+
+        return view("admin.sponsorship.create", compact("sponsorships", "accommodations"));
     }
 
     /**
