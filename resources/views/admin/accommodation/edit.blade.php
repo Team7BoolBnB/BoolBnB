@@ -58,18 +58,7 @@
                 </div>
             </div>
 
-            <h5>Image</h5>
-            <div class="form-group mb-5">
-                
-                 
-                    <img class="card-img-top" src="{{asset('storage/' . $accommodation->image ) }}" alt="Card image cap" width="100" height="200">
-                    <input type="file" name="image" class="form-control @error('image') is-invalid @enderror"
-                        placeholder="Inserisci il titolo" value=" {{old("image", $accommodation->image) === $accommodation->image ? $accommodation->image : "" }} ">
-                    @error('image')
-                        <div class="invalid-feedback">{{ $message }}</div>
-                    @enderror
-              
-            </div>
+           
 
             <h5>Description</h5>
             <div class="form-floating mb-5">
