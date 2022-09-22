@@ -27,7 +27,8 @@
                                 <div class="fs-3">{{ $accommodation->title }}</div>
                                 <div>{{ $accommodation->address }}</div>
                             </div>
-                            <img class="img-fluid" src="{{ $accommodation->image }}" alt="">
+                            
+                            <img class="img-fluid" src="{{ asset('storage/' . $accommodation->image) }}" alt="">
                             <div class="links_card_admin">
                                 <a class="link_admin" href="{{ route('admin.accommodation.show', $accommodation->slug) }}"
                                     class="btn btn-primary">

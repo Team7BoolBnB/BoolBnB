@@ -70,7 +70,7 @@ class AccommodationController extends Controller
      */
     public function index()
 
-
+    
 
 
     {
@@ -120,7 +120,7 @@ class AccommodationController extends Controller
 
         $accommodation->user_id = Auth::user()->id;
 
-
+        
 
         $coverImg = Storage::put("/accommodation", $data["image"]);
 
@@ -171,13 +171,13 @@ class AccommodationController extends Controller
         $services = Service::all();
         $typologies = Typology::all();
 
-        $control=[];
+        $control = [];
 
         foreach ($accommodation->services as $serviceOnThisAccommodation) {
-            $control[]=$serviceOnThisAccommodation->name;
+            $control[] = $serviceOnThisAccommodation->name;
         };
-        
-       
+
+
 
         return view("admin.accommodation.edit", compact("accommodation", "services", "typologies", "control"));
     }
@@ -205,26 +205,17 @@ class AccommodationController extends Controller
         Storage::delete($accommodation->image);
         $accommodation->image = Storage::put("/accommodation", $data["image"]);
 
-        if (key_exists("services", $data)) {
+        if (key_exists("services", $data) && key_exists("sponsorships", $data)) {
 
             $accommodation->services()->sync($data["services"]);
-           
-
-        } else {
-            $accommodation->services()->sync([]);
-           
-
-        }
-        if (key_exists("sponsorships", $data)) {
-
-           
             $accommodation->sponsorship()->sync($data["sponsorships"]);
+        } elseif (key_exists("services", $data)) {
+            $accommodation->services()->sync([]);
+        } elseif (key_exists("sponsorships", $data)) {
 
-        } else {
-           
-            $accommodation->sponsorship()->sync([]);
-
+            $accommodation->sponsorship()->sync($data["sponsorships"]);
         }
+
 
         $accommodation->update($data);
 

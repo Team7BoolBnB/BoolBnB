@@ -29,12 +29,12 @@ class AccommodationRequest extends FormRequest
             "longitude" => "required|integer|digits_between:3,8",
             "latitude" => "required|integer|digits_between:3,8",
             "title" => "required|string|min:10|max:50",
-            "description" => "required|string|min:40|max:255",
-            "rooms" => "required|integer|min:1|max:400",
-            "beds" => "required|integer|min:1|max:10",
-            "bathrooms" => "required|integer|min:1|max:6",
+            "description" => "required|string|min:40|max:1000",
+            "rooms" => "required|integer|min:1|max:50",
+            "beds" => "required|integer|min:1|max:50",
+            "bathrooms" => "required|integer|min:1|max:50",
             "mt_square" => "required|integer|min:1|max:5000",
-            "image" => "required|image",
+            "image" => "nullable|image",
         
             "services" => "required",
         ];
