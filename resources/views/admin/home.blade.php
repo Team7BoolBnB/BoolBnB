@@ -20,9 +20,11 @@
                 @foreach ($accommodations as $accommodation)
                     <div class="col-sm-5">
                         <div class="card_admin">
-                            <div class="available_info">
-                                <span>Available</span>
-                            </div>
+                            @if($accommodation->available == "0")
+                                <h6 class=" badge not_available_info">Not Visible</h6>
+                            @else
+                                <h6 class=" badge available_info">Visible</h6>
+                            @endif
                             <div class="accommodation_info">
                                 <div class="fs-3">{{ $accommodation->title }}</div>
                                 <div>{{ $accommodation->address }}</div>

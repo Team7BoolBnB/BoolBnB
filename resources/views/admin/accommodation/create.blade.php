@@ -184,6 +184,14 @@
             <hr>
 
             <h5 class="mt-5">Address</h5>
+
+{{-- <div class="form-floating mb-5">
+    
+    <input class="form-control" list="datalistOptions" id="exampleDataList" placeholder="Type to search...">
+    <datalist id="datalistOptions">
+      
+    </datalist>
+</div> --}}
             <div class="form-floating mb-5">
                 <input type="text" class="form-control {{ $errors->has('address') ? 'is-invalid' : '' }}"
                     name="address" id="addressInput" placeholder="Insert an address..." value="{{ old('address') }}">

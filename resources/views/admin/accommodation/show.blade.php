@@ -10,7 +10,7 @@
 
     <div class="container pt-5">
 
-        <img src="{{ $accommodation->image }}" alt="{{ $accommodation->title }}" width="100%">
+        <img src="{{ asset('storage/' . $accommodation->image) }}" alt="{{ $accommodation->title }}" width="100%">
 
         <h5 class="pt-4">{{ $accommodation->title }}</h5>
 
