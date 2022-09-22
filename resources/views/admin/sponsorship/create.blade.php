@@ -1,55 +1,71 @@
-@extends('layouts.app')
+@extends('layouts.creation')
+
+@section('page-title', 'New Sponsorship')
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-12">
-            <div class="d-flex justify-content-between align-items-center">
-                <h1>Creazione nuovo ADS</h1>
-            </div>
+    <div class="container">
 
-            <div>
-                @if ($errors->any())
-                <div class="alert alert-danger">
-                    <ul>
-                        @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
+        <div class="row">
+            <div class="col-12">
+                <div class="text-end pb-5">
+                    <a href="{{ route('admin.sponsorship.index') }}" class="textLink me-2">
+                        <i class="fa-solid fa-arrow-left pe-2"></i>
+                        Back to sponsorships
+                    </a>
                 </div>
-                @endif
+            </div>
+        </div>
+
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                Errori di validazione:
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+
+
+        <form action="{{ route('admin.sponsorship.store') }}" method="post" enctype="multipart/form-data">
+
+            @csrf
+
+            <h5 class="mt-5 mb-4">Which accommodation you want to sponsor?</h5>
+            <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
+                @foreach ($accommodations as $item)
+                    <option class="{{ $errors->has('accommodation_id') ? 'is-invalid' : '' }}" name="accommodation_id"
+                        value="{{ $item->id }}">{{ $item->title }} - {{ $item->address }}</option>
+                @endforeach
+            </select>
+            <div class="row">
+                @error('typology_id')
+                    <div class="invalid-feedback">{{ $message }}</div>
+                @enderror
             </div>
 
-            <form action="{{ route('admin.sponsorship.store') }}" method="post" enctype="multipart/form-data">
-                @csrf
+            <div class="row">
+                <div class="col-6">
+                    <h5 class="mt-5 mb-4">Start date</h5>
+                    <input type="datetime-local" id="startTime" name="startTime">
 
-                <div class="form-group">
-                    <label>Durata sponsorship</label>
-                    <select type="text" name="sponsorship_id" class="form-control @error('sponsorship_id') is-invalid @enderror" value="{{ old('sponsorship_id') }}" required>
-                        <option value=""></option>
-                        @foreach($sponsorships as $ads)
-                            <option value="{{ $ads->id }}">{{ $ads->period }}</option>
+                </div>
+                <div class="col-6">
+                    <h5 class="mt-5 mb-4">Duration</h5>
+                    <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
+                        @foreach ($sponsorships as $item)
+                            <option class="{{ $errors->has('sponsorship_id') ? 'is-invalid' : '' }}" name="sponsorship_id"
+                                value="{{ $item->id }}">{{ $item->name }} - {{ $item->period }}h</option>
                         @endforeach
                     </select>
-                    @error('sponsorship_id')
-                    <div class="invalid-feedback">{{ $message }}</div>
-                    @enderror
                 </div>
+            </div>
+
+            <button type="submit" class="basicBtn bigBtn primaryBtn mt-5">Create</button>
+
+        </form>
 
 
-                
-                <div class="form-group py-4">
-                    <button type="submit" class="btn btn-success mt-3 mb-1">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-activity"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path><polyline points="17 21 17 13 7 13 7 21"></polyline><polyline points="7 3 7 8 15 8"></polyline></svg>
-                        Save
-                    </button>
-                </div>
-                <a href="{{ route('admin.sponsorship.index') }}" class="btn btn-secondary py-0 px-1">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-activity"><line x1="20" y1="12" x2="4" y2="12"></line><polyline points="10 18 4 12 10 6"></polyline></svg>
-                    Back
-                </a>
-            </form>
-        </div>
     </div>
-</div>
 @endsection

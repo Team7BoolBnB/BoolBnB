@@ -4,7 +4,7 @@
 
     <div class="pageHeader d-flex align-items-center">
         <div class="container text-white">
-            <h2>Sponsorship</h2>
+            <h2>Sponsorships</h2>
         </div>
     </div>
 
