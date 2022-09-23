@@ -33,14 +33,14 @@
             @csrf
 
             <h5 class="mt-5 mb-4">Which accommodation you want to sponsor?</h5>
-            <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
+            <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example" required="required">
                 @foreach ($accommodations as $item)
                     <option class="{{ $errors->has('accommodation_id') ? 'is-invalid' : '' }}" name="accommodation_id"
                         value="{{ $item->id }}">{{ $item->title }} - {{ $item->address }}</option>
                 @endforeach
             </select>
             <div class="row">
-                @error('typology_id')
+                @error('accommodation_id')
                     <div class="invalid-feedback">{{ $message }}</div>
                 @enderror
             </div>
@@ -48,12 +48,11 @@
             <div class="row">
                 <div class="col-6">
                     <h5 class="mt-5 mb-4">Start date</h5>
-                    <input type="datetime-local" id="startTime" name="startTime">
-
+                    <input type="datetime-local" id="startTime" name="startTime" required="required">
                 </div>
                 <div class="col-6">
                     <h5 class="mt-5 mb-4">Duration</h5>
-                    <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
+                    <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example" required="required">
                         @foreach ($sponsorships as $item)
                             <option class="{{ $errors->has('sponsorship_id') ? 'is-invalid' : '' }}" name="sponsorship_id"
                                 value="{{ $item->id }}">{{ $item->name }} - {{ $item->period }}h</option>
