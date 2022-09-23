@@ -15,10 +15,10 @@
 
 <script>
     import axios from "axios";
-    
+    import SideBar from "../components/SideBar.vue";
     
     export default {
-      
+      components: { SideBar },
       data() {
         return {
           data: [],

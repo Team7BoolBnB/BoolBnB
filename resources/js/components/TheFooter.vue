@@ -1,12 +1,12 @@
 <template>
-    <div class="sticky-bottom">
-        <footer>
+    <div class="border">
+        <div>
             <div class="py-2 navbar-light bg-white">
                 <div class="container d-flex justify-content-between">
 
                     <!-- logo -->
                     <div>
-                        <a class="navbar-brand" href="/">
+                        <a  href="/">
                             <img src="/img/logo-s.png" alt="Logo" width="30">
                         </a>
                     </div>
@@ -15,7 +15,7 @@
 
                 </div>
             </div>
-        </footer>
+        </div>
     </div>
 </template>
 
@@ -23,10 +23,11 @@
 
 </script>
 
-<style scoped>
-    .footer{
-        width: 100%;
-        background-color: grey;
+<style lang="scss" scoped>
+@import "../../sass/partials/variables";
+
+    .border{
+        border-top: 1px solid $tertiaryColor;
     }
 
 
