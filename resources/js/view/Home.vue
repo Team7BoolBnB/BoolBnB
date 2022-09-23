@@ -1,23 +1,6 @@
 <template>
   <div>
-    <NavBar></NavBar>
-
-    <!-- sezione con carosello di immagini -->
-    <div class="debug_carosel">
-      
-      <div class="h-100 d-flex justify-content-center align-items-center">
-        <div class="container_link_advanced">
-          <router-link :to="{ name: 'advanced-search' }"
-            >pagina advanced</router-link
-          >
-        </div>
-      </div>
-    </div>
-
-    <!-- sezione main con card => chiamata api -->
-    <div>
-      <CardList></CardList>
-    </div>
+   
   </div>
 
 
