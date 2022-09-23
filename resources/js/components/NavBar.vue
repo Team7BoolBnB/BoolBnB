@@ -1,5 +1,5 @@
 <template>
-    <div class="sticky-top">
+    <div class="sticky-top border">
         <header>
             <nav class="navbar navbar-expand-md navbar-light bg-white">
                 <div class="container d-flex justify-content-between">
@@ -40,3 +40,13 @@ export default {
 
 }
 </script>
+
+<style lang="scss" scoped>
+    @import "../../sass/partials/variables";
+    
+        .border{
+            border-top: 1px solid $tertiaryColor;
+        }
+    
+    
+    </style>

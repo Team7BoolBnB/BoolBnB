@@ -1,6 +1,6 @@
 <template>
-    <div class="sidebar_container">
-        <h3 class="text-white">Filtri</h3>
+    <div class="sidebar_container border">
+        <h3>Filters</h3>
 
         <div>
             <form action="">
@@ -8,46 +8,26 @@
 
                 <div class="form-floating mb-3">
                     <input type="text" class="form-control" id="destinationInput" placeholder="scegli una destinazione">
-                    <label for="destinationInput">Destinazione</label>
+                    <label for="destinationInput">Destination</label>
                 </div>
 
                 <div class="row g-2 mb-3">
                     <div class="col-md">
                         <div class="form-floating">
-                            <input type="datetime-local" class="form-control" id="dateInput"
+                            <input type="date" class="form-control" id="dateArrivalInput"
                                 placeholder="Data di arrivo">
-                            <label for="dateInput">Data di arrivo</label>
+                            <label for="dateArrivalInput">Check-in date</label>
                         </div>
                     </div>
                     <div class="col-md">
                         <div class="form-floating">
-                            <input type="datetime-local" class="form-control" id="dateInput"
+                            <input type="date" class="form-control" id="dateDDepartureInput"
                                 placeholder="Data di arrivo">
-                            <label for="dateInput">Data di arrivo</label>
+                            <label for="dateDDepartureInput">Check-out date</label>
                         </div>
                     </div>
                 </div>
 
-                <div class="row g-2 mb-3">
-                    <div class="col-md">
-                        <div class="form-floating">
-                            <input type="number" class="form-control" id="numberAdult" placeholder="Data di arrivo">
-                            <label for="numberAdult">Adulti</label>
-                        </div>
-                    </div>
-                    <div class="col-md">
-                        <div class="form-floating">
-                            <input type="number" class="form-control" id="numberChild" placeholder="Data di arrivo">
-                            <label for="numberChild">Bambini</label>
-                        </div>
-                    </div>
-                    <div class="col-md">
-                        <div class="form-floating">
-                            <input type="number" class="form-control" id="numberAnimal" placeholder="Data di arrivo">
-                            <label for="numberAnimal">Animali</label>
-                        </div>
-                    </div>
-                </div>
 
                 <div class="form-floating mb-3">
                     <select class="form-select" id="selectTypology" aria-label="Floating label select example">
@@ -56,11 +36,33 @@
                         <option value="2">Two</option>
                         <option value="3">Three</option>
                     </select>
-                    <label for="selectTypology">Tipo di alloggio</label>
+                    <label for="selectTypology">Type of accommodation</label>
+                </div>
+
+                <div class="row g-2 mb-3">
+                    <h5>Accommodation details</h5>
+                    <div class="col-md">
+                        <div class="form-floating">
+                            <input type="number" class="form-control" id="numberRooms" >
+                            <label for="numberRooms">Rooms</label>
+                        </div>
+                    </div>
+                    <div class="col-md">
+                        <div class="form-floating">
+                            <input type="number" class="form-control" id="numberBeds" >
+                            <label for="numberBeds">Beds</label>
+                        </div>
+                    </div>
+                    <div class="col-md">
+                        <div class="form-floating">
+                            <input type="number" class="form-control" id="numberBathrooms" >
+                            <label for="numberBathrooms">Bathrooms</label>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="check_container">
-                    <h5>Servizi</h5>
+                    <h5>Services</h5>
                     <div class="form-check">
                         <input class="form-check-input" type="checkbox" value="" id="wifiCheck">
                         <label class="form-check-label" for="wifiCheck">
@@ -70,25 +72,25 @@
                     <div class="form-check">
                         <input class="form-check-input" type="checkbox" value="" id="kitchenCheck">
                         <label class="form-check-label" for="kitchenCheck">
-                            Cucina
+                            Kitchen
                         </label>
                     </div>
                     <div class="form-check">
                         <input class="form-check-input" type="checkbox" value="" id="parkingCheck">
                         <label class="form-check-label" for="parkingCheck">
-                            Parcheggio gratuito nella proprietà
+                            Free parking on the property
                         </label>
                     </div>
                     <div class="form-check">
                         <input class="form-check-input" type="checkbox" value="" id="tubCheck">
                         <label class="form-check-label" for="tubCheck">
-                            Vasca da bagno
+                            Bath tub
                         </label>
                     </div>
                     <div class="form-check">
                         <input class="form-check-input" type="checkbox" value="" id="panoramicCheck">
                         <label class="form-check-label" for="panoramicCheck">
-                            Vista sul Mare
+                            Sea-view
                         </label>
                     </div>
                     <div class="form-check">
@@ -100,11 +102,13 @@
                     <div class="form-check">
                         <input class="form-check-input" type="checkbox" value="" id="heatingCheck">
                         <label class="form-check-label" for="heatingCheck">
-                            Riscaldamento
+                            Heating
                         </label>
                     </div>
                 </div>
 
+
+                <button type="submit" class="basicBtn bigBtn primaryBtn mt-5">Search</button>
 
             </form>
         </div>
@@ -124,13 +128,20 @@ export default {
 
 .sidebar_container {
     padding: 1.5rem;
-    background: linear-gradient(0deg, rgba(65, 43, 157, 1) 0%, rgba(207, 35, 119, 1) 100%);
-    min-width: 300px;
+    /* background: linear-gradient(0deg, rgba(65, 43, 157, 1) 0%, rgba(207, 35, 119, 1) 100%); */
+    max-width: 400px;
+    background-color: white;
+    border-right: 1px solid $tertiaryColor;
 }
 
 .check_container{
     padding: 0.5rem;
     border-radius: 0.25rem;
-    background-color: white;
+    border: 1px solid #71717166;
+    background-color: #f8fafc;
+}
+
+.border{
+    /* border-right: 1px solid $tertiaryColor; */
 }
 </style>
