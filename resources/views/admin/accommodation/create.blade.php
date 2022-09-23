@@ -188,6 +188,7 @@
             <div class="form-floating mb-5">
 
                 <input class="form-control" list="datalistOptions" name="address" id="exampleDataList" placeholder="Type to search..." value="{{old("address")}}">
+                <label for="exampleDataList">Type to search...</label>
                 <datalist id="datalistOptions">
 
                 </datalist>
@@ -209,7 +210,7 @@
                 <div class="col-6 ">
                     <div class="form-floating mb-5">
                         <input type="text" class="form-control" name="latitude" id="latitudeInput"
-                            value="{{ old('latitude') }}">
+                            value="{{ old('latitude') }}" >
                     </div>
                 </div>
 

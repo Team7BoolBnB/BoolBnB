@@ -40123,11 +40123,11 @@ var _require = __webpack_require__(/*! axios */ "./node_modules/axios/index.js")
 /* Rchiamo tutti gli elementi che mi serviranno */
 
 
-var listaOption = document.getElementById("datalistOptions");
 var inputText = document.getElementById("exampleDataList");
 var longitudeInput = document.getElementById("longitudeInput");
 var latitudeInput = document.getElementById("latitudeInput");
 var formHandler = document.getElementById("formHandler");
+var listaOption = document.getElementById("datalistOptions");
 /* Funzione autocomplete */
 
 function fetchData(_x) {
@@ -40136,18 +40136,30 @@ function fetchData(_x) {
 
 function _fetchData() {
   _fetchData = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2(query) {
-    var Promise, results;
+    var _Promise, results;
+
     return _regeneratorRuntime().wrap(function _callee2$(_context2) {
       while (1) {
         switch (_context2.prev = _context2.next) {
           case 0:
-            Promise = Axios.get("https://api.tomtom.com/search/2/search/" + encodeURIComponent(query) + ".json?key=ziNw7Yn7FMXsuIsY65fMoQmyy7qrHcM3");
-            _context2.next = 3;
-            return Promise;
+            if (listaOption.lastChild) {
+              while (listaOption.firstChild) {
+                listaOption.removeChild(listaOption.lastChild);
+              }
+            }
 
-          case 3:
+            if (!(query.length > 10)) {
+              _context2.next = 7;
+              break;
+            }
+
+            _Promise = Axios.get("https://api.tomtom.com/search/2/search/" + encodeURIComponent(query) + ".json?key=ziNw7Yn7FMXsuIsY65fMoQmyy7qrHcM3");
+            _context2.next = 5;
+            return _Promise;
+
+          case 5:
             results = _context2.sent;
-            results.data.results.forEach(function (result) {
+            results.data.results.forEach(function (result, index) {
               var fullAddress = result.address;
               var address = fullAddress.freeformAddress;
               var provincia = fullAddress.countrySecondarySubdivision;
@@ -40158,7 +40170,7 @@ function _fetchData() {
               listaOption.append(option);
             });
 
-          case 5:
+          case 7:
           case "end":
             return _context2.stop();
         }
