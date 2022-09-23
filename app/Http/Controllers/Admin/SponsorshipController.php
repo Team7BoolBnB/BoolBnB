@@ -41,7 +41,11 @@ class SponsorshipController extends Controller
     {
         $sponsorships = Sponsorship::all();
 
-        return view("admin.sponsorship.create", compact("sponsorships"));
+        //Get all the accommodations of logged user
+        $user_id = Auth::id();
+        $accommodations = Accommodation::where("user_id", $user_id)->get();
+
+        return view("admin.sponsorship.create", compact("sponsorships", "accommodations"));
     }
 
     /**
@@ -53,9 +57,22 @@ class SponsorshipController extends Controller
     public function store(SponsorshipRequest $request)
     {
         $data = $request->validated();
-        $newSponsorship = Sponsorship::create($data);
+        
+         
+       
+        $period=Sponsorship::findOrFail($data["sponsorship_id"]); 
 
-        return  redirect()->route("admin.sponsorship.show", $newSponsorship->id);
+        $orario="+" . $period->period . " hours";
+        
+        $calcultedData=date_modify(date_create($data["startTime"]), $orario);
+
+        DB::table('sponsorship_accommodation')->insertGetId(
+            ['accommodation_id' => $data["accommodation_id"], 'sponsorship_id' =>$data["sponsorship_id"], 'startTime' => $data["startTime"], 'endTime' => $calcultedData]
+           
+        );   
+        
+ 
+        return  redirect()->route("admin.home");
     }
 
     /**

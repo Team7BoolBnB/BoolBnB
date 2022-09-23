@@ -70,17 +70,18 @@ class AccommodationController extends Controller
      */
     public function index()
 
-   
+    
 
 
-    {   $user_id=Auth::id();
-        
+    {
+        $user_id = Auth::id();
+
         //Get all the accommodations of logged user
-        $accommodations = Accommodation::where("user_id",$user_id)->get();
+        $accommodations = Accommodation::where("user_id", $user_id)->get();
 
         /* $accommodations = []; */
 
-        if(count($accommodations) == 0) {
+        if (count($accommodations) == 0) {
             $visible = false;
         } else {
             $visible = true;
@@ -122,7 +123,7 @@ class AccommodationController extends Controller
         
 
         $coverImg = Storage::put("/accommodation", $data["image"]);
-    
+
         $accommodation->image = $coverImg;
 
 
@@ -170,7 +171,15 @@ class AccommodationController extends Controller
         $services = Service::all();
         $typologies = Typology::all();
 
-        return view("admin.accommodation.edit", compact("accommodation", "services", "typologies"));
+        $control = [];
+
+        foreach ($accommodation->services as $serviceOnThisAccommodation) {
+            $control[] = $serviceOnThisAccommodation->name;
+        };
+
+
+
+        return view("admin.accommodation.edit", compact("accommodation", "services", "typologies", "control"));
     }
 
     /**
@@ -182,7 +191,7 @@ class AccommodationController extends Controller
      */
     public function update(AccommodationRequest $request, $slug)
     {
-        
+
         $data = $request->validated();
 
         $accommodation = $this->findBySlug($slug);
@@ -193,15 +202,20 @@ class AccommodationController extends Controller
         }
 
 
-        Storage::delete($accommodation->image);
-        $accommodation->image=Storage::put("/accommodation", $data["image"]);
-         
-        if (key_exists("services", $data)) {
-            
+        /* Storage::delete($accommodation->image);
+        $accommodation->image = Storage::put("/accommodation", $data["image"]); */
+
+        if (key_exists("services", $data) && key_exists("sponsorships", $data)) {
+
             $accommodation->services()->sync($data["services"]);
-        } else {
+            $accommodation->sponsorship()->sync($data["sponsorships"]);
+        } elseif (key_exists("services", $data)) {
             $accommodation->services()->sync([]);
+        } elseif (key_exists("sponsorships", $data)) {
+
+            $accommodation->sponsorship()->sync($data["sponsorships"]);
         }
+
 
         $accommodation->update($data);
 
@@ -217,17 +231,18 @@ class AccommodationController extends Controller
     public function destroy($slug)
     {
         $accommodation = $this->findBySlug($slug);
-
-
-        if($accommodation->trashed()){
+        $accommodation->services()->detach();
+        $accommodation->sponsorship()->detach();
+        $accommodation->messages()->delete();
+        $accommodation->delete();
+        /* if ($accommodation->trashed()) {
             $accommodation->services()->detach();
             $accommodation->forceDelete();
-        }
-        else{
+        } else {
             $accommodation->delete();
         }
-        $accommodation->delete();
+        $accommodation->delete(); */
 
-        return redirect()->route("admin.accommodation.index");
+        return redirect()->route("admin.home");
     }
 }

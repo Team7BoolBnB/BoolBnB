@@ -4,7 +4,7 @@
 
     <div class="pageHeader d-flex align-items-center">
         <div class="container text-white">
-            <h2>Sponsorship</h2>
+            <h2>Sponsorships</h2>
         </div>
     </div>
 
@@ -48,9 +48,11 @@
                     @foreach ($sponzorizedAccommodation as $accommodation)
                         <div class="col">
                             <div class="card_admin">
-                                <div class="available_info">
-                                    <span>Active (TIMER)</span>
-                                </div>
+                                @if($accommodation->available == "0")
+                                    <h6 class=" badge not_available_info">Not Visible</h6>
+                                @else
+                                    <h6 class=" badge available_info">Visible</h6>
+                                @endif
                                 <div class="accommodation_info">
                                     <div class="fs-3">{{ $accommodation->title }}</div>
                                     <div>{{ $accommodation->address }}</div>
@@ -58,7 +60,7 @@
                                 </div>
                                 <img class="img-fluid" src="{{ $accommodation->image }}" alt="">
                                 <div class="links_card_admin">
-                                    <a class="link_admin" href="{{ route('admin.accommodation.show', $accommodation->id) }}"
+                                    <a class="link_admin" href="{{ route('admin.accommodation.show', $accommodation->slug) }}"
                                         class="btn btn-primary">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                             fill="currentColor" class="bi bi-eye-fill" viewBox="0 0 16 16">
@@ -67,7 +69,7 @@
                                                 d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z" />
                                         </svg>
                                     </a>
-                                    <a class="link_admin" href="{{ route('admin.accommodation.edit', $accommodation->id) }}"
+                                    <a class="link_admin" href="{{ route('admin.accommodation.edit', $accommodation->slug) }}"
                                         class="btn btn-primary">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                             fill="currentColor" class="bi bi-pencil-fill" viewBox="0 0 16 16">
@@ -76,13 +78,19 @@
                                         </svg>
                                     </a>
                                     {{-- link delete --}}
-                                    <a class="link_admin" href="#" class="btn btn-primary">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                            fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
-                                            <path
-                                                d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z" />
-                                        </svg>
-                                    </a>
+                                    <form class="d-inline-block" action="{{ route('admin.accommodation.destroy', $accommodation->slug) }}" method="post">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="deleteButton">
+                                            <a class="link_admin" href="#" class="">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                                    class="bi bi-trash-fill" viewBox="0 0 16 16">
+                                                    <path
+                                                        d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z" />
+                                                </svg>
+                                            </a>
+                                        </button>
+                                      </form>
                                     <a class="link_admin" href="{{ route('admin.sponsorship.create', $accommodation->id) }}"
                                         class="btn btn-primary">
                                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="currentColor">

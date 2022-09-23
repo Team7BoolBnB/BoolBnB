@@ -12,6 +12,7 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/backend.js') }}" defer></script>
+    
 
     <!-- Fonts -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
@@ -45,7 +46,7 @@
                 <div class="collapse navbar-collapse d-flex justify-content-center" id="navbarText">
                     <a class="nav-link {{ Request::route()->getName() === 'admin.home' ? 'navActivePage' : '' }}" aria-current="page" href="/admin">Dashboard</a>
                     <a class="nav-link {{ Request::route()->getName() === 'admin.accommodation.index' ? 'navActivePage' : '' }}" href="{{ route('admin.accommodation.index') }}">Accommodations</a>
-                    <a class="nav-link {{ Request::route()->getName() === 'admin.sponsorship.index' ? 'navActivePage' : '' }}" href="{{ route('admin.sponsorship.index') }}">Sponsorship</a>
+                    <a class="nav-link {{ Request::route()->getName() === 'admin.sponsorship.index' ? 'navActivePage' : '' }}" href="{{ route('admin.sponsorship.index') }}">Sponsorships</a>
                 </div>
 
                 {{-- User --}}

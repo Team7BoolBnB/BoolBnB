@@ -25,9 +25,9 @@ class SponsorshipRequest extends FormRequest
     {
         return [
 
-            "name" => "required",
-            "period" => "required",
-            "price" => "required",
+            "sponsorship_id" => "required",
+            "accommodation_id" => "required",
+            "startTime" => "required",
 
 
         ];

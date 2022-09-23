@@ -12801,21 +12801,24 @@ nav .nav-link.navActivePage {
   color: #222222;
 }
 
-.available_info {
+.available_info,
+.not_available_info {
   padding: 0.5rem;
-  border: 1px solid #FF385C;
-  border-radius: 0.5rem;
+  /* border: 1px solid $primaryColor;
+  border-radius: 0.50rem; */
   z-index: 2;
-  background: white;
   position: absolute;
   top: 5%;
   right: 5%;
-  -webkit-backdrop-filter: blur(30px);
-          backdrop-filter: blur(30px);
+  /* backdrop-filter: blur(30px); */
 }
 
-.available_info span {
-  color: #FF385C;
+.not_available_info {
+  background: grey;
+}
+
+.available_info {
+  background: #38c172;
 }
 
 .accommodation_info {
@@ -12836,7 +12839,9 @@ nav .nav-link.navActivePage {
 
 .accommodation_info div {
   color: white;
-  /* font-size: 1rem; */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .card_admin {
@@ -12862,8 +12867,9 @@ nav .nav-link.navActivePage {
   transform: translateY(0px);
 }
 
-.card_admin:hover .available_info,
-.card_admin:hover .accommodation_info {
+.card_admin:hover .available_info.badge,
+.card_admin:hover .accommodation_info,
+.card_admin:hover .not_available_info {
   display: none;
 }
 
@@ -12899,7 +12905,7 @@ nav .nav-link.navActivePage {
   z-index: 3;
   color: white;
   opacity: 0;
-  transform: translateY(30px);
+  transform: translateY(-30px);
   transition: 0.5s;
 }
 
@@ -12926,7 +12932,9 @@ nav .nav-link.navActivePage {
 }
 
 .card_link {
-  background-image: linear-gradient(135deg, rgb(255, 56, 92) 0%, rgb(217, 9, 99) 100%);
+  /* background-image: linear-gradient(135deg, rgba(255, 56, 92, 1) 0%, rgba(217, 9, 99, 1) 100%); */
+  background-image: linear-gradient(135deg, rgb(173, 165, 166) 0%, rgb(99, 94, 96) 100%);
+  /* background-color: $tertiaryColor; */
   height: 280px;
   display: flex;
   justify-content: center;
@@ -12969,5 +12977,10 @@ nav .nav-link.navActivePage {
 
 .form-control.formTextArea {
   height: 9rem;
+}
+
+.deleteButton {
+  background: none;
+  border: none;
 }
 

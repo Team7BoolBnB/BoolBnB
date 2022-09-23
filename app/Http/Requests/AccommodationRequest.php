@@ -24,18 +24,18 @@ class AccommodationRequest extends FormRequest
     public function rules()
     {
         return [
-            "address" => "required|min:6|max:255",
+            "address" => "required|string|min:6|max:100",
             "typology_id"=>"required",
-            "longitude" => "required|min:5|max:15",
-            "latitude" => "required|min:5|max:15",
-            "title" => "required",
-            "description" => "required|min:80|max:255",
-            "rooms" => "required|min:1|max:10",
-            "beds" => "required|min:1|max:10",
-            "bathrooms" => "required|min:1|max:6",
-            "mt_square" => "required",
-            "image" => "required",
-            "available" => "required",
+            "longitude" => "required",
+            "latitude" => "required",
+            "title" => "required|string|min:10|max:50",
+            "description" => "required|string|min:40|max:1000",
+            "rooms" => "required|integer|min:1|max:50",
+            "beds" => "required|integer|min:1|max:50",
+            "bathrooms" => "required|integer|min:1|max:50",
+            "mt_square" => "required|integer|min:1|max:5000",
+            "image" => "nullable|image",
+        
             "services" => "required",
         ];
     }
