@@ -1,8 +1,6 @@
 <template>
 
   <div>
-      <NavBar></NavBar>
-  
       <!-- sezione con carosello di immagini -->
       <div class="debug_carosel">
           <div class="heroOverlay">
