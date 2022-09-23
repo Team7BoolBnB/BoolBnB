@@ -1,4 +1,5 @@
 <template>
+
   <div>
       <NavBar></NavBar>
   
@@ -38,17 +39,17 @@
       components: { NavBar, CardItem },
       data() {
         return {
-          accommodations: [],
+            accommodations: [],
         };
-      },
-      methods:{
-        async fetchdata(){
-           await  axios.get("/api/accommodations").then((resp)=>{
-                this.accommodations=resp.data;
+    },
+    methods: {
+        async fetchdata() {
+            await axios.get("/api/accommodations").then((resp) => {
+                this.accommodations = resp.data;
             })
         }
-      },
-       mounted() {
+    },
+    mounted() {
         this.fetchdata();
       },
     };
