@@ -6,7 +6,7 @@
         <div class="debug_carosel">
             <div class="h-100 d-flex justify-content-center align-items-center">
                 <div class="container_link_advanced">
-                    <a class="button bt-dark" href="#">link pagina advanced</a>
+                    <router-link :to="{ name: 'advanced-search' }">pagina advanced</router-link>
                 </div>
             </div>
         </div>

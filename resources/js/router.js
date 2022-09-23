@@ -6,11 +6,12 @@ Vue.use(VueRouter);
 
 const routes = [
     {
-        path: "/" ,component: Home,name: "home.index",
-        path: "/advanced-search" , component: AdvancedSearch ,name: "home.index",
+        path: "/" ,component: Home,name: "home ",
+        
         /*  path: "/accommodation/:{id}" ,component: Home,name: "home.index", */
 
-    }
+    },
+    {path: "/advanced-search" , component: AdvancedSearch ,name: "advanced-search",}
 ]
 
 
