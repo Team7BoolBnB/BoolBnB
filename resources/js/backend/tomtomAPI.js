@@ -67,6 +67,16 @@ async function sendData(query) {
       let longitude = position.lon;
       longitudeInput.setAttribute("value", longitude)
 
+
+      let fullAddress=results.data.results[0].address;
+      let address = fullAddress.freeformAddress;
+      let provincia = fullAddress.countrySecondarySubdivision;
+      let country = fullAddress.countryCode;
+
+      let optionAddress = address + " " + provincia + ", " + country
+
+      inputText.value=optionAddress
+      
       return true
 
 }

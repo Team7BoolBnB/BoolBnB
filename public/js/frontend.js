@@ -43371,20 +43371,58 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _view_Home_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./view/Home.vue */ "./resources/js/view/Home.vue");
+/* harmony import */ var _view_AdvancedSearch_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./view/AdvancedSearch.vue */ "./resources/js/view/AdvancedSearch.vue");
+var _ref;
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
 
 
 
 vue__WEBPACK_IMPORTED_MODULE_1___default.a.use(vue_router__WEBPACK_IMPORTED_MODULE_0__["default"]);
-var routes = [{
+var routes = [(_ref = {
   path: "/",
   component: _view_Home_vue__WEBPACK_IMPORTED_MODULE_2__["default"],
   name: "home.index"
-}];
+}, _defineProperty(_ref, "path", "/advanced-search"), _defineProperty(_ref, "component", _view_AdvancedSearch_vue__WEBPACK_IMPORTED_MODULE_3__["default"]), _defineProperty(_ref, "name", "home.index"), _ref)];
 var router = new vue_router__WEBPACK_IMPORTED_MODULE_0__["default"]({
   routes: routes,
   mode: "history"
 });
 /* harmony default export */ __webpack_exports__["default"] = (router);
+
+/***/ }),
+
+/***/ "./resources/js/view/AdvancedSearch.vue":
+/*!**********************************************!*\
+  !*** ./resources/js/view/AdvancedSearch.vue ***!
+  \**********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+var render, staticRenderFns
+var script = {}
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_0__["default"])(
+  script,
+  render,
+  staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+component.options.__file = "resources/js/view/AdvancedSearch.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
 
 /***/ }),
 
