@@ -22,3 +22,4 @@ Route::get("/sponsorship","Api\PaymentController@generate");
 Route::post("/make/payment","Api\PaymentController@makePayment");
 
 Route::get("/accommodations","Api\HomeController@index");
+Route::get("/advancedsearch","Api\AdvancedSearchController@index");
