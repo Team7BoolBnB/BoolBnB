@@ -33,9 +33,13 @@
             @csrf
 
             <h5 class="mt-5 mb-4">Which accommodation you want to sponsor?</h5>
-            <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example" required="required">
+
+            <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example" name="accommodation_id" required="required">
+                
+
                 @foreach ($accommodations as $item)
-                    <option class="{{ $errors->has('accommodation_id') ? 'is-invalid' : '' }}" name="accommodation_id"
+
+                    <option class="{{ $errors->has('accommodation_id') ? 'is-invalid' : '' }}" 
                         value="{{ $item->id }}">{{ $item->title }} - {{ $item->address }}</option>
                 @endforeach
             </select>
@@ -52,9 +56,11 @@
                 </div>
                 <div class="col-6">
                     <h5 class="mt-5 mb-4">Duration</h5>
-                    <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example" required="required">
+
+                    <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example" name="sponsorship_id" required="required">
+
                         @foreach ($sponsorships as $item)
-                            <option class="{{ $errors->has('sponsorship_id') ? 'is-invalid' : '' }}" name="sponsorship_id"
+                            <option class="{{ $errors->has('sponsorship_id') ? 'is-invalid' : '' }}" 
                                 value="{{ $item->id }}">{{ $item->name }} - {{ $item->period }}h</option>
                         @endforeach
                     </select>

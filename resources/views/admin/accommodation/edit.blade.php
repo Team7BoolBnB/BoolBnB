@@ -58,6 +58,7 @@
                 </div>
             </div>
 
+
             <h5>Image</h5>
             <div class="form-group mb-5">
                 
@@ -70,6 +71,7 @@
                     @enderror
               
             </div>
+
 
             <h5>Description</h5>
             <div class="form-floating mb-5">

@@ -202,8 +202,8 @@ class AccommodationController extends Controller
         }
 
 
-        Storage::delete($accommodation->image);
-        $accommodation->image = Storage::put("/accommodation", $data["image"]);
+        /* Storage::delete($accommodation->image);
+        $accommodation->image = Storage::put("/accommodation", $data["image"]); */
 
         if (key_exists("services", $data) && key_exists("sponsorships", $data)) {
 
