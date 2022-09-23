@@ -2182,7 +2182,7 @@ function sendData(_x2) {
 
 function _sendData() {
   _sendData = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee3(query) {
-    var Promise, results, position, latitude, longitude;
+    var Promise, results, position, latitude, longitude, fullAddress, address, provincia, country, optionAddress;
     return _regeneratorRuntime().wrap(function _callee3$(_context3) {
       while (1) {
         switch (_context3.prev = _context3.next) {
@@ -2200,9 +2200,15 @@ function _sendData() {
             latitudeInput.setAttribute("value", latitude);
             longitude = position.lon;
             longitudeInput.setAttribute("value", longitude);
+            fullAddress = results.data.results[0].address;
+            address = fullAddress.freeformAddress;
+            provincia = fullAddress.countrySecondarySubdivision;
+            country = fullAddress.countryCode;
+            optionAddress = address + " " + provincia + ", " + country;
+            inputText.value = optionAddress;
             return _context3.abrupt("return", true);
 
-          case 10:
+          case 16:
           case "end":
             return _context3.stop();
         }
