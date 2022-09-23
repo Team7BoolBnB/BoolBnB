@@ -174,51 +174,37 @@
             <hr>
 
             <h5 class="mt-5">Address</h5>
+
             <div class="form-floating mb-5">
-                <input type="text" class="form-control {{ $errors->has('address') ? 'is-invalid' : '' }}"
-                    name="address" id="addressInput" placeholder="Insert an address..." value="{{ old('address') ?? $accommodation->address }}" required="required">
-                <label for="addressInput">Insert an address for your accommodation</label>
-                <div class="invalid-feedback">
-                    @foreach ($errors->get('address') as $error)
-                        {{ $error }}<br>
-                    @endforeach
-                </div>
+
+
+                <input class="form-control" list="datalistOptions" name="address" id="exampleDataList" placeholder="Type to search..." value="{{ old('address') ?? $accommodation->address }}" required="required">
+                <label for="exampleDataList">Type to search...</label>
+                <datalist id="datalistOptions">
+
+                </datalist>
+
             </div>
 
-            <div class="row">
+            <div class="row d-none">
 
-                <div class="col-6">
-                    <h5>Latitude</h5>
+
+                <div class="col-6 ">
                     <div class="form-floating mb-5">
-                        <input type="text" class="form-control {{ $errors->has('latitude') ? 'is-invalid' : '' }}"
-                            name="latitude" id="latitudeInput" placeholder="Insert latitude..."
-                            value="{{ old('latitude') ?? $accommodation->latitude }}">
-                        <label for="latitudeInput">Insert the latitude for your accommodation</label>
-                        <div class="invalid-feedback">
-                            @foreach ($errors->get('latitude') as $error)
-                                {{ $error }}<br>
-                            @endforeach
-                        </div>
+                        <input type="text" class="form-control" name="latitude" id="latitudeInput"
+                            value="{{ old('latitude') }}" >
                     </div>
                 </div>
 
-                <div class="col-6">
-                    <h5>Longitude</h5>
+                {{-- Longitude --}}
+                <div class="col-6 ">
                     <div class="form-floating mb-5">
-                        <input type="text" class="form-control {{ $errors->has('longitude') ? 'is-invalid' : '' }}"
-                            name="longitude" id="longitudeInput" placeholder="Insert longitude..."
-                            value="{{ old('longitude') ?? $accommodation->longitude }}">
-                        <label for="longitudeInput">Insert the longitude for your accommodation</label>
-                        <div class="invalid-feedback">
-                            @foreach ($errors->get('longitude') as $error)
-                                {{ $error }}<br>
-                            @endforeach
-                        </div>
+                        <input type="text" class="form-control" name="longitude" id="longitudeInput"
+                            value="{{ old('longitude') }}">
                     </div>
                 </div>
 
             </div>
-
             <hr>
 
             <div>

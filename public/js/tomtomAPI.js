@@ -2111,47 +2111,149 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 var _require = __webpack_require__(/*! axios */ "./node_modules/axios/index.js"),
     Axios = _require["default"];
-/* const listaOption=document.getElementById("datalistOptions");
+/* Rchiamo tutti gli elementi che mi serviranno */
 
-let option =document.createElement("option")
 
-option.setAttribute("value","data[i]")
-listaOption.append(option)
- */
-
+var inputText = document.getElementById("exampleDataList");
+var longitudeInput = document.getElementById("longitudeInput");
+var latitudeInput = document.getElementById("latitudeInput");
+var formHandler = document.getElementById("formHandler");
+var listaOption = document.getElementById("datalistOptions");
+/* Funzione autocomplete */
 
 function fetchData(_x) {
   return _fetchData.apply(this, arguments);
 }
 
 function _fetchData() {
-  _fetchData = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee(query) {
-    var dati;
-    return _regeneratorRuntime().wrap(function _callee$(_context) {
+  _fetchData = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2(query) {
+    var _Promise, results;
+
+    return _regeneratorRuntime().wrap(function _callee2$(_context2) {
       while (1) {
-        switch (_context.prev = _context.next) {
+        switch (_context2.prev = _context2.next) {
           case 0:
-            _context.next = 2;
-            return Axios.get("https://api.tomtom.com/search/2/search/" + encodeURIComponent(query) + ".json?key=ziNw7Yn7FMXsuIsY65fMoQmyy7qrHcM3").then(function (response) {
-              dati = response.data.results;
+            if (listaOption.lastChild) {
+              while (listaOption.firstChild) {
+                listaOption.removeChild(listaOption.lastChild);
+              }
+            }
+
+            if (!(query.length > 10)) {
+              _context2.next = 7;
+              break;
+            }
+
+            _Promise = Axios.get("https://api.tomtom.com/search/2/search/" + encodeURIComponent(query) + ".json?key=ziNw7Yn7FMXsuIsY65fMoQmyy7qrHcM3");
+            _context2.next = 5;
+            return _Promise;
+
+          case 5:
+            results = _context2.sent;
+            results.data.results.forEach(function (result, index) {
+              var fullAddress = result.address;
+              var address = fullAddress.freeformAddress;
+              var provincia = fullAddress.countrySecondarySubdivision;
+              var country = fullAddress.countryCode;
+              var optionAddress = address + " " + provincia + ", " + country;
+              var option = document.createElement("option");
+              option.setAttribute("value", optionAddress);
+              listaOption.append(option);
             });
 
-          case 2:
-            return _context.abrupt("return", _context.sent);
-
-          case 3:
+          case 7:
           case "end":
-            return _context.stop();
+            return _context2.stop();
         }
       }
-    }, _callee);
+    }, _callee2);
   }));
   return _fetchData.apply(this, arguments);
 }
 
 ;
-var dati = fetchData("Via idria 51");
-console.log(dati);
+/* Funzione salvataggio Latitudine Longitudine */
+
+function sendData(_x2) {
+  return _sendData.apply(this, arguments);
+}
+/* All'evento keyup filtro e perfeziono la ricercca */
+
+
+function _sendData() {
+  _sendData = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee3(query) {
+    var Promise, results, position, latitude, longitude;
+    return _regeneratorRuntime().wrap(function _callee3$(_context3) {
+      while (1) {
+        switch (_context3.prev = _context3.next) {
+          case 0:
+            Promise = Axios.get("https://api.tomtom.com/search/2/search/" + encodeURIComponent(query) + ".json?key=ziNw7Yn7FMXsuIsY65fMoQmyy7qrHcM3");
+            _context3.next = 3;
+            return Promise;
+
+          case 3:
+            results = _context3.sent;
+
+            /* Setto la posizione negli input del form prendendo il risultato col rating più alto */
+            position = results.data.results[0].position;
+            latitude = position.lat;
+            latitudeInput.setAttribute("value", latitude);
+            longitude = position.lon;
+            longitudeInput.setAttribute("value", longitude);
+            return _context3.abrupt("return", true);
+
+          case 10:
+          case "end":
+            return _context3.stop();
+        }
+      }
+    }, _callee3);
+  }));
+  return _sendData.apply(this, arguments);
+}
+
+inputText.addEventListener("keyup", function (e) {
+  e.preventDefault();
+  fetchData(this.value);
+});
+/* All'evento submit del form salvo latitudine e longitudine e poi faccio il vero submit */
+
+formHandler.addEventListener("submit", function (e) {
+  e.preventDefault();
+
+  function submitted() {
+    return _submitted.apply(this, arguments);
+  }
+
+  function _submitted() {
+    _submitted = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
+      var pass;
+      return _regeneratorRuntime().wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              _context.next = 2;
+              return sendData(inputText.value);
+
+            case 2:
+              pass = _context.sent;
+
+              if (pass) {
+                formHandler.submit();
+              }
+
+            case 4:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, _callee);
+    }));
+    return _submitted.apply(this, arguments);
+  }
+
+  submitted();
+});
 
 /***/ }),
 
