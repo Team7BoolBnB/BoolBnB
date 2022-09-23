@@ -35,7 +35,7 @@
             <h5>Title</h5>
             <div class="form-floating mb-5">
                 <input type="text" class="form-control {{ $errors->has('$title') ? 'is-invalid' : '' }}" name="title"
-                    id="titleInput" placeholder="Insert a title..." value="{{ old('title') ?? $accommodation->title }}">
+                    id="titleInput" placeholder="Insert a title..." value="{{ old('title') ?? $accommodation->title }}" required="required">
                 <label for="titleInput">Insert a title for your accommodation</label>
                 <div class="invalid-feedback">
                     @foreach ($errors->get('title') as $error)
@@ -58,13 +58,26 @@
                 </div>
             </div>
 
-           
+
+            <h5>Image</h5>
+            <div class="form-group mb-5">
+                
+                 
+                    <img class="card-img-top" src="{{asset('storage/' . $accommodation->image ) }}" alt="Card image cap" width="100" height="200">
+                    <input type="file" name="image" class="form-control @error('image') is-invalid @enderror"
+                        placeholder="Inserisci il titolo" value=" {{old("image", $accommodation->image) === $accommodation->image ? $accommodation->image : "" }} " required="required">
+                    @error('image')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
+              
+            </div>
+
 
             <h5>Description</h5>
             <div class="form-floating mb-5">
                 <textarea type="text" rows="5"
                     class="form-control formTextArea {{ $errors->has('description') ? 'is-invalid' : '' }}" name="description"
-                    id="descriptionInput" placeholder="Insert a description...">{!! old('description') ?? $accommodation->description !!}</textarea>
+                    id="descriptionInput" placeholder="Insert a description..." required="required">{!! old('description') ?? $accommodation->description !!}</textarea>
                 <label for="descriptionInput">Insert a description for your accommodation</label>
                 <div class="invalid-feedback">
                     @foreach ($errors->get('description') as $error)
@@ -80,7 +93,7 @@
                 @foreach ($typologies as $type)
                     <div class="col-6 form-check cardForm mb-4" style="padding-left: 0.5em">
                         <input class="form-check-input d-none @error('typology_id') is-invalid @enderror" type="radio"
-                            name="typology_id" id="{{ $type->id }}" value="{{ $type->id }}" @if(old('typology_id') == $type->id || $accommodation->typology_id == $type->id) checked @endif>
+                            name="typology_id" required="required" id="{{ $type->id }}" value="{{ $type->id }}" @if(old('typology_id') == $type->id || $accommodation->typology_id == $type->id) checked @endif>
                         <label class="form-check-label basicBtn formBtn px-4 py-3" for="{{ $type->id }}">
                             {{ $type->name }}
                         </label>
@@ -100,7 +113,7 @@
                     <div class="form-floating mb-5">
                         <input type="text" class="form-control {{ $errors->has('bathrooms') ? 'is-invalid' : '' }}"
                             name="bathrooms" id="bathroomsInput" placeholder="Insert number of bathrooms..."
-                            value="{{ old('bathrooms') ?? $accommodation->bathrooms }}">
+                            value="{{ old('bathrooms') ?? $accommodation->bathrooms }}" required="required">
                         <label for="bathroomsInput">Insert the number of bathrooms</label>
                         <div class="invalid-feedback">
                             @foreach ($errors->get('bathrooms') as $error)
@@ -115,7 +128,7 @@
                     <div class="form-floating mb-5">
                         <input type="text" class="form-control {{ $errors->has('beds') ? 'is-invalid' : '' }}"
                             name="beds" id="bedsInput" placeholder="Insert number of beds..."
-                            value="{{ old('beds') ?? $accommodation->beds }}">
+                            value="{{ old('beds') ?? $accommodation->beds }}" required="required">
                         <label for="bedsInput">Insert the number of beds</label>
                         <div class="invalid-feedback">
                             @foreach ($errors->get('beds') as $error)
@@ -130,7 +143,7 @@
                     <div class="form-floating">
                         <input type="text" class="form-control {{ $errors->has('rooms') ? 'is-invalid' : '' }}"
                             name="rooms" id="roomsInput" placeholder="Insert number of rooms..."
-                            value="{{ old('rooms') ?? $accommodation->rooms }}">
+                            value="{{ old('rooms') ?? $accommodation->rooms }}" required="required">
                         <label for="roomsInput">Insert the number of rooms</label>
                         <div class="invalid-feedback">
                             @foreach ($errors->get('rooms') as $error)
@@ -145,7 +158,7 @@
                     <div class="form-floating">
                         <input type="number" class="form-control {{ $errors->has('mt_square') ? 'is-invalid' : '' }}"
                             name="mt_square" id="mtSquareInput" placeholder="Insert latitude..."
-                            value="{{ old('mt_square') ?? $accommodation->mt_square }}">
+                            value="{{ old('mt_square') ?? $accommodation->mt_square }}" required="required">
                         <label for="mtSquareInput">Insert the number of square meters</label>
                         <div class="invalid-feedback">
                             @foreach ($errors->get('mt_square') as $error)
@@ -163,7 +176,7 @@
             <h5 class="mt-5">Address</h5>
             <div class="form-floating mb-5">
                 <input type="text" class="form-control {{ $errors->has('address') ? 'is-invalid' : '' }}"
-                    name="address" id="addressInput" placeholder="Insert an address..." value="{{ old('address') ?? $accommodation->address }}">
+                    name="address" id="addressInput" placeholder="Insert an address..." value="{{ old('address') ?? $accommodation->address }}" required="required">
                 <label for="addressInput">Insert an address for your accommodation</label>
                 <div class="invalid-feedback">
                     @foreach ($errors->get('address') as $error)
