@@ -12769,6 +12769,19 @@ a {
   border: 1px solid #222222 !important;
 }
 
+.publicCardImage {
+  max-width: 400px;
+  aspect-ratio: 1/1;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.publicCardTitle {
+  display: block;
+  color: #717171;
+  font-family: "Plus Jakarta Sans", sans-serif;
+}
+
 button {
   background-color: none;
 }
