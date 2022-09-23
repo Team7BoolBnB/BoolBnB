@@ -13,15 +13,30 @@
     </div>
 </template>
 
-<script >
-import SideBar from '../components/SideBar.vue';
+<script>
+    import axios from "axios";
+    
+    
+    export default {
+      
+      data() {
+        return {
+          data: [],
+        };
+      },
+      methods:{
+        async fetchdata(){
+           await  axios.get("/api/advancedsearch").then((resp)=>{
+                this.data=resp.data;
+            })
+        }
+      },
+       mounted() {
+        this.fetchdata();
+      },
+    };
+    </script>
 
-
-export default{
-    components: { SideBar }
-}
-
-</script>
 
 <style scoped>
 

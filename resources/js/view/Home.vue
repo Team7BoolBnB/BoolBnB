@@ -82,3 +82,4 @@ export default {
     -webkit-backdrop-filter: blur(6px);
 }
 </style>
+
