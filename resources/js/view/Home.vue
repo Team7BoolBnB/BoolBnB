@@ -1,7 +1,5 @@
 <template>
     <div>
-        <NavBar></NavBar>
-        
         <!-- sezione con carosello di immagini -->
         <div class="debug_carosel">
             <div class="h-100 d-flex justify-content-center align-items-center">
@@ -19,11 +17,11 @@
 </template>
 
 <script>
-import NavBar from '../components/NavBar.vue';
+
 import CardList from '../components/CardList.vue';
     
     export default {
-    components: { NavBar, CardList }
+    components: { CardList }
 }
 </script>
 
