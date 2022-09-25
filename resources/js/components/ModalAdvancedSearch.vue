@@ -35,7 +35,8 @@
                   id="exampleDataList"
                   placeholder="Type to
                 search..."
-                  value=""
+                  v-model="query"
+                  v-on:change="coordinateSet($event)"
                 />
                 <label for="exampleDataList">Type to search...</label>
                 <datalist id="datalistOptions"> </datalist>
@@ -52,10 +53,10 @@
                 max="20"
                 step="0.5"
                 id="customRange3"
+                v-model="radius"
               />
-              <div class="row justify-content-between ">
+              <div class="row justify-content-between">
                 <div class="col">0</div>
-                <div class="col">1</div>
                 <div class="col">2</div>
                 <div class="col">4</div>
                 <div class="col">6</div>
@@ -78,7 +79,11 @@
                   <h5 class="mb-3">{{ filter }}</h5>
                   <div class="row flex-align-center">
                     <div class="col-2">
-                      <button class="btn btn-outline-secondary rounded-pill">
+                      <button
+                        class="btn btn-outline-secondary rounded-pill"
+                        :class="buttonActive ? 'active' : ''"
+                        v-on:click="setFilterValue(filter, i)"
+                      >
                         Qualsiasi
                       </button>
                     </div>
@@ -86,12 +91,16 @@
                       <button
                         v-if="i < 8"
                         class="btn btn-outline-secondary rounded-pill rounded-5"
+                        :class="filter + i ? filterActiceClass : ''"
+                        v-on:click="setFilterValue(filter, i)"
                       >
                         {{ i }}
                       </button>
                       <button
                         v-else
                         class="btn btn-outline-secondary rounded-pill rounded-5"
+                        :class="filter + i ? filterActiceClass : ''"
+                        v-on:click="setFilterValue(filter, i)"
                       >
                         {{ i }}+
                       </button>
@@ -111,9 +120,13 @@
                   :key="typology.name"
                   class="col"
                 >
-                  <button class="btn btn-outline-secondary">
+                  <button
+                    class="btn btn-outline-secondary"
+                    v-on:click="setTypology(typology.id)"
+                  >
                     <div class="d-flex flex-column">
-                      <div><i  :class="typology.icon"></i></div> <div>{{ typology.name }}</div>
+                      <div><i :class="typology.icon"></i></div>
+                      <div>{{ typology.name }}</div>
                     </div>
                   </button>
                 </div>
@@ -133,6 +146,7 @@
                 >
                   <div class="form-check cardForm">
                     <input
+                      v-model="services"
                       class="form-check-input my-4 d-none"
                       :name="service.id"
                       type="checkbox"
@@ -159,43 +173,165 @@
             </div>
           </div>
 
-          <div class="modal-footer">
+          <div class="modal-footer d-flex justify-content-between">
             <button
               type="button"
-              class="btn btn-secondary"
+              class="btn btn btn-light"
               data-bs-dismiss="modal"
+              @click="clearParams()"
             >
-              Close
+              Cancella tutto
             </button>
-            <button type="button" class="btn btn-primary">Understood</button>
+            <button
+              @click="filteringDataFetch()"
+              type="button"
+              class="btn btn-dark queryButton"
+            >
+              Mostra mille alloggi
+            </button>
+            <router-link
+              :to="{
+                name: 'filtered',
+                params: { query: axiosParams },
+              }"
+              >prova</router-link
+            >
           </div>
         </div>
       </div>
     </div>
-    
   </div>
 </template>
 
 <script>
-import axios from "axios";
+import Axios from "axios";
 
 export default {
   data() {
     return {
       data: [],
+      accommodations: null,
       filters: ["Camere da letto", "Letti", "Bagni"],
       buttonFilterNumber: 8,
+      buttonActive: "",
+      filterActiceClass: "",
+
+      //Chiamata API data
+      query: "",
+      bedFilter: null,
+      bathFilter: null,
+      roomFilter: null,
+      typology_id: null,
+      services: [],
+      radius: null,
+      latitude:45.45881,
+      longitude:9.13208
     };
   },
   methods: {
     fetchdata() {
-      axios.get("/api/advancedsearch").then((resp) => {
+      Axios.get("/api/advancedsearch").then((resp) => {
         this.data = resp.data;
       });
     },
+   async filteringDataFetch() {
+      /* this.tomtomfetchCoordinate(); */
+    await  Axios.get("/api/advancedsearch/ ", {
+        params: this.axiosParams,
+      }).then((resp) => {
+        this.accommodations = resp.data;
+       
+      });
+      
+    },
+   /*  tomtomfetchCoordinate() {
+      Axios.get("https://api.tomtom.com/search/2/search/"+ encodeURIComponent(this.query) +".json?key=ziNw7Yn7FMXsuIsY65fMoQmyy7qrHcM3")
+     .then((resp) => {
+        console.log(resp.data);;
+      });
+    }, */
+    
+    setFilterValue(filter, i) {
+      if (filter == "Camere da letto" && i > 0) {
+        this.roomFilter = i;
+      } else if (filter == "Letti" && i > 0) {
+        this.bedFilter = i;
+      } else if (filter == "Bagni" && i > 0) {
+        this.bathFilter = i;
+      } else if (filter == "Camere da letto") {
+        this.roomFilter = "";
+      } else if (filter == "Letti") {
+        this.bedFilter = "";
+      } else if (filter == "Bagni") {
+        this.bathFilter = "";
+      }
+    },
+    setTypology(id) {
+      this.typology_id = id;
+    },
+    coordinateSet(e) {
+      this.query = e.target.value;
+      /* this.setCoordinateValue(); */
+    },
+    clearParams() {
+      (this.query = null),
+        (this.bedFilter = null),
+        (this.bathFilter = null),
+        (this.roomFilter = null),
+        (this.typology_id = null),
+        (this.services = []),
+        (this.radius = null);
+        /* (this.latitude = null);
+        (this.longitude = null); */
+
+    },
   },
+
   created() {
+    this.buttonActive = "active";
     this.fetchdata();
+  },
+
+  computed: {
+    axiosParams() {
+      // passare meglio i dati dell'array services
+      const params = new URLSearchParams();
+      if (this.bedFilter) {
+        params.append("beds", this.bedFilter);
+      }
+      if (this.bathFilter) {
+        params.append("baths", this.bathFilter);
+      }
+      if (this.typology_id) {
+        params.append("typology_id", this.typology_id);
+      }
+      if (this.roomFilter) {
+        params.append("rooms", this.roomFilter);
+      }
+      if (this.radius) {
+        params.append("radius", this.radius);
+      }
+      if (this.services) {
+        this.services.forEach((service) => {
+          params.append("services", service);
+        });
+      }
+      if (this.latitude) {
+        params.append("latitude", this.latitude);
+      }
+      if (this.longitude) {
+        params.append("longitude", this.longitude);
+      }
+      if (this.query) {
+        params.append("address", this.query);
+      }
+      else{
+        params.append("address", "Milano piazza leonardo");
+      }
+      
+
+      return params;
+    },
   },
 };
 </script>

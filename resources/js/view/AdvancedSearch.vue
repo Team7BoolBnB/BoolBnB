@@ -24,13 +24,31 @@
           data: [],
         };
       },
-      methods:{
-        async fetchdata(){
-           await  axios.get("/api/advancedsearch").then((resp)=>{
-                this.data=resp.data;
-            })
-        }
-      },
+    // methods:{
+    //   async fetchdata(){
+    //     let params = new URLSearchParams(document.location.search);
+    //     console.log(;
+    //   
+    //      await  axios.get("/api/advancedsearch/"+{
+    //       
+    //       params:{
+    //         //devo passare i parametri ricavati dall'url per prendere quelli da services usare params.getAll('service')
+    //         /* address:this.$route.params.query, */
+    //         
+    //         beds:this.$route.params.beds,
+    //         bathrooms:this.$route.params.bath,
+    //         typology_id:this.$route.params.typology_id,
+    //         rooms:this.$route.params.rooms,
+    //         radius:this.$route.params.radius,
+    //         /* services:this.$route.params.services */
+    //       }
+    //      }).then((resp)=>{
+    //           console.log(resp.data);
+    //       })
+    //       
+    //      
+    //   }
+    // }
        mounted() {
         this.fetchdata();
       },

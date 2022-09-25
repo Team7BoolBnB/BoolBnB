@@ -10,7 +10,7 @@
     <title>Home Page</title>
     <link rel="stylesheet" href="{{ mix('css/app.css')}}">
     <script src="{{asset("js/frontend.js")}}" defer></script>
-    <script src="{{asset("js/tomtomAPI.js")}}" defer></script>
+    {{-- <script src="{{asset("js/tomtomAPI.js")}}" defer></script> --}}
 
 </head>
 <body>

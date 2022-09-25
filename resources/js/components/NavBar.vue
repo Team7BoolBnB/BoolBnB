@@ -37,7 +37,7 @@
 
           <button
             type="button"
-            class="btn btn-outline-secondary"
+            class="btn btn-outline-secondary queryButton"
             data-bs-toggle="modal"
             data-bs-target="#prova"
           >
@@ -51,9 +51,9 @@
 </template>
 
 <script>
-import ModalAdvancedSearch from "./ModalAdvancedSearch.vue";
+
 export default {
-  components: { ModalAdvancedSearch },
+ 
 };
 </script>
 

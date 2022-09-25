@@ -3,6 +3,7 @@
   <div>
       <!-- sezione con carosello di immagini -->
       <div class="debug_carosel">
+        <modal-advanced-search ></modal-advanced-search>
           <div class="heroOverlay">
               <div class="h-100 d-flex justify-content-center align-items-center">
                   <div class="container_link_advanced d-flex flex-column justify-content-center align-items-center">
@@ -18,6 +19,7 @@
       <div class="container py-5">
           <h2 class="text-center pt-3 pb-5">Sponsorized Accommodations</h2>
           <div class="row">
+            
               <div class="col-3" v-for="accommodation in accommodations" :key="accommodation.id">
                   <CardItem :accommodation="accommodation"></CardItem>
               </div>
@@ -32,9 +34,10 @@
     import axios from "axios";
     import NavBar from "../components/NavBar.vue";
     import CardItem from "../components/CardItem.vue";
+  import ModalAdvancedSearch from '../components/ModalAdvancedSearch.vue';
     
     export default {
-      components: { NavBar, CardItem },
+      components: { NavBar, CardItem, ModalAdvancedSearch },
       data() {
         return {
             accommodations: [],

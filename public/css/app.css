@@ -13010,3 +13010,12 @@ nav .nav-link.navActivePage {
   width: 100%;
 }
 
+.modal-footer a {
+  color: black;
+  font-weight: bold;
+}
+
+.modal-footer .queryButton {
+  padding: 1rem 2rem;
+}
+
