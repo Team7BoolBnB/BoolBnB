@@ -177,25 +177,51 @@
             <button
               type="button"
               class="btn btn btn-light"
-              data-bs-dismiss="modal"
               @click="clearParams()"
             >
               Cancella tutto
             </button>
+            <div v-if="checkQuery && radiusCheck" class="alert alert-danger" role="alert">
+              <span > Inserisci parametri di ricerca</span>
+            </div>
+            <div v-else-if="checkQuery || radiusCheck" class="alert alert-danger" role="alert">
+              <span v-if="checkQuery"> Inserisci un indirizzo di ricerca</span>
+              <span v-else-if="radiusCheck"> Inserisci raggio di ricerca</span>
+           
+            </div>
+            
             <button
-              @click="filteringDataFetch()"
+              v-if="query && radius"
+              v-on:click="
+                object({
+                  query: query,
+                  bedFilter: bedFilter,
+                  bathFilter: bathFilter,
+                  longitude: longitude,
+                  latitude: latitude,
+                  radius: radius,
+                  services: services,
+                  typology_id: typology_id,
+                  roomFilter: roomFilter,
+                })
+              "
               type="button"
               class="btn btn-dark queryButton"
+              data-bs-dismiss="modal"
             >
               Mostra mille alloggi
             </button>
-            <router-link
+            <button v-else type="button" class="btn btn-dark queryButton" v-on:click="alertPopup()">
+              Mostra mille alloggi
+            </button>
+
+            <!--  <router-link
               :to="{
                 name: 'filtered',
                 params: { query: axiosParams },
               }"
               >prova</router-link
-            >
+            > -->
           </div>
         </div>
       </div>
@@ -215,17 +241,19 @@ export default {
       buttonFilterNumber: 8,
       buttonActive: "",
       filterActiceClass: "",
+      checkQuery: false,
+      radiusCheck:false,
 
       //Chiamata API data
-      query: "",
+      query: null,
       bedFilter: null,
       bathFilter: null,
       roomFilter: null,
       typology_id: null,
       services: [],
       radius: null,
-      latitude:45.45881,
-      longitude:9.13208
+      latitude: 45.45881,
+      longitude: 9.13208,
     };
   },
   methods: {
@@ -234,23 +262,7 @@ export default {
         this.data = resp.data;
       });
     },
-   async filteringDataFetch() {
-      /* this.tomtomfetchCoordinate(); */
-    await  Axios.get("/api/advancedsearch/ ", {
-        params: this.axiosParams,
-      }).then((resp) => {
-        this.accommodations = resp.data;
-       
-      });
-      
-    },
-   /*  tomtomfetchCoordinate() {
-      Axios.get("https://api.tomtom.com/search/2/search/"+ encodeURIComponent(this.query) +".json?key=ziNw7Yn7FMXsuIsY65fMoQmyy7qrHcM3")
-     .then((resp) => {
-        console.log(resp.data);;
-      });
-    }, */
-    
+
     setFilterValue(filter, i) {
       if (filter == "Camere da letto" && i > 0) {
         this.roomFilter = i;
@@ -281,18 +293,45 @@ export default {
         (this.typology_id = null),
         (this.services = []),
         (this.radius = null);
-        /* (this.latitude = null);
+      /* (this.latitude = null);
         (this.longitude = null); */
-
     },
+    alertPopup(){
+      if(this.radius){
+        this.checkQuery=true
+      }
+      else if (this.query){
+        this.radiusCheck=true
+      }
+      else{
+        this.radiusCheck=true
+        this.checkQuery=true
+      }
+    }
   },
-
+  props: {
+    object: Function,
+  },
   created() {
     this.buttonActive = "active";
     this.fetchdata();
   },
 
-  computed: {
+  watch:{
+    query(newValue){
+      if(newValue.length > 0){
+        this.checkQuery=false
+      }
+    },
+    radius(newValue){
+      if(newValue != null){
+        this.radiusCheck=false
+      }
+    }
+
+  }
+
+  /* computed: {
     axiosParams() {
       // passare meglio i dati dell'array services
       const params = new URLSearchParams();
@@ -332,6 +371,6 @@ export default {
 
       return params;
     },
-  },
+  }, */
 };
 </script>

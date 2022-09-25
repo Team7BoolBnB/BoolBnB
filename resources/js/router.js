@@ -12,7 +12,7 @@ const routes = [
 
     },
     {path: "/advanced-search" , component: AdvancedSearch ,name: "advanced-search",},
-    {path: "/advanced-search/:query" , component: AdvancedSearch ,name: "filtered",}
+    {path: "/advanced-search/:query" , component: Home ,name: "filtered",}
 
 ]
 

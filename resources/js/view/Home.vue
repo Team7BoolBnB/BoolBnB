@@ -3,7 +3,7 @@
   <div>
       <!-- sezione con carosello di immagini -->
       <div class="debug_carosel">
-        <modal-advanced-search ></modal-advanced-search>
+        <modal-advanced-search :object="takeObject"></modal-advanced-search>
           <div class="heroOverlay">
               <div class="h-100 d-flex justify-content-center align-items-center">
                   <div class="container_link_advanced d-flex flex-column justify-content-center align-items-center">
@@ -41,6 +41,7 @@
       data() {
         return {
             accommodations: [],
+            apiParams:null
         };
     },
     methods: {
@@ -48,11 +49,78 @@
             await axios.get("/api/accommodations").then((resp) => {
                 this.accommodations = resp.data;
             })
-        }
+        },
+        takeObject(data){
+          this.apiParams=data
+        },
+        async filteringDataFetch() {
+      /* this.tomtomfetchCoordinate(); */
+    await  axios.get("/api/advancedsearch/ ", {
+      params: this.axiosParams
+      
+    }).then((resp) => {
+        this.accommodations = resp.data;
+       
+      });
+      
+    },
+   /*  tomtomfetchCoordinate() {
+      Axios.get("https://api.tomtom.com/search/2/search/"+ encodeURIComponent(this.query) +".json?key=ziNw7Yn7FMXsuIsY65fMoQmyy7qrHcM3")
+     .then((resp) => {
+        console.log(resp.data);;
+      });
+    }, */
+        
     },
     mounted() {
         this.fetchdata();
       },
+      computed: {
+    axiosParams() {
+      // passare meglio i dati dell'array services
+      const params = new URLSearchParams();
+      if (this.apiParams.bedFilter) {
+        params.append("beds", this.apiParams.bedFilter);
+      }
+      if (this.apiParams.bathFilter) {
+        params.append("baths", this.apiParams.bathFilter);
+      }
+      if (this.apiParams.typology_id) {
+        params.append("typology_id", this.apiParams.typology_id);
+      }
+      if (this.apiParams.roomFilter) {
+        params.append("rooms", this.apiParams.roomFilter);
+      }
+      if (this.apiParams.radius) {
+        params.append("radius", this.apiParams.radius);
+      }
+      if (this.apiParams.services) {
+        this.apiParams.services.forEach((service) => {
+          params.append("services", service);
+        });
+      }
+      if (this.apiParams.latitude) {
+        params.append("latitude", this.apiParams.latitude);
+      }
+      if (this.apiParams.longitude) {
+        params.append("longitude", this.apiParams.longitude);
+      }
+      if (this.apiParams.query) {
+        params.append("address", this.apiParams.query);
+      }
+      else{
+        params.append("address", "Milano piazza leonardo");
+      }
+      
+
+      return params;
+    },
+  },
+    watch:{
+      apiParams(newValue,oldValue){
+          this.filteringDataFetch()
+      }
+    }
     };
     </script>
     
