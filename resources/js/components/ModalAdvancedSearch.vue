@@ -49,7 +49,7 @@
               <input
                 type="range"
                 class="form-range pe-4"
-                min="0"
+                min="0.5"
                 max="20"
                 step="0.5"
                 id="customRange3"
