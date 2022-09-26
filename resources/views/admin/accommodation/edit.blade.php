@@ -27,10 +27,10 @@
             </div>
         @endif
 
-        <form action="{{ route('admin.accommodation.update', $accommodation->slug) }}" method="post" enctype="multipart/form-data">
+        <form id="formHandler" action="{{ route('admin.accommodation.update', $accommodation->slug) }}" method="post" enctype="multipart/form-data">
 
             @csrf
-            @method('PATCH')
+            @method('PUT')
 
             <h5>Title</h5>
             <div class="form-floating mb-5">
@@ -61,15 +61,19 @@
 
             <h5>Image</h5>
             <div class="form-group mb-5">
-                
-                 
-                    <img class="card-img-top" src="{{asset('storage/' . $accommodation->image ) }}" alt="Card image cap" width="100" height="200">
-                    <input type="file" name="image" class="form-control @error('image') is-invalid @enderror"
-                        placeholder="Inserisci il titolo" value=" {{old("image", $accommodation->image) === $accommodation->image ? $accommodation->image : "" }} " required="required">
-                    @error('image')
-                        <div class="invalid-feedback">{{ $message }}</div>
-                    @enderror
-              
+
+
+                <div class="d-flex">
+
+                    <input type="file" name="image" class="form-control-file @error('image') is-invalid @enderror"
+                        id="image" value="{{ old('image') }}" required="required">
+
+                </div>
+                <div class="invalid-feedback">
+                    @foreach ($errors->get('image') as $error)
+                        {{ $error }}<br>
+                    @endforeach
+                </div>
             </div>
 
 
