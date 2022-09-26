@@ -62,11 +62,11 @@
             <h5>Image</h5>
             <div class="form-group mb-5">
 
-                <img src="{{asset('storage/'. $accommodation->image)}}" alt="" height="500">
+                <img src="{{asset('storage/'. $accommodation->image)}}" alt="" height="300" width="550">
                 <div class="d-flex">
                     
                     <input type="file" name="image" class="form-control-file @error('image') is-invalid @enderror"
-                        id="image" value="{{$accommodation->image}}" required="required">
+                        id="image" value="{{$accommodation->image ?? old('image') }}" >
 
                 </div>
                 <div class="invalid-feedback">
