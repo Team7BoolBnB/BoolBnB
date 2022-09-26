@@ -23,6 +23,12 @@ class AdvancedSearchController extends Controller
 
         ]);
     }
+    public function show($slug)
+    {   
+            $accommodation=Accommodation::where("slug",$slug)->get();;
+            return response()->json($accommodation);
+       
+    }
 
     public function filter(Request $request)
     {
