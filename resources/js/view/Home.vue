@@ -56,7 +56,7 @@
           this.apiParams=data
         },
         async filteringDataFetch() {
-      /* this.tomtomfetchCoordinate(); */
+     
     await  axios.get("/api/advancedsearch/ ", {
       params: this.axiosParams
       
@@ -66,12 +66,6 @@
       });
       
     },
-   /*  tomtomfetchCoordinate() {
-      Axios.get("https://api.tomtom.com/search/2/search/"+ encodeURIComponent(this.query) +".json?key=ziNw7Yn7FMXsuIsY65fMoQmyy7qrHcM3")
-     .then((resp) => {
-        console.log(resp.data);;
-      });
-    }, */
         
     },
     mounted() {

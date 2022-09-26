@@ -197,8 +197,6 @@
                   query: query,
                   bedFilter: bedFilter,
                   bathFilter: bathFilter,
-                  longitude: longitude,
-                  latitude: latitude,
                   radius: radius,
                   services: services,
                   typology_id: typology_id,
@@ -243,6 +241,7 @@ export default {
       filterActiceClass: "",
       checkQuery: false,
       radiusCheck:false,
+     
 
       //Chiamata API data
       query: null,
@@ -252,20 +251,12 @@ export default {
       typology_id: null,
       services: [],
       radius: null,
-      latitude: 45.45881,
-      longitude: 9.13208,
     };
   },
   methods: {
     fetchdata() {
       Axios.get("/api/advancedsearch").then((resp) => {
         this.data = resp.data;
-      });
-    },
-    tomtomfetchCoordinate() {
-      Axios.get("https://api.tomtom.com/search/2/search/"+ encodeURIComponent(this.query) +".json?key=ziNw7Yn7FMXsuIsY65fMoQmyy7qrHcM3")
-     .then((resp) => {
-        console.log(resp.data);;
       });
     },
 
@@ -289,7 +280,7 @@ export default {
     },
     coordinateSet(e) {
       this.query = e.target.value;
-      this.tomtomfetchCoordinate()
+     
     },
     clearParams() {
       (this.query = null),
@@ -299,8 +290,7 @@ export default {
         (this.typology_id = null),
         (this.services = []),
         (this.radius = null);
-      /* (this.latitude = null);
-        (this.longitude = null); */
+    
     },
     alertPopup(){
       if(this.radius){
@@ -337,46 +327,5 @@ export default {
 
   }
 
-  /* computed: {
-    axiosParams() {
-      // passare meglio i dati dell'array services
-      const params = new URLSearchParams();
-      if (this.bedFilter) {
-        params.append("beds", this.bedFilter);
-      }
-      if (this.bathFilter) {
-        params.append("baths", this.bathFilter);
-      }
-      if (this.typology_id) {
-        params.append("typology_id", this.typology_id);
-      }
-      if (this.roomFilter) {
-        params.append("rooms", this.roomFilter);
-      }
-      if (this.radius) {
-        params.append("radius", this.radius);
-      }
-      if (this.services) {
-        this.services.forEach((service) => {
-          params.append("services", service);
-        });
-      }
-      if (this.latitude) {
-        params.append("latitude", this.latitude);
-      }
-      if (this.longitude) {
-        params.append("longitude", this.longitude);
-      }
-      if (this.query) {
-        params.append("address", this.query);
-      }
-      else{
-        params.append("address", "Milano piazza leonardo");
-      }
-      
-
-      return params;
-    },
-  }, */
 };
 </script>
