@@ -27,7 +27,7 @@
             </div>
         @endif
 
-        <form action="{{ route('admin.accommodation.update', $accommodation->slug) }}" method="post" enctype="multipart/form-data">
+        <form id="formHandler" action="{{ route('admin.accommodation.store') }}" method="post" enctype="multipart/form-data">
 
             @csrf
             @method('PATCH')
