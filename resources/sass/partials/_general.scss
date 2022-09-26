@@ -38,7 +38,8 @@ nav {
 
 
 // sezione card
-.available_info, .not_available_info {
+.available_info,
+.not_available_info {
     padding: 0.5rem;
     /* border: 1px solid $primaryColor;
     border-radius: 0.50rem; */
@@ -136,7 +137,7 @@ nav {
         z-index: 1;
     }
 
-    
+
 
     .links_card_admin {
         position: relative;
@@ -193,6 +194,7 @@ nav {
 }
 
 
+
 // Creation form
 
 .creationCol {
@@ -225,4 +227,32 @@ nav {
 .deleteButton {
     background: none;
     border: none
+}
+
+.filterModal {
+    font-weight: bold;
+    font-size: .8rem;
+
+}
+
+.modal-body {
+    .modal-container-section {
+        width: 100%;
+
+        button {
+            width: 100%;
+        }
+
+    }
+}
+
+.modal-footer {
+    a{
+        color: black;
+        font-weight: bold;
+    }
+    .queryButton{
+        padding: 1rem 2rem;
+
+    }
 }

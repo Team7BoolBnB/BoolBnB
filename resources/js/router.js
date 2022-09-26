@@ -11,7 +11,9 @@ const routes = [
         /*  path: "/accommodation/:{id}" ,component: Home,name: "home.index", */
 
     },
-    {path: "/advanced-search" , component: AdvancedSearch ,name: "advanced-search",}
+    {path: "/advanced-search" , component: AdvancedSearch ,name: "advanced-search",},
+    {path: "/advanced-search/:query" , component: Home ,name: "filtered",}
+
 ]
 
 

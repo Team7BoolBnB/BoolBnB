@@ -23,3 +23,5 @@ Route::post("/make/payment","Api\PaymentController@makePayment");
 
 Route::get("/accommodations","Api\HomeController@index");
 Route::get("/advancedsearch","Api\AdvancedSearchController@index");
+Route::get("/advancedsearch/{query}","Api\AdvancedSearchController@filter");
+

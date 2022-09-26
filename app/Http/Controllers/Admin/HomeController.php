@@ -56,10 +56,10 @@ class HomeController extends Controller
         $sponzorizedAccommodation = DB::table('accommodations')
             ->join('sponsorship_accommodation', 'accommodations.id', '=', 'sponsorship_accommodation.accommodation_id')
             ->join('sponsorships', 'sponsorship_accommodation.sponsorship_id', '=', 'sponsorships.id')
-            ->select('accommodations.*')->where("user_id",Auth::id())->orderBy("endTime","desc")
+            ->select('sponsorships.*','accommodations.slug','accommodations.image','accommodations.title')->where("user_id",Auth::id())->orderBy("endTime","desc")
             ->get()->take(2);      
 
-
+            
         return view('admin.home', compact("accommodations", "visible","sponzorizedAccommodation"));
     }
 }
