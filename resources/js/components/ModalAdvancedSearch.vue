@@ -262,6 +262,12 @@ export default {
         this.data = resp.data;
       });
     },
+    tomtomfetchCoordinate() {
+      Axios.get("https://api.tomtom.com/search/2/search/"+ encodeURIComponent(this.query) +".json?key=ziNw7Yn7FMXsuIsY65fMoQmyy7qrHcM3")
+     .then((resp) => {
+        console.log(resp.data);;
+      });
+    },
 
     setFilterValue(filter, i) {
       if (filter == "Camere da letto" && i > 0) {
@@ -283,7 +289,7 @@ export default {
     },
     coordinateSet(e) {
       this.query = e.target.value;
-      /* this.setCoordinateValue(); */
+      this.tomtomfetchCoordinate()
     },
     clearParams() {
       (this.query = null),

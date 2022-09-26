@@ -54,7 +54,7 @@ $raw = 'SELECT *,
         else{
                 
                 if(key_exists("typology_id",$filters) && $count==5){
-                    $query='WHERE `typologies`.`id` = 1';
+                    $query='WHERE `typologies`.`id` = '.$filters["typology_id"].'';
                 }
                     
 

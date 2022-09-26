@@ -1,10 +1,10 @@
 <template>
 
   <div>
+    <modal-advanced-search :object="takeObject"></modal-advanced-search>
       <!-- sezione con carosello di immagini -->
-      <div class="debug_carosel">
-        <modal-advanced-search :object="takeObject"></modal-advanced-search>
-          <div class="heroOverlay">
+      <div class="debug_carosel d-none">
+          <div class="heroOverlay d-none">
               <div class="h-100 d-flex justify-content-center align-items-center">
                   <div class="container_link_advanced d-flex flex-column justify-content-center align-items-center">
                       <h3>Ready for your next trip?</h3>
