@@ -22,7 +22,11 @@
             
               <div class="col-3" v-for="accommodation in accommodations" :key="accommodation.id">
 
-                <router-link :to="{ name: 'accommodations.show' , params : { slug:accommodation.slug} }">  <CardItem :accommodation="accommodation"></CardItem></router-link>
+                <router-link 
+                :to="{ name: 'accommodations.show' , params : { slug:accommodation.slug} }"
+                class="publicCardImage d-flex justify-content-center align-items-center mb-3">  
+                  <CardItem :accommodation="accommodation"></CardItem>
+                </router-link>
                 
               </div>
           </div>
