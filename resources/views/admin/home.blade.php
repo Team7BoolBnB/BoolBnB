@@ -113,16 +113,18 @@
                 @foreach ($sponzorizedAccommodation as $accommodation)
                     <div class="col-sm-5">
                         <div class="card_admin">
+                           
                             <div class="available_info">
                                 
                                 <span>Active</span>
                             </div>
                             <div class="accommodation_info">
+                                <div class="fs-1">{{$accommodation->title}}</div>
                                 <div class="fs-3">{{ $accommodation->name }}</div>
                                 <div>{{ $accommodation->period }}</div>
                                 <div>{{ $accommodation->price }}</div>
-
                             </div>
+                            <img src="{{ asset('storage/' . $accommodation->image) }}" alt="">
                             
                         </div>
                     </div>
