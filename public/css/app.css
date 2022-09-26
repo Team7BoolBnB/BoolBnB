@@ -12769,6 +12769,19 @@ a {
   border: 1px solid #222222 !important;
 }
 
+.publicCardImage {
+  max-width: 400px;
+  aspect-ratio: 1/1;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.publicCardTitle {
+  display: block;
+  color: #717171;
+  font-family: "Plus Jakarta Sans", sans-serif;
+}
+
 button {
   background-color: none;
 }
@@ -12939,17 +12952,35 @@ nav .nav-link.navActivePage {
   display: flex;
   justify-content: center;
   align-items: center !important;
-  border-radius: 1rem;
+  border-radius: 10px;
   padding: 1rem;
   /* box-shadow: 0px 7px 10px rgba(black, 0.5); */
   text-decoration: none;
-  color: white;
+  color: white !important;
+  z-index: 1;
+  position: relative;
 }
 
-.card_link:hover {
+.card_link:before {
+  position: absolute;
+  background-image: linear-gradient(135deg, rgb(99, 94, 96) 0%, rgb(173, 165, 166) 100%);
+  content: "";
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  z-index: -1;
+  border-radius: 10px;
+  transition: opacity 0.3s linear;
+  opacity: 0;
+  color: #ffffff !important;
+}
+
+.card_link:hover::before {
+  opacity: 1;
   text-decoration: none;
-  color: white;
   cursor: pointer;
+  color: #ffffff !important;
 }
 
 .creationCol {

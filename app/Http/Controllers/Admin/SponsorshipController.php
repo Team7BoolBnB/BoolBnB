@@ -57,9 +57,7 @@ class SponsorshipController extends Controller
     public function store(SponsorshipRequest $request)
     {
         $data = $request->validated();
-        
-         
-       
+
         $period=Sponsorship::findOrFail($data["sponsorship_id"]); 
 
         $orario="+" . $period->period . " hours";
@@ -68,10 +66,8 @@ class SponsorshipController extends Controller
 
         DB::table('sponsorship_accommodation')->insertGetId(
             ['accommodation_id' => $data["accommodation_id"], 'sponsorship_id' =>$data["sponsorship_id"], 'startTime' => $data["startTime"], 'endTime' => $calcultedData]
-           
         );   
-        
- 
+
         return  redirect()->route("admin.home");
     }
 
