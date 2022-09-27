@@ -1,7 +1,7 @@
 <template>
     <div class="border">
         <div>
-            <div class="py-2 navbar-light bg-white">
+            <div class="py-3 navbar-light bg-white">
                 <div class="container d-flex justify-content-between">
 
                     <!-- logo -->

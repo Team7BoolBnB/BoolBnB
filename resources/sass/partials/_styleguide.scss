@@ -121,11 +121,11 @@ p, a {
 }
 
 .textLink {
-    font-weight: 600;
-    color: #222222;
+    font-weight: 600 !important;
+    color: #222222 !important;
 
     &:hover {
-        color: #484848;
+        color: #484848 !important;
     }
 }
 
