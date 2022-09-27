@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="publicCardImage d-flex justify-content-center align-items-center mb-3">
-            <img :src="accommodation.image" alt="Card image">
+            <img :src="accommodation.image" :alt="'Image of '+ accommodation.title">
             <!-- <img :src="require(`storage/accommodation` + accommodation.image)" alt="Card image"> -->
             <!-- <img :src="asset ('storage/' + accommodation.image )" alt="Card image"> -->
         </div>
