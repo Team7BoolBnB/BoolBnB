@@ -1,7 +1,7 @@
 <template>
 
   <div>
-    <modal-advanced-search :object="takeObject"></modal-advanced-search>
+    <modal-advanced-search :object="takeObject" ></modal-advanced-search>
       <!-- sezione con carosello di immagini -->
       <div class="debug_carosel d-none">
           <div class="heroOverlay d-none">
@@ -43,7 +43,8 @@
       data() {
         return {
             accommodations: [],
-            apiParams:null
+            apiParams:null,
+            
         };
     },
     methods: {

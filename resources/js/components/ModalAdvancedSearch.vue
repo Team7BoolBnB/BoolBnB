@@ -146,6 +146,7 @@
                 >
                   <div class="form-check cardForm">
                     <input
+                   
                       v-model="services"
                       class="form-check-input my-4 d-none"
                       :name="service.id"
@@ -198,7 +199,7 @@
                   bedFilter: bedFilter,
                   bathFilter: bathFilter,
                   radius: radius,
-                  services: services,
+                  services,
                   typology_id: typology_id,
                   roomFilter: roomFilter,
                 })
@@ -307,6 +308,7 @@ export default {
   },
   props: {
     object: Function,
+    loadServices:Function
   },
   created() {
     this.buttonActive = "active";
