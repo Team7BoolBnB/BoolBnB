@@ -3,7 +3,7 @@
   <div>
     <modal-advanced-search :object="takeObject"></modal-advanced-search>
       <!-- sezione con carosello di immagini -->
-      <div class="debug_carosel d-none">
+      <!-- <div class="debug_carosel d-none">
           <div class="heroOverlay d-none">
               <div class="h-100 d-flex justify-content-center align-items-center">
                   <div class="container_link_advanced d-flex flex-column justify-content-center align-items-center">
@@ -13,15 +13,16 @@
                   </div>
               </div>
           </div>
-      </div>
+      </div> -->
   
       <!-- sezione main con card => chiamata api -->
       <div class="container py-5">
-          <h2 class="text-center pt-3 pb-5">Sponsorized Accommodations</h2>
           <div class="row">
             
               <div class="col-3" v-for="accommodation in accommodations" :key="accommodation.id">
-                  <CardItem :accommodation="accommodation"></CardItem>
+
+                <router-link :to="{ name: 'accommodations.show' , params : { slug:accommodation.slug} }">  <CardItem :accommodation="accommodation"></CardItem></router-link>
+                
               </div>
           </div>
       </div>
@@ -34,7 +35,7 @@
     import axios from "axios";
     import NavBar from "../components/NavBar.vue";
     import CardItem from "../components/CardItem.vue";
-  import ModalAdvancedSearch from '../components/ModalAdvancedSearch.vue';
+    import ModalAdvancedSearch from '../components/ModalAdvancedSearch.vue';
     
     export default {
       components: { NavBar, CardItem, ModalAdvancedSearch },
@@ -54,7 +55,7 @@
           this.apiParams=data
         },
         async filteringDataFetch() {
-      /* this.tomtomfetchCoordinate(); */
+     
     await  axios.get("/api/advancedsearch/ ", {
       params: this.axiosParams
       
@@ -64,12 +65,6 @@
       });
       
     },
-   /*  tomtomfetchCoordinate() {
-      Axios.get("https://api.tomtom.com/search/2/search/"+ encodeURIComponent(this.query) +".json?key=ziNw7Yn7FMXsuIsY65fMoQmyy7qrHcM3")
-     .then((resp) => {
-        console.log(resp.data);;
-      });
-    }, */
         
     },
     mounted() {

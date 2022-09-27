@@ -51,17 +51,26 @@
                     <a class="nav-link {{ Request::route()->getName() === 'admin.sponsorship.index' ? 'navActivePage' : '' }}" href="{{ route('admin.sponsorship.index') }}">Sponsorships</a>
                     
                 {{-- User --}}
+
                 <div class="login-no">
                     <span class="navbar-text">
                         <!-- Authentication Links -->
                         @guest
                             <li class="nav-item">
                                 <a class="nav" href="{{ route('login') }}">{{ __('Login') }}</a>
-                            </li>
+
+                <div>
+                    <span class="navbar-text d-flex">
+                        <!-- Authentication Links -->
+                        @guest
+                            <div class="nav-item">
+                                <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                            </div>
+
                             @if (Route::has('register'))
-                                <li class="nav-item">
+                                <div class="nav-item">
                                     <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                                </li>
+                                </div>
                             @endif
                         @else
                             <div class="nav-item dropdown">
