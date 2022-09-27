@@ -1,5 +1,5 @@
 <template>
-    <div class="border sticky-bottom">
+    <div class="border">
         <div class="py-2 navbar-light bg-white">
             <div class="container d-flex justify-content-between">
 

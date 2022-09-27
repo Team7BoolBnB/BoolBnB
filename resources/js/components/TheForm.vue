@@ -38,7 +38,7 @@ export default {
 
 .fixed {
     position: sticky !important;
-    top: calc(70px + 2rem) !important;
+    top: calc($navBarHeight + 2rem) !important;
     z-index: 1 !important;
     width: 100%;
     display: inline-block !important;

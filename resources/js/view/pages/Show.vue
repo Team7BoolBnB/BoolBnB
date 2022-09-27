@@ -1,10 +1,11 @@
 <template>
-    <div>
+    <div class="position-relative">
+        <!-- <NavBarShow></NavBarShow> -->
         <div class="container py-5">
             <div>
                 <h2>{{accommodation[0].title}}</h2>
                 <div class="d-flex gap-3 align-items-end">
-                    <div>
+                    <div id="sectionPhoto">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                             class="bi bi-star-half" viewBox="0 0 16 16">
                             <path
@@ -26,6 +27,7 @@
                 </div>
                 <div class="col-4">
                     <div class="py-3">
+                        <h4 class="text-uppercase primaryColorText">mappa tom tom da sistemare</h4>
                         <img class="w-100 img_debug"
                             src="https://www.google.com/maps/d/thumbnail?mid=1R-z0nvlZTWYN9LH3bxAtMhZScxo&hl=it"
                             :alt="'Accommodation of ' + accommodation[0].title">
@@ -104,7 +106,7 @@
                         <hr>
 
                         <!-- servizi dell'accommodation -->
-                        <div class="py-4">
+                        <div class="py-4" id="sectionServices">
                             <div>
                                 <h4 class="mb-3">What will you find</h4>
                                 <ul class="list-unstyled">
@@ -155,7 +157,7 @@
                 </div>
 
                 <!-- col di destra con dentro form fisso durante lo scroll della col di sinistra -->
-                <div class="col-4 ">
+                <div class="col-4 " id="sectionForm">
                     <TheForm></TheForm>
                 </div>
             </div>
@@ -165,8 +167,9 @@
 
                 <!-- sezione con barre di recensione -->
                 <div class="row py-5 gap-5">
-                    <div class="col" >
-                        <div class="d-flex justify-content-between align-items-center w-100 py-2 me-3" v-for="rec1 in accViews1" :key="rec1.name">
+                    <div class="col">
+                        <div class="d-flex justify-content-between align-items-center w-100 py-2 me-3"
+                            v-for="rec1 in accViews1" :key="rec1.name">
                             <div class="text_debug">{{rec1.name}}</div>
                             <div class="w-50 d-flex align-items-center">
                                 <div class="bar_container">
@@ -176,8 +179,9 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col" >
-                        <div class="d-flex justify-content-between align-items-center w-100 py-2 me-3" v-for="rec2 in accViews1" :key="rec2.name">
+                    <div class="col">
+                        <div class="d-flex justify-content-between align-items-center w-100 py-2 me-3"
+                            v-for="rec2 in accViews1" :key="rec2.name">
                             <div class="text_debug">{{rec2.name}}</div>
                             <div class="w-50 d-flex align-items-center">
                                 <div class="bar_container">
@@ -191,7 +195,7 @@
 
                 <hr>
 
-                <div class="py-5">
+                <div class="py-5" id="sectionInfo">
                     <h4 class="mb-5">Things to know before booking</h4>
                     <div class="row">
                         <div class="col">
@@ -203,7 +207,7 @@
                                         <span class="ms-2">
                                             Check-in: After 14:00 pm
                                         </span>
-                                        
+
                                     </li>
                                     <li class="py-2 fw-light">
                                         <i class="fa-solid fa-clock"></i>
@@ -214,7 +218,7 @@
                                     <li class="py-2 fw-light">
                                         <i class="fa-solid fa-door-open"></i>
                                         <span class="ms-2">
-                                            Self check-in online 
+                                            Self check-in online
                                         </span>
                                     </li>
                                     <li class="py-2 fw-light">
@@ -238,10 +242,12 @@
                                     <li class="py-2 fw-light">
                                         Cancellation within 2 days before.
                                         <br>
-                                        Partial Refund: Receive a percentage refund (50%) for each night. Receive a refund of all costs of the service..
+                                        Partial Refund: Receive a percentage refund (50%) for each night. Receive a
+                                        refund of all costs of the service..
                                     </li>
                                     <li class="py-2 fw-light">
-                                        Read the host's full cancellation terms, which also apply in the event of illness or inconvenience related to the COVID-19 pandemic.
+                                        Read the host's full cancellation terms, which also apply in the event of
+                                        illness or inconvenience related to the COVID-19 pandemic.
                                     </li>
                                 </ul>
                             </div>
@@ -261,9 +267,10 @@
 import Axios from 'axios';
 import FooterShow from '../../components/FooterShow.vue';
 import TheForm from '../../components/TheForm.vue';
+import NavBarShow from '../../components/NavBarShow.vue';
 
 export default {
-    components: { FooterShow, TheForm },
+    components: { FooterShow, TheForm, NavBarShow },
     data() {
         return {
             accommodation: {},
@@ -276,10 +283,29 @@ export default {
                 { name: "Precisione" },
                 { name: "Posizione" },
                 { name: "QUalità/prezzo" },
-            ]
+            ],
+            /* view: {
+                scroll: true,
+            } */
         };
     },
+
+    /* beforeMount() {
+    window.addEventListener('scroll', this.backgroundNavBar)
+    }, */
+
     methods: {
+        /* backgroundNavBar(element) {
+            if(window.scrollY) {
+                this.view.scroll = false;
+                element = document.getElementById("navScroll");
+                element.classList.add("d-none");
+            } else {
+                this.view.scroll = true;
+                element = document.getElementById("navScroll");
+                element.classList.remove("d-none");
+            }
+        }, */
         fetch() {
             Axios.get("/api/accommodations/" + this.$route.params.slug).then((resp) => {
                 this.accommodation = resp.data.accommodation;
@@ -298,6 +324,17 @@ export default {
 
 <style lang="scss" scoped>
 @import "../../../sass/partials/variables";
+
+/* .scroll {
+    padding: 1rem;
+    position: absolute;
+    top: -70px;
+    right: 0;
+    left: 0;
+    z-index: 9999;
+    scroll-behavior: smooth;
+    display: block;
+} */
 
 .img_debug {
     border-radius: 1rem;
@@ -320,7 +357,7 @@ i {
     }
 }
 
-.bar_container{
+.bar_container {
     position: relative !important;
     height: 4px !important;
     width: 100% !important;
@@ -329,7 +366,7 @@ i {
     border-radius: 2px !important;
 }
 
-.bar{
+.bar {
     position: absolute !important;
     top: 0px !important;
     left: 0px !important;
@@ -338,10 +375,14 @@ i {
     border-radius: 2px !important;
 }
 
-.text_debug{
+.text_debug {
     width: 100% !important;
     overflow: hidden !important;
     text-overflow: ellipsis !important;
     white-space: nowrap !important;
+}
+
+.border {
+    border-top: 1px solid $tertiaryColor;
 }
 </style>
