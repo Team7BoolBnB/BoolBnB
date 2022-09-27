@@ -27,8 +27,16 @@
     <div >
 
         {{-- Main content --}}
-        <main class="d-flex">
-            <div class="creationCol leftCol">
+        <main class="d-flex herobunner">
+            <div class="creationCol leftCol nodisplay">
+                <div class="logoCol">
+                    <img src="{{asset('/img/logo-light.png')}}" alt="Logo BoolBnb" width="120">
+                </div>
+                <div class="h-100 d-flex align-items-center">
+                    <h1 class="text-white">@yield('page-title')</h1>
+                </div>
+            </div>
+            <div class="creationCol leftCol yesdisplay1">
                 <div class="logoCol">
                     <img src="{{asset('/img/logo-light.png')}}" alt="Logo BoolBnb" width="120">
                 </div>

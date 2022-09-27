@@ -10,7 +10,7 @@
                 <div class="text-end pb-5">
                     <a href="{{ route('admin.sponsorship.index') }}" class="textLink me-2">
                         <i class="fa-solid fa-arrow-left pe-2"></i>
-                        Back to sponsorships
+                        <span class="nodisplay">Back to accommodations</span> 
                     </a>
                 </div>
             </div>
@@ -49,7 +49,7 @@
                 @enderror
             </div>
 
-            <div class="row">
+            <div class="row row-cols-lg-2 row-cols-sm-1 sponsortime">
                 <div class="col-6">
                     <h5 class="mt-5 mb-4">Start date</h5>
                     <input type="datetime-local" id="startTime" name="startTime" required="required">
