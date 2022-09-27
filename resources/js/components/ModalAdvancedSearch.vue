@@ -113,12 +113,14 @@
                 <h5>Services</h5>
               </div>
               <div class="row row-cols-2">
+
                 <div v-for="service in data.services" :key="service.name" class="col">
                   <div class="form-check cardForm ps-0">
                     <input v-model="services" class="form-check-input my-4 d-none" :name="service.id" type="checkbox" :value="service.id" :id="service.name"/>
                     <label class="form-check-label basicBtn formBtn px-4 py-3 my-2" :for="service.name">
                       <i class="fa-solid pe-2" :class="service.icon">
                       </i>{{ service.name }}</label>
+
                   </div>
                 </div>
               </div>
@@ -146,7 +148,7 @@
                   bedFilter: bedFilter,
                   bathFilter: bathFilter,
                   radius: radius,
-                  services: services,
+                  services,
                   typology_id: typology_id,
                   roomFilter: roomFilter,
                 })
@@ -255,6 +257,7 @@ export default {
   },
   props: {
     object: Function,
+    loadServices:Function
   },
   created() {
     this.buttonActive = "active";
