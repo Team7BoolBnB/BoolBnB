@@ -10,7 +10,7 @@
                 <div class="text-end pb-5">
                     <a href="{{ route('admin.accommodation.index') }}" class="textLink me-2">
                         <i class="fa-solid fa-arrow-left pe-2"></i>
-                        Back to accommodations
+                        <span class="nodisplay">Back to accommodations</span> 
                     </a>
                 </div>
             </div>
@@ -91,7 +91,7 @@
             <h5 class="mt-5 mb-4">Typology</h5>
             <div class="row">
                 @foreach ($typologies as $type)
-                    <div class="col-6 form-check cardForm mb-4" style="padding-left: 0.5em">
+                    <div class="col form-check cardForm mb-4" style="padding-left: 0.5em">
                         <input class="form-check-input d-none @error('typology_id') is-invalid @enderror" type="radio"
                             name="typology_id" required="required" id="{{ $type->id }}" value="{{ $type->id }}" @if(old('typology_id') == $type->id || $accommodation->typology_id == $type->id) checked @endif>
                         <label class="form-check-label basicBtn formBtn px-4 py-3" for="{{ $type->id }}">
@@ -106,10 +106,11 @@
 
             <hr>
 
-            <div class="row my-5">
+            <div class="row row-cols-sm-1 row-cols-md-2 row-cols-lg-4 my-5">
 
-                <div class="col-6">
-                    <h5>Bathrooms</h5>
+                <div class="col">
+                    <h5 class="nodisplay">Bathrooms</h5>
+                    <i class="yesdisplay1 fa-solid fa-bath"></i>
                     <div class="form-floating mb-5">
                         <input type="text" class="form-control {{ $errors->has('bathrooms') ? 'is-invalid' : '' }}"
                             name="bathrooms" id="bathroomsInput" placeholder="Insert number of bathrooms..."
@@ -123,8 +124,9 @@
                     </div>
                 </div>
 
-                <div class="col-6">
-                    <h5>Beds</h5>
+                <div class="col">
+                    <h5 class="nodisplay">Beds</h5>
+                    <i class="yesdisplay1 fa-solid fa-bed"></i>
                     <div class="form-floating mb-5">
                         <input type="text" class="form-control {{ $errors->has('beds') ? 'is-invalid' : '' }}"
                             name="beds" id="bedsInput" placeholder="Insert number of beds..."
@@ -138,8 +140,9 @@
                     </div>
                 </div>
 
-                <div class="col-6">
-                    <h5>Rooms</h5>
+                <div class="col">
+                    <h5 class="nodisplay">Rooms</h5>
+                    <i class="yesdisplay1 fa-solid fa-door-open"></i>
                     <div class="form-floating">
                         <input type="text" class="form-control {{ $errors->has('rooms') ? 'is-invalid' : '' }}"
                             name="rooms" id="roomsInput" placeholder="Insert number of rooms..."
@@ -153,8 +156,9 @@
                     </div>
                 </div>
 
-                <div class="col-6">
-                    <h5>Square meters</h5>
+                <div class="col-12">
+                    <h5 class="nodisplay">Square meters</h5>
+                    <i class="yesdisplay1 fa-solid fa-vector-square"></i>
                     <div class="form-floating">
                         <input type="number" class="form-control {{ $errors->has('mt_square') ? 'is-invalid' : '' }}"
                             name="mt_square" id="mtSquareInput" placeholder="Insert latitude..."
@@ -210,14 +214,14 @@
             <div>
                 <h5 class="pb-3 mt-5">Insert the services for your accommodation</h5>
             </div>
-            <div class="row gx-5 mb-5">
+            <div class="row row-cols-sm-1 row-cols-md-2 gx-5 mb-5">
                 @foreach ($services as $service)
                     <div class="col-6 form-check cardForm">
                         <input class="form-check-input my-4 d-none" name="services[]" type="checkbox" {{ in_array($service->name,$control) ? 'checked' : '' }}
                             value="{{ $service->id }}" id="{{ $service->name }}">
                         <label class="form-check-label basicBtn formBtn ms-1 px-4 py-3 my-2"
-                            for="{{ $service->name }}"><i
-                                class="fa-solid pe-2 {{ $service->icon }}"></i>{{ $service->name }}</label>
+                            for="{{ $service->name }}">
+                            <i class="fa-solid pe-2 {{ $service->icon }}"></i><span class="nodisplay">{{ $service->name }}</span></label>
                     </div>
                 @endforeach
             </div>

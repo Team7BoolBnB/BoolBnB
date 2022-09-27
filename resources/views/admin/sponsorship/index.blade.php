@@ -14,8 +14,8 @@
         
             <div class="container pt-5">
 
-                <div class="row row-cols-3 py-4 g-4 justify-content-center">
-                    <div class="col">
+                <div class="row row-cols-sm-1 row-cols-lg-3 py-4 g-4 justify-content-center">
+                    <div class="col col-sm-12">
                         <div>
                             <a class="card_link d-flex flex-column" href="{{ route('admin.sponsorship.create') }}">
                                 Add New
@@ -31,10 +31,10 @@
             </div>
         @else
             <div class="container pt-5">
-                <div class="row row-cols-3 py-4 g-4">
-                    <div class="col">
+                <div class="row row-cols-sm-1 row-cols-lg-3 py-4 g-4">
+                    <div class="col col-sm-12">
                         <div>
-                            <a class="card_link d-flex flex-column" href="{{ route('admin.sponsorship.create') }}">
+                            <a class="card_link card-all d-flex flex-column" href="{{ route('admin.sponsorship.create') }}">
                                 Add New
                                 <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
                                     class="bi bi-plus-circle-fill" viewBox="0 0 16 16">
@@ -46,10 +46,10 @@
                     </div>
 
                     @foreach ($sponzorizedAccommodation as $accommodation)
-                    <div class="col-sm-5">
+                    <div class="col-md-6 col-sm-12">
                         <div class="card_admin">
                            
-                            <div class="available_info">
+                            <div class="badge available_info">
                                 
                                 <span>Active</span>
                             </div>
