@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="container-sm text-center">
-          {{ requestForm}}
+         
             <Braintree v-if="token" :authorization="token" 
             @loading="handleLoading()"
             @onSuccess="paymentOnSuccess"
@@ -55,6 +55,7 @@ export default {
             try {
                  let response =await axios.post("/api/make/payment", {...this.requestForm})
                  const message=response.data.message;
+                 //chiamata a database in post
                  alert(message)
             } catch (error) {
                 alert("Qualcosa è andato storto ")
@@ -63,7 +64,7 @@ export default {
     
     },
   
- mounted() {
+    mounted() {
        this.requestForm.idSponsorship=this.$route.params.sponsorship_id
         axios.get("/api/sponsorship").then(resp=>{
                 this.token=resp.data.token;

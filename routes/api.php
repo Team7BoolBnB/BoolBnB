@@ -13,13 +13,18 @@ use Illuminate\Support\Facades\Route;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-
-Route::middleware('auth')->get("/accommodations/sponsorship","Api\HomeController@sponsorshipData");
-
-Route::get("/sponsorship","Api\PaymentController@generate");
-Route::post("/make/payment","Api\PaymentController@makePayment");
+Route::middleware("auth")->group(function () {
+    Route::get("/accommodations/sponsorship","Api\HomeController@sponsorshipData");
+    Route::get("/sponsorship","Api\PaymentController@generate");
+    Route::post("/make/payment","Api\PaymentController@makePayment");
+    });
 
 Route::get("/accommodations","Api\HomeController@index");
+/* Route::middleware('auth')->get("/accommodations/sponsorship","Api\HomeController@sponsorshipData");
+
+Route::get("/sponsorship","Api\PaymentController@generate");
+Route::post("/make/payment","Api\PaymentController@makePayment"); */
+
 /* Route::get("/accommodations/sponsorship","Api\HomeController@sponsorshipData"); */
 
 
