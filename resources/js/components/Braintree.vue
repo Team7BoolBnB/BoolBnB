@@ -5,7 +5,7 @@
       locale="it_IT"
       @success="onSuccess"
       @error="onError"
-      @loaad="onLoad"
+     
     ></v-braintree>
   </div>
 </template>

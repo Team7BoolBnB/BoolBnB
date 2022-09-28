@@ -50,13 +50,36 @@ export default {
         paymentOnError(error){
 
         },
+        databaseUpdate(){
+            axios.post("/api/update/database",{
+                params:{
+                    sponsorship_id:this.$route.params.sponsorship_id,
+                    accommodation_id:this.$route.params.accommodation_id,
+                    startTime:this.$route.params.date,
+                }
+            }).then(response=>{
+                if(response==1){
+                    this.$router.push({path:'admin/sponsorship/index'})
+                }
+                /* else{
+                    return false
+                } */
+            })
+        },
         async buy(){
-   
+                 /*  let dbCheck= this.databaseUpdate() */
             try {
                  let response =await axios.post("/api/make/payment", {...this.requestForm})
                  const message=response.data.message;
+                 if(response.data.success){
+                    alert("pagamento andato a buon fine...inizio a caricare i dati a db");
+                     this.databaseUpdate();
+                 }
+                else{
+                     alert(message)
+                }
                  //chiamata a database in post
-                 alert(message)
+                
             } catch (error) {
                 alert("Qualcosa è andato storto ")
             }

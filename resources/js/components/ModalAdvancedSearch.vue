@@ -16,16 +16,30 @@
       >
         <div class="modal-content">
           <div class="modal-header px-4">
-            <h3 class="modal-title" id="staticBackdropLabel">Advanced Search</h3>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <h3 class="modal-title" id="staticBackdropLabel">
+              Advanced Search
+            </h3>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
           </div>
           <div class="modal-body p-4">
-
             <!-- Where -->
             <div class="modal-container-section pt-2">
               <h5>Where</h5>
               <div class="form-floating mb-5">
-                <input class="form-control" list="datalistOptions" name="address" id="exampleDataList" placeholder="Search for your destination..." v-model="query" v-on:change="coordinateSet($event)" />
+                <input
+                  class="form-control"
+                  list="datalistOptions"
+                  name="address"
+                  id="exampleDataList"
+                  placeholder="Search for your destination..."
+                  v-model="query"
+                  v-on:change="coordinateSet($event)"
+                />
                 <label for="exampleDataList">Search for your destination</label>
                 <datalist id="datalistOptions"> </datalist>
               </div>
@@ -35,7 +49,15 @@
             <div class="modal-container-section pb-4">
               <h5>Range</h5>
               <label for="customRange3" class="form-label">Km</label>
-              <input type="range" class="form-range pe-4" min="0.5" max="20" step="0.5" id="customRange3" v-model="radius" />
+              <input
+                type="range"
+                class="form-range pe-4"
+                min="0.5"
+                max="20"
+                step="0.5"
+                id="customRange3"
+                v-model="radius"
+              />
               <div class="row justify-content-between">
                 <div class="col">0</div>
                 <div class="col">2</div>
@@ -59,8 +81,15 @@
                 <h5>Typology</h5>
               </div>
               <div class="row">
-                <div v-for="typology in data.typologies" :key="typology.name" class="col">
-                  <button class="basicBtn bigBtn typologyBtn" v-on:click="setTypology(typology.id)">
+                <div
+                  v-for="typology in data.typologies"
+                  :key="typology.name"
+                  class="col"
+                >
+                  <button
+                    class="basicBtn bigBtn typologyBtn"
+                    v-on:click="setTypology(typology.id)"
+                  >
                     <div class="d-flex justify-content-center">
                       <div><i :class="typology.icon"></i></div>
                       <div class="ps-2">{{ typology.name }}</div>
@@ -70,57 +99,60 @@
               </div>
             </div>
 
-            <hr>
+            <hr />
 
             <!-- Rooms / Beds / Bathrooms -->
             <div class="modal-container-section py-2">
-              <div v-for="filter in filters" :key="filter" class="row">
+              <div v-for="filter in filters" :key="filter.name" class="row">
                 <div class="py-3">
-                  <h5 class="mb-3">{{ filter }}</h5>
+                <!--   <h5 class="mb-3">{{ filter.name }}</h5> -->
                   <div class="row flex-align-center">
                     <div class="col-2">
-                      <button class="btn btn-outline-secondary rounded-pill" :class="buttonActive ? 'active' : ''" v-on:click="setFilterValue(filter, i)">
-                        Qualsiasi
-                      </button>
-                    </div>
-                    <div v-for="i in buttonFilterNumber" :key="i" class="col">
+                      
+                    <div v-for="array in filter.value" :key="array.value" class="col">
                       <button
-                        v-if="i < 8"
                         class="btn btn-outline-secondary rounded-pill rounded-5"
-                        :class="filter + i ? filterActiceClass : ''"
-                        v-on:click="setFilterValue(filter, i)"
+                        :class="array.active ? 'active' : '' "
+                        v-on:click="setFilterValue(filter.name, array.value),classCheck(array)"
                       >
-                        {{ i }}
+                        {{ array.value }}
                       </button>
-                      <button
-                        v-else
-                        class="btn btn-outline-secondary rounded-pill rounded-5"
-                        :class="filter + i ? filterActiceClass : ''"
-                        v-on:click="setFilterValue(filter, i)"
-                      >
-                        {{ i }}+
-                      </button>
+                      
                     </div>
                   </div>
                 </div>
               </div>
             </div>
+            </div>
 
-            <hr>
+            <hr />
 
             <div class="modal-container-section py-2">
               <div class="mt-3 mb-3">
                 <h5>Services</h5>
               </div>
               <div class="row row-cols-2">
-
-                <div v-for="service in data.services" :key="service.name" class="col">
+                <div
+                  v-for="service in data.services"
+                  :key="service.name"
+                  class="col"
+                >
                   <div class="form-check cardForm ps-0">
-                    <input v-model="services" class="form-check-input my-4 d-none" :name="service.id" type="checkbox" :value="service.id" :id="service.name"/>
-                    <label class="form-check-label basicBtn formBtn px-4 py-3 my-2" :for="service.name">
-                      <i class="fa-solid pe-2" :class="service.icon">
-                      </i>{{ service.name }}</label>
-
+                    <input
+                      v-model="services"
+                      class="form-check-input my-4 d-none"
+                      :name="service.id"
+                      type="checkbox"
+                      :value="service.id"
+                      :id="service.name"
+                    />
+                    <label
+                      class="form-check-label basicBtn formBtn px-4 py-3 my-2"
+                      :for="service.name"
+                    >
+                      <i class="fa-solid pe-2" :class="service.icon"> </i
+                      >{{ service.name }}</label
+                    >
                   </div>
                 </div>
               </div>
@@ -131,15 +163,22 @@
             <button type="button" class="textLink" @click="clearParams()">
               Clear all
             </button>
-            <div v-if="checkQuery && radiusCheck" class="alert alert-danger" role="alert">
+            <div
+              v-if="checkQuery && radiusCheck"
+              class="alert alert-danger"
+              role="alert"
+            >
               <span>Inserisci parametri di ricerca</span>
             </div>
-            <div v-else-if="checkQuery || radiusCheck" class="alert alert-danger" role="alert">
+            <div
+              v-else-if="checkQuery || radiusCheck"
+              class="alert alert-danger"
+              role="alert"
+            >
               <span v-if="checkQuery">Inserisci un indirizzo di ricerca</span>
               <span v-else-if="radiusCheck">Inserisci raggio di ricerca</span>
-           
             </div>
-            
+
             <button
               v-if="query && radius"
               v-on:click="
@@ -159,7 +198,12 @@
             >
               Search
             </button>
-            <button v-else type="button" class="basicBtn bigBtn primaryBtn" v-on:click="alertPopup()">
+            <button
+              v-else
+              type="button"
+              class="basicBtn bigBtn primaryBtn"
+              v-on:click="alertPopup()"
+            >
               Search
             </button>
 
@@ -185,13 +229,63 @@ export default {
     return {
       data: [],
       accommodations: null,
-      filters: ["Rooms", "Beds", "Bathrooms"],
+     
       buttonFilterNumber: 8,
       buttonActive: "",
       filterActiceClass: "",
       checkQuery: false,
-      radiusCheck:false,
-     
+      radiusCheck: false,
+      filters: [
+      [
+        {
+          name:"Rooms",
+          value:[
+            { value: "Qualsiasi", active: true },
+            { value: "1", active: false },
+            { value: "2", active: false },
+            { value: "3", active: false },
+            { value: "4", active: false },
+            { value: "5", active: false },
+            { value: "6", active: false },
+            { value: "7", active: false },
+            { value: "8+", active: false },
+          ]
+        }
+      ]/* ,
+      [
+        {
+          name:"Beds",
+          value:[
+            { value: "Qualsiasi", active: true },
+            { value: "1", active: false },
+            { value: "2", active: false },
+            { value: "3", active: false },
+            { value: "4", active: false },
+            { value: "5", active: false },
+            { value: "6", active: false },
+            { value: "7", active: false },
+            { value: "8+", active: false },
+          ]
+        }
+      ],
+      [
+        {
+          name:"Bathrooms",
+          value:[
+            { value: "Qualsiasi", active: true },
+            { value: "1", active: false },
+            { value: "2", active: false },
+            { value: "3", active: false },
+            { value: "4", active: false },
+            { value: "5", active: false },
+            { value: "6", active: false },
+            { value: "7", active: false },
+            { value: "8+", active: false },
+          ]
+        }
+      ], */
+       
+      ],
 
       //Chiamata API data
       query: null,
@@ -211,6 +305,12 @@ export default {
     },
 
     setFilterValue(filter, i) {
+      if (filter == "Rooms" && i == "8+") {
+        this.roomFilter = "all";
+      } else if (filter == "Beds" && i == "8+") {
+        this.bedFilter = "all";
+      } else if (filter == "Bathrooms" && i == "8+") {
+        this.bathFilter = "all";}
       if (filter == "Rooms" && i > 0) {
         this.roomFilter = i;
       } else if (filter == "Beds" && i > 0) {
@@ -225,12 +325,14 @@ export default {
         this.bathFilter = "";
       }
     },
+    classCheck(array){
+      console.log(array);
+    },
     setTypology(id) {
       this.typology_id = id;
     },
     coordinateSet(e) {
       this.query = e.target.value;
-     
     },
     clearParams() {
       (this.query = null),
@@ -240,56 +342,49 @@ export default {
         (this.typology_id = null),
         (this.services = []),
         (this.radius = null);
-    
     },
-    alertPopup(){
-      if(this.radius){
-        this.checkQuery=true
+    alertPopup() {
+      if (this.radius) {
+        this.checkQuery = true;
+      } else if (this.query) {
+        this.radiusCheck = true;
+      } else {
+        this.radiusCheck = true;
+        this.checkQuery = true;
       }
-      else if (this.query){
-        this.radiusCheck=true
-      }
-      else{
-        this.radiusCheck=true
-        this.checkQuery=true
-      }
-    }
+    },
   },
   props: {
     object: Function,
-    loadServices:Function
+    loadServices: Function,
   },
   created() {
     this.buttonActive = "active";
     this.fetchdata();
   },
 
-  watch:{
-    query(newValue){
-      if(newValue.length > 0){
-        this.checkQuery=false
+  watch: {
+    query(newValue) {
+      if (newValue.length > 0) {
+        this.checkQuery = false;
       }
     },
-    radius(newValue){
-      if(newValue != null){
-        this.radiusCheck=false
+    radius(newValue) {
+      if (newValue != null) {
+        this.radiusCheck = false;
       }
-    }
-
-  }
-
+    },
+  },
 };
 </script>
 
 <style lang="scss" scoped>
-
 @import "../../sass/partials/variables";
 
 .typologyBtn {
   padding: 20px !important;
   background-color: #ffffff;
   border: 1px solid $tertiaryColor;
-
 }
 
 .textLink {
@@ -297,6 +392,4 @@ export default {
   border: unset;
   text-decoration: underline;
 }
-
-
 </style>
