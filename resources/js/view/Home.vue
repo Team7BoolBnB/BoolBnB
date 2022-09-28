@@ -1,6 +1,7 @@
 <template>
 
   <div>
+    <NavBar></NavBar>
     <modal-advanced-search :object="takeObject" ></modal-advanced-search>
       <!-- sezione con carosello di immagini -->
       <!-- <div class="debug_carosel d-none">

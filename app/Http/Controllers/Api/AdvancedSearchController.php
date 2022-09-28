@@ -46,6 +46,7 @@ class AdvancedSearchController extends Controller
 
         ]);
     }
+    
     public function show($slug)
     {
         $raw = 'SELECT
@@ -65,8 +66,16 @@ class AdvancedSearchController extends Controller
 
         $accommodation = DB::select($raw);
 
-       
+        $typologies = Typology::findOrFail($accommodation[0]->typology_id);
+        /* $typologies = [];
+
+
+        foreach ($accommodation as $typology) {
+            $typologies[] = ["name" => $typology->name];
+        } */
+
         return response()->json([
+            "typology" => $typologies,
             "accommodation" => $accommodation
         ]);
     }
@@ -185,6 +194,6 @@ $raw = 'SELECT *,
         
         
 
-        return response()->json($accommodations);
+        return response()->json($request);
     }
 }
