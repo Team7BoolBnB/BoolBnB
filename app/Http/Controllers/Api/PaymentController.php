@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Payments\PaymentRequest;
+use App\Http\Requests\SponsorshipRequest;
 use App\Sponsorship;
 use Braintree\Gateway;
 use Illuminate\Http\Request;
@@ -51,5 +52,27 @@ class PaymentController extends Controller
 
             return response()->json($data, 401);
         }
+    }
+
+    public function update(Request $request){
+        
+
+        $data = $request;
+        
+         
+       
+        $period=Sponsorship::findOrFail($data->params["sponsorship_id"]); 
+
+        $orario="+" . $period->period . " hours";
+        
+        $calcultedData=date_modify(date_create($data->params["startTime"]), $orario);
+
+        DB::table('sponsorship_accommodation')->insertGetId(
+            ['accommodation_id' => $data->params["accommodation_id"], 'sponsorship_id' =>$data->params["sponsorship_id"], 'startTime' => $data->params["startTime"], 'endTime' => $calcultedData]
+           
+        );   
+        
+ 
+        return  response(true);
     }
 }

@@ -62,7 +62,7 @@
 
 <script>
     import axios from 'axios';
-import id_ID from 'braintree-web-drop-in/translations/id_ID';
+
 export default {
     data() {
         return {
