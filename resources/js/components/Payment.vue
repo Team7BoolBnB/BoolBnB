@@ -17,7 +17,7 @@
                 
             </div> -->
     </div>
-    <div v-else class="spinner flex-column">
+    <div v-else class="spinner flex-column py-4 mb-5">
         <div v-if="paymentOK"><h1>Grazie per aver acquistato</h1> </div>
         <atom-spinner :animation-duration="1000" :size="100" color="#ff1d5e" />
     </div>

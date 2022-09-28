@@ -49,10 +49,16 @@
                     <div class="col-md-6 col-sm-12">
                         <div class="card_admin">
                            
+                           
+                            @if((strtotime($accommodation->endTime)-strtotime(now()))>0)
                             <div class="badge available_info">
-                                
-                                <span>Active</span>
-                            </div>
+                                   <span>Active</span>
+                                </div>
+                                @else
+                                <div class="badge not_available_info">
+                                    <span>Expired</span>
+                                 </div>
+                            @endif
                             <div class="accommodation_info">
                                 <div class="fs-1">{{$accommodation->title}}</div>
                                 <div class="fs-3">{{ $accommodation->name }}</div>

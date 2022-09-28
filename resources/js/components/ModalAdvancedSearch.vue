@@ -87,7 +87,7 @@
                   class="col"
                 >
                   <button
-                    class="basicBtn bigBtn typologyBtn"
+                    class="btn btn btn btn-outline-dark"
                     v-on:click="setTypology(typology.id)"
                   >
                     <div class="d-flex justify-content-center">
@@ -160,7 +160,7 @@
           </div>
 
           <div class="modal-footer d-flex justify-content-between">
-            <button type="button" class="textLink" @click="clearParams()">
+            <button type="basicBtn" class="textLink" @click="clearParams()">
               Clear all
             </button>
             <div
