@@ -268,6 +268,7 @@
 
 
 <script>
+
 import Axios from 'axios';
 import FooterShow from '../../components/FooterShow.vue';
 import TheForm from '../../components/TheForm.vue';
