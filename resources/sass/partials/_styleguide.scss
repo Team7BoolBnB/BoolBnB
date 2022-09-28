@@ -5,6 +5,20 @@ h1 {
     font-size: 3rem !important;
     font-weight: 600 !important;
 }
+@media only screen and (max-width: 885px) {
+    h1 {
+        font-family: 'Plus Jakarta Sans', sans-serif;
+        font-size: 1.8rem !important;
+        font-weight: 600 !important;
+    }
+}
+@media only screen and (max-width: 625px) {
+    h1 {
+        font-family: 'Plus Jakarta Sans', sans-serif;
+        font-size: 1rem !important;
+        font-weight: 600 !important;
+    }
+}
 
 h2 {
     font-family: 'Plus Jakarta Sans', sans-serif;
@@ -119,15 +133,32 @@ p, a {
     }
 
 }
+@media only screen and (max-width: 433px) {
+        .basicBtn.bigBtn {
+            padding: 5px 10px;
+        }
+}
 
 .textLink {
-    font-weight: 600;
-    color: #222222;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 600 !important;
+    color: #222222 !important;
+
+    &.lightLink {
+        font-weight: 400 !important;
+    }
 
     &:hover {
-        color: #484848;
+        color: #484848 !important;
     }
 }
+
+@media only screen and (max-width: 534px) {
+    .textLink {
+        font-size: 20px;
+    }
+}
+
 
 
 // Forms

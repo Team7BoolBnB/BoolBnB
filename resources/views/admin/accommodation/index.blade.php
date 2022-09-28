@@ -13,7 +13,7 @@
     @if(!$visible)
         
         <div class="container">
-            <div class="row row-cols-3 py-4 g-4 justify-content-center">
+            <div class="row row-cols-sm-1 row-cols-lg-3 py-4 g-4 justify-content-center">
                 <div class="col">
                     <div>
                         <a class="card_link d-flex flex-column" href="{{ route('admin.accommodation.create') }}">
@@ -29,10 +29,10 @@
 @else
     
         <div class="container">
-            <div class="row row-cols-3 py-4 g-4">
-                <div class="col">
+            <div class="row row-cols-sm-1 row-cols-lg-3 py-4 g-4">
+                <div class="col col-sm-12">
                     <div>
-                        <a class="card_link d-flex flex-column" href="{{ route('admin.accommodation.create') }}">
+                        <a class="card_link card-all d-flex flex-column" href="{{ route('admin.accommodation.create') }}">
                             Add New
                             <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-plus-circle-fill" viewBox="0 0 16 16">
                                 <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z"/>
@@ -42,7 +42,7 @@
                 </div>
 
                 @foreach ($accommodations as $accommodation)
-                        <div class="col">
+                        <div class="col-md-6 col-sm-12">
                             <div class="card_admin">
                                 @if($accommodation->available == "0")
                                     <h6 class=" badge not_available_info">Not Visible</h6>

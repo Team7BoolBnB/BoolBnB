@@ -15,11 +15,11 @@
     @else
         <div class="container pt-5">
             <h3>Your apartments</h3>
-            <div class="row py-4 ">
+            <div class="row row-cols-sm-1 row-cols-md-2 row-cols-lg-3 py-4 ">
 
                 @foreach ($accommodations as $accommodation)
-                    <div class="col-sm-5">
-                        <div class="card_admin">
+                    <div class="col-md-6 col-sm-12">
+                        <div class="card_admin mb-4">
                             @if($accommodation->available == "0")
                                 <h6 class=" badge not_available_info">Not Visible</h6>
                             @else
@@ -86,9 +86,9 @@
                     </div>
                 @endforeach
 
-                <div class="col-sm-2">
+                <div class="col-md-12 col-sm-12">
                     <div>
-                        <a class="card_link" href="{{ route('admin.accommodation.index', $accommodation->slug) }}">See
+                        <a class="card_link card-all card-all-index" href="{{ route('admin.accommodation.index', $accommodation->slug) }}">See
                             all</a>
                     </div>
                 </div>
@@ -108,13 +108,13 @@
     @else
         <div class="container pt-5">
             <h3>Latest sponsorships</h3>
-            <div class="row py-4 ">
+            <div class="row row-cols-sm-1 row-cols-md-2 row-cols-lg-3 py-4 ">
 
                 @foreach ($sponzorizedAccommodation as $accommodation)
-                    <div class="col-sm-5">
-                        <div class="card_admin">
+                    <div class="col-md-6 col-sm-12">
+                        <div class="card_admin mb-4">
                            
-                            <div class="available_info">
+                            <div class="badge available_info">
                                 
                                 <span>Active</span>
                             </div>
@@ -131,10 +131,9 @@
                 @endforeach
 
 
-                <div class="col-sm-2">
+                <div class="col-md-12 col-sm-12">
                     <div>
-                        <a class="card_link" href="{{ route('admin.sponsorship.index', $accommodation->slug) }}">See
-                            all</a>
+                        <a class="card_link card-all card-all-index" href="{{ route('admin.sponsorship.index', $accommodation->slug) }}">See all</a>
                     </div>
                 </div>
             </div>

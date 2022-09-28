@@ -1,6 +1,5 @@
 <template>
     <div>
-        <NavBar></NavBar>
 
         <!-- main con router-links -->
         <router-view/>
@@ -12,11 +11,10 @@
 </template>
 
 <script>
-import NavBar from './components/NavBar.vue';
 import TheFooter from './components/TheFooter.vue';
 
 
     export default{
-        components: { NavBar, TheFooter }
+        components: { TheFooter }
     }
 </script>

@@ -15,8 +15,10 @@
         "
       >
         <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="staticBackdropLabel">Filtri</h5>
+          <div class="modal-header px-4">
+            <h3 class="modal-title" id="staticBackdropLabel">
+              Advanced Search
+            </h3>
             <button
               type="button"
               class="btn-close"
@@ -24,27 +26,28 @@
               aria-label="Close"
             ></button>
           </div>
-          <div class="modal-body">
-            <div class="modal-container-section">
-              <h3>Dove vuoi andare?</h3>
+          <div class="modal-body p-4">
+            <!-- Where -->
+            <div class="modal-container-section pt-2">
+              <h5>Where</h5>
               <div class="form-floating mb-5">
                 <input
                   class="form-control"
                   list="datalistOptions"
                   name="address"
                   id="exampleDataList"
-                  placeholder="Type to
-                search..."
+                  placeholder="Search for your destination..."
                   v-model="query"
                   v-on:change="coordinateSet($event)"
                 />
-                <label for="exampleDataList">Type to search...</label>
+                <label for="exampleDataList">Search for your destination</label>
                 <datalist id="datalistOptions"> </datalist>
               </div>
             </div>
 
-            <div class="modal-container-section">
-              <h3>Distanza dal punto di interesse</h3>
+            <!-- Range -->
+            <div class="modal-container-section pb-4">
+              <h5>Range</h5>
               <label for="customRange3" class="form-label">Km</label>
               <input
                 type="range"
@@ -69,50 +72,13 @@
                 <div class="col">20</div>
               </div>
             </div>
-            <hr />
-            <div class="modal-container-section">
-              <div class="mt-3 mb-3">
-                <h3>Stanze e letti</h3>
-              </div>
-              <div v-for="filter in filters" :key="filter" class="row">
-                <div class="py-3">
-                  <h5 class="mb-3">{{ filter }}</h5>
-                  <div class="row flex-align-center">
-                    <div class="col-2">
-                      <button
-                        class="btn btn-outline-secondary rounded-pill"
-                        :class="buttonActive ? 'active' : ''"
-                        v-on:click="setFilterValue(filter, i)"
-                      >
-                        Qualsiasi
-                      </button>
-                    </div>
-                    <div v-for="i in buttonFilterNumber" :key="i" class="col">
-                      <button
-                        v-if="i < 8"
-                        class="btn btn-outline-secondary rounded-pill rounded-5"
-                        :class="filter + i ? filterActiceClass : ''"
-                        v-on:click="setFilterValue(filter, i)"
-                      >
-                        {{ i }}
-                      </button>
-                      <button
-                        v-else
-                        class="btn btn-outline-secondary rounded-pill rounded-5"
-                        :class="filter + i ? filterActiceClass : ''"
-                        v-on:click="setFilterValue(filter, i)"
-                      >
-                        {{ i }}+
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
 
-            <div class="modal-container-section">
+            <hr />
+
+            <!-- Typology -->
+            <div class="modal-container-section pt-2 pb-4">
               <div class="mt-3 mb-3">
-                <h3>Tipo di alloggio</h3>
+                <h5>Typology</h5>
               </div>
               <div class="row">
                 <div
@@ -121,30 +87,57 @@
                   class="col"
                 >
                   <button
-                    class="btn btn-outline-secondary"
+                    class="basicBtn bigBtn typologyBtn"
                     v-on:click="setTypology(typology.id)"
                   >
-                    <div class="d-flex flex-column">
+                    <div class="d-flex justify-content-center">
                       <div><i :class="typology.icon"></i></div>
-                      <div>{{ typology.name }}</div>
+                      <div class="ps-2">{{ typology.name }}</div>
                     </div>
                   </button>
                 </div>
               </div>
             </div>
 
-            <div class="modal-container-section">
-              <div class="mt-3 mb-3">
-                <h3>Servizi</h3>
+            <hr />
+
+            <!-- Rooms / Beds / Bathrooms -->
+            <div class="modal-container-section py-2">
+              <div v-for="filter in filters" :key="filter.name" class="row">
+                <div class="py-3">
+                <!--   <h5 class="mb-3">{{ filter.name }}</h5> -->
+                  <div class="row flex-align-center">
+                    <div class="col-2">
+                      
+                    <div v-for="array in filter.value" :key="array.value" class="col">
+                      <button
+                        class="btn btn-outline-secondary rounded-pill rounded-5"
+                        :class="array.active ? 'active' : '' "
+                        v-on:click="setFilterValue(filter.name, array.value),classCheck(array)"
+                      >
+                        {{ array.value }}
+                      </button>
+                      
+                    </div>
+                  </div>
+                </div>
               </div>
-              <h5 class="mb-3">Servizi essenziali</h5>
+            </div>
+            </div>
+
+            <hr />
+
+            <div class="modal-container-section py-2">
+              <div class="mt-3 mb-3">
+                <h5>Services</h5>
+              </div>
               <div class="row row-cols-2">
                 <div
                   v-for="service in data.services"
                   :key="service.name"
                   class="col"
                 >
-                  <div class="form-check cardForm">
+                  <div class="form-check cardForm ps-0">
                     <input
                       v-model="services"
                       class="form-check-input my-4 d-none"
@@ -154,17 +147,10 @@
                       :id="service.name"
                     />
                     <label
-                      class="
-                        form-check-label
-                        basicBtn
-                        formBtn
-                        ms-1
-                        px-4
-                        py-3
-                        my-2
-                      "
+                      class="form-check-label basicBtn formBtn px-4 py-3 my-2"
                       :for="service.name"
-                      ><i class="fa-solid pe-2" :class="service.icon"></i
+                    >
+                      <i class="fa-solid pe-2" :class="service.icon"> </i
                       >{{ service.name }}</label
                     >
                   </div>
@@ -174,22 +160,25 @@
           </div>
 
           <div class="modal-footer d-flex justify-content-between">
-            <button
-              type="button"
-              class="btn btn btn-light"
-              @click="clearParams()"
-            >
-              Cancella tutto
+            <button type="button" class="textLink" @click="clearParams()">
+              Clear all
             </button>
-            <div v-if="checkQuery && radiusCheck" class="alert alert-danger" role="alert">
-              <span > Inserisci parametri di ricerca</span>
+            <div
+              v-if="checkQuery && radiusCheck"
+              class="alert alert-danger"
+              role="alert"
+            >
+              <span>Inserisci parametri di ricerca</span>
             </div>
-            <div v-else-if="checkQuery || radiusCheck" class="alert alert-danger" role="alert">
-              <span v-if="checkQuery"> Inserisci un indirizzo di ricerca</span>
-              <span v-else-if="radiusCheck"> Inserisci raggio di ricerca</span>
-           
+            <div
+              v-else-if="checkQuery || radiusCheck"
+              class="alert alert-danger"
+              role="alert"
+            >
+              <span v-if="checkQuery">Inserisci un indirizzo di ricerca</span>
+              <span v-else-if="radiusCheck">Inserisci raggio di ricerca</span>
             </div>
-            
+
             <button
               v-if="query && radius"
               v-on:click="
@@ -197,10 +186,8 @@
                   query: query,
                   bedFilter: bedFilter,
                   bathFilter: bathFilter,
-                  longitude: longitude,
-                  latitude: latitude,
                   radius: radius,
-                  services: services,
+                  services,
                   typology_id: typology_id,
                   roomFilter: roomFilter,
                 })
@@ -209,10 +196,15 @@
               class="btn btn-dark queryButton"
               data-bs-dismiss="modal"
             >
-              Mostra mille alloggi
+              Search
             </button>
-            <button v-else type="button" class="btn btn-dark queryButton" v-on:click="alertPopup()">
-              Mostra mille alloggi
+            <button
+              v-else
+              type="button"
+              class="basicBtn bigBtn primaryBtn"
+              v-on:click="alertPopup()"
+            >
+              Search
             </button>
 
             <!--  <router-link
@@ -237,12 +229,63 @@ export default {
     return {
       data: [],
       accommodations: null,
-      filters: ["Camere da letto", "Letti", "Bagni"],
+     
       buttonFilterNumber: 8,
       buttonActive: "",
       filterActiceClass: "",
       checkQuery: false,
-      radiusCheck:false,
+      radiusCheck: false,
+      filters: [
+      [
+        {
+          name:"Rooms",
+          value:[
+            { value: "Qualsiasi", active: true },
+            { value: "1", active: false },
+            { value: "2", active: false },
+            { value: "3", active: false },
+            { value: "4", active: false },
+            { value: "5", active: false },
+            { value: "6", active: false },
+            { value: "7", active: false },
+            { value: "8+", active: false },
+          ]
+        }
+      ]/* ,
+      [
+        {
+          name:"Beds",
+          value:[
+            { value: "Qualsiasi", active: true },
+            { value: "1", active: false },
+            { value: "2", active: false },
+            { value: "3", active: false },
+            { value: "4", active: false },
+            { value: "5", active: false },
+            { value: "6", active: false },
+            { value: "7", active: false },
+            { value: "8+", active: false },
+          ]
+        }
+      ],
+      [
+        {
+          name:"Bathrooms",
+          value:[
+            { value: "Qualsiasi", active: true },
+            { value: "1", active: false },
+            { value: "2", active: false },
+            { value: "3", active: false },
+            { value: "4", active: false },
+            { value: "5", active: false },
+            { value: "6", active: false },
+            { value: "7", active: false },
+            { value: "8+", active: false },
+          ]
+        }
+      ], */
+       
+      ],
 
       //Chiamata API data
       query: null,
@@ -252,8 +295,6 @@ export default {
       typology_id: null,
       services: [],
       radius: null,
-      latitude: 45.45881,
-      longitude: 9.13208,
     };
   },
   methods: {
@@ -262,34 +303,36 @@ export default {
         this.data = resp.data;
       });
     },
-    tomtomfetchCoordinate() {
-      Axios.get("https://api.tomtom.com/search/2/search/"+ encodeURIComponent(this.query) +".json?key=ziNw7Yn7FMXsuIsY65fMoQmyy7qrHcM3")
-     .then((resp) => {
-        console.log(resp.data);;
-      });
-    },
 
     setFilterValue(filter, i) {
-      if (filter == "Camere da letto" && i > 0) {
+      if (filter == "Rooms" && i == "8+") {
+        this.roomFilter = "all";
+      } else if (filter == "Beds" && i == "8+") {
+        this.bedFilter = "all";
+      } else if (filter == "Bathrooms" && i == "8+") {
+        this.bathFilter = "all";}
+      if (filter == "Rooms" && i > 0) {
         this.roomFilter = i;
-      } else if (filter == "Letti" && i > 0) {
+      } else if (filter == "Beds" && i > 0) {
         this.bedFilter = i;
-      } else if (filter == "Bagni" && i > 0) {
+      } else if (filter == "Bathrooms" && i > 0) {
         this.bathFilter = i;
-      } else if (filter == "Camere da letto") {
+      } else if (filter == "Rooms") {
         this.roomFilter = "";
-      } else if (filter == "Letti") {
+      } else if (filter == "Beds") {
         this.bedFilter = "";
-      } else if (filter == "Bagni") {
+      } else if (filter == "Bathrooms") {
         this.bathFilter = "";
       }
+    },
+    classCheck(array){
+      console.log(array);
     },
     setTypology(id) {
       this.typology_id = id;
     },
     coordinateSet(e) {
       this.query = e.target.value;
-      this.tomtomfetchCoordinate()
     },
     clearParams() {
       (this.query = null),
@@ -299,84 +342,54 @@ export default {
         (this.typology_id = null),
         (this.services = []),
         (this.radius = null);
-      /* (this.latitude = null);
-        (this.longitude = null); */
     },
-    alertPopup(){
-      if(this.radius){
-        this.checkQuery=true
+    alertPopup() {
+      if (this.radius) {
+        this.checkQuery = true;
+      } else if (this.query) {
+        this.radiusCheck = true;
+      } else {
+        this.radiusCheck = true;
+        this.checkQuery = true;
       }
-      else if (this.query){
-        this.radiusCheck=true
-      }
-      else{
-        this.radiusCheck=true
-        this.checkQuery=true
-      }
-    }
+    },
   },
   props: {
     object: Function,
+    loadServices: Function,
   },
   created() {
     this.buttonActive = "active";
     this.fetchdata();
   },
 
-  watch:{
-    query(newValue){
-      if(newValue.length > 0){
-        this.checkQuery=false
+  watch: {
+    query(newValue) {
+      if (newValue.length > 0) {
+        this.checkQuery = false;
       }
     },
-    radius(newValue){
-      if(newValue != null){
-        this.radiusCheck=false
+    radius(newValue) {
+      if (newValue != null) {
+        this.radiusCheck = false;
       }
-    }
-
-  }
-
-  /* computed: {
-    axiosParams() {
-      // passare meglio i dati dell'array services
-      const params = new URLSearchParams();
-      if (this.bedFilter) {
-        params.append("beds", this.bedFilter);
-      }
-      if (this.bathFilter) {
-        params.append("baths", this.bathFilter);
-      }
-      if (this.typology_id) {
-        params.append("typology_id", this.typology_id);
-      }
-      if (this.roomFilter) {
-        params.append("rooms", this.roomFilter);
-      }
-      if (this.radius) {
-        params.append("radius", this.radius);
-      }
-      if (this.services) {
-        this.services.forEach((service) => {
-          params.append("services", service);
-        });
-      }
-      if (this.latitude) {
-        params.append("latitude", this.latitude);
-      }
-      if (this.longitude) {
-        params.append("longitude", this.longitude);
-      }
-      if (this.query) {
-        params.append("address", this.query);
-      }
-      else{
-        params.append("address", "Milano piazza leonardo");
-      }
-      
-
-      return params;
     },
-  }, */
+  },
 };
 </script>
+
+<style lang="scss" scoped>
+@import "../../sass/partials/variables";
+
+.typologyBtn {
+  padding: 20px !important;
+  background-color: #ffffff;
+  border: 1px solid $tertiaryColor;
+}
+
+.textLink {
+  background-color: unset;
+  border: unset;
+  text-decoration: underline;
+}
+</style>
