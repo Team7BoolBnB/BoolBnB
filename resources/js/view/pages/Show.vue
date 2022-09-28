@@ -258,10 +258,13 @@
                 </div>
             </div>
         </div>
-
+        <div>
+            <TheFooter></TheFooter>
+        </div>
         <!-- sezione footer statica con link fasulli -->
         <!-- <FooterShow></FooterShow> -->
     </div>
+    
 </template>
 
 

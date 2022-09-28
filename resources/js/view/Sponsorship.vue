@@ -2,6 +2,8 @@
     <div>
         <div class="container">
 
+            
+
             <div v-if="dataSubmit" >
 
                 <h5 class="mt-5 mb-4">Which accommodation you want to sponsor?</h5>
@@ -42,8 +44,8 @@
                   <span >Inserisci tutti i dati richiesti</span>
                 </div>
             </div>
-        
-            <div v-if="checkout" class="text-center">
+        <div v-if="checkout" class="text-center paymentContainer">
+            <div >
                 <h2>CHECKOUT:</h2>
                 <h4>Stai sponsorizzando: {{accommodationName}}</h4>
                 <h4>Nome Servizio: {{sponsorshipName}}</h4>
@@ -52,6 +54,8 @@
                 <h4>Prezzo: {{price}}</h4>
                 <router-link  :to="{ name: 'sponsorship.payment' , params : { date:date , sponsorship_id:sponsorship_id , accommodation_id:accommodation_id} } "><button  class="btn btn-primary">Acquista</button> </router-link>
             </div>
+        </div>
+           
             
             
         
@@ -127,3 +131,14 @@ export default {
 
 }
 </script>
+
+<style lang="scss" scoped>
+    
+.paymentContainer{
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+</style>
