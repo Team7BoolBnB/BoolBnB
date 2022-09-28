@@ -46,7 +46,6 @@ class AdvancedSearchController extends Controller
 
         ]);
     }
-    
     public function show($slug)
     {
         $raw = 'SELECT
@@ -80,6 +79,7 @@ class AdvancedSearchController extends Controller
         ]);
     }
 
+
    
 
     public function filter(Request $request)
@@ -89,7 +89,7 @@ class AdvancedSearchController extends Controller
 
         $coordinate= $this->coordinate($filters["address"]);
         
-        dd($filters);
+      
         $count=0;
         foreach ($filters as $value) {
 
@@ -194,6 +194,6 @@ $raw = 'SELECT *,
         
         
 
-        return response()->json($request);
+        return response()->json($accommodations);
     }
 }
