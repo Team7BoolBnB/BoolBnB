@@ -43,13 +43,15 @@
         return {
             accommodations: [],
             apiParams:null,
-            
+            user:null
         };
     },
     methods: {
         async fetchdata() {
             await axios.get("/api/accommodations").then((resp) => {
-                this.accommodations = resp.data;
+                this.accommodations = resp.data.accommodations;
+                this.user = resp.data.user;
+
             })
         },
         takeObject(data){

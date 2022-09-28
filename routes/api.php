@@ -17,6 +17,8 @@ Route::middleware("auth")->group(function () {
     Route::get("/accommodations/sponsorship","Api\HomeController@sponsorshipData");
     Route::get("/sponsorship","Api\PaymentController@generate");
     Route::post("/make/payment","Api\PaymentController@makePayment");
+    Route::post("/update/database","Api\PaymentController@update");
+
     });
 
 Route::get("/accommodations","Api\HomeController@index");
