@@ -13,7 +13,13 @@ class HomeController extends Controller
     public function index(){
         $accommodations = Accommodation::all();
 
-
+        if(Auth::user()){
+            $user=Auth::user();
+        }
+        else{
+            $user=null;
+        }
+        
         $sponsorized = [];
 
         for ($i=0; $i < count($accommodations); $i++) { 
@@ -26,7 +32,7 @@ class HomeController extends Controller
 
         
 
-        return response()->json($sponsorized);
+        return response()->json(["accommodations"=>$sponsorized,"user"=>$user]);
         
 
 
