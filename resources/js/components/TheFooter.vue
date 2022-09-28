@@ -1,5 +1,4 @@
 <template>
-
 <div>
   <div class="border">
       <nav class="fixed-bottom navbar navbar-expand-md navbar-light bg-white">
@@ -85,10 +84,7 @@
                             </div>
                         </div>
                     </div>
-
                 </div>
-
-
             </div>
           </div>
         </div>
@@ -183,7 +179,6 @@
 @import "../../sass/partials/variables";
 
 .border {
-
   border-top: 1px solid $tertiaryColor;
 }
 .font-linkfoot{
@@ -239,5 +234,4 @@
     }
 }
     
-
 </style>

@@ -1,7 +1,4 @@
 // General
-body{
-    background-color: white;
-}
 
 button {
     background-color: none;
@@ -17,7 +14,7 @@ button {
 
 // Navbar
 nav {
-    height: $navBarHeight;
+    height: 70px;
     font-family: 'Plus Jakarta Sans', sans-serif;
 
     .nav-link {

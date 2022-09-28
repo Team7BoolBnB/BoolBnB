@@ -1,5 +1,5 @@
 <template>
-  <div class="border">
+  <div class="sticky-top border">
     <header>
       <nav class="navbar navbar-expand-md navbar-light bg-white">
         <div class="container-fluid  small-device-nav">
