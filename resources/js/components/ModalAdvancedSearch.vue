@@ -29,7 +29,7 @@
           <div class="modal-body p-4">
             <!-- Where -->
             <div class="modal-container-section pt-2">
-              <h5>Where</h5>
+              <h4>Where</h4>
               <div class="form-floating mb-5">
                 <input
                   class="form-control"
@@ -47,7 +47,7 @@
 
             <!-- Range -->
             <div class="modal-container-section pb-4">
-              <h5>Range</h5>
+              <h4>Range</h4>
               <label for="customRange3" class="form-label">Km</label>
               <input
                 type="range"
@@ -78,7 +78,7 @@
             <!-- Typology -->
             <div class="modal-container-section pt-2 pb-4">
               <div class="mt-3 mb-3">
-                <h5>Typology</h5>
+                <h4>Typology</h4>
               </div>
               <div class="row">
                 <div
@@ -87,7 +87,7 @@
                   class="col"
                 >
                   <button
-                    class="btn btn btn btn-outline-dark"
+                    class=" btn btn-outline-dark"
                     v-on:click="setTypology(typology.id)"
                   >
                     <div class="d-flex justify-content-center">
@@ -103,33 +103,60 @@
 
             <!-- Rooms / Beds / Bathrooms -->
             <div class="modal-container-section py-2">
-              <div v-for="filter in filters" :key="filter.name" class="row">
-                <div class="py-3">
-                <!--   <h5 class="mb-3">{{ filter.name }}</h5> -->
-                  <div class="row flex-align-center">
-                    <div class="col-2">
-                      
-                    <div v-for="array in filter.value" :key="array.value" class="col">
-                      <button
-                        class="btn btn-outline-secondary rounded-pill rounded-5"
-                        :class="array.active ? 'active' : '' "
-                        v-on:click="setFilterValue(filter.name, array.value),classCheck(array)"
-                      >
-                        {{ array.value }}
-                      </button>
-                      
-                    </div>
-                  </div>
-                </div>
-              </div>
+              <div  class="row ">
+                <h4 class="py-4">Beds</h4>
+                <div v-for="value in filtersBeds" :key="value.value" class="col">
+                  <button
+                    class="btn btn btn-outline-dark rounded-pill rounded-5"
+                    :class="value.active ? 'active' : '' "
+                    v-on:click="setFilterValue(filters[0], value.value),classCheck(filters[0], value.value)"
+                  >
+                  <span v-if="value.value ==0">Qualsiasi</span>
+                  <span v-else-if="value.value ==8">8+</span>
+                  <span v-else-if="value.value !=0">{{ value.value }}</span>
+
+
+                  
+                  </button>
             </div>
             </div>
+            <div  class="row ">
+                <h4 class="py-4">Rooms</h4>
+                <div v-for="value in filterRooms" :key="value.value" class="col">
+                  <button
+                    class="btn btn btn-outline-dark rounded-pill rounded-5"
+                    :class="value.active ? 'active' : '' "
+                    v-on:click="setFilterValue(filters[1], value.value),classCheck(filters[1], value.value)"
+                  >
+                  <span v-if="value.value ==0">Qualsiasi</span>
+                  <span v-else-if="value.value ==8">8+</span>
+                  <span v-else-if="value.value !=0">{{ value.value }}</span>
+
+                  </button>
+            </div>
+            </div>
+            <div  class="row ">
+                <h4 class="py-4">Bathrooms</h4>
+                <div v-for="value in filtersBathrooms" :key="value.value" class="col">
+                  <button
+                    class="btn btn btn-outline-dark rounded-pill rounded-5"
+                    :class="value.active ? 'active' : '' "
+                    v-on:click="setFilterValue(filters[2], value.value),classCheck(filters[2], value.value)"
+                  >
+                  <span v-if="value.value ==0">Qualsiasi</span>
+                  <span v-else-if="value.value ==8">8+</span>
+                  <span v-else-if="value.value !=0">{{ value.value }}</span>
+
+                  </button>
+            </div>
+            </div>
+          </div>
 
             <hr />
 
             <div class="modal-container-section py-2">
               <div class="mt-3 mb-3">
-                <h5>Services</h5>
+                <h4>Services</h4>
               </div>
               <div class="row row-cols-2">
                 <div
@@ -229,18 +256,14 @@ export default {
     return {
       data: [],
       accommodations: null,
-     
+      filters:["Beds","Rooms","Bathrooms"],
       buttonFilterNumber: 8,
       buttonActive: "",
       filterActiceClass: "",
       checkQuery: false,
       radiusCheck: false,
-      filters: [
-      [
-        {
-          name:"Rooms",
-          value:[
-            { value: "Qualsiasi", active: true },
+      filterRooms:[
+            { value: "0", active: true },
             { value: "1", active: false },
             { value: "2", active: false },
             { value: "3", active: false },
@@ -248,15 +271,10 @@ export default {
             { value: "5", active: false },
             { value: "6", active: false },
             { value: "7", active: false },
-            { value: "8+", active: false },
-          ]
-        }
-      ]/* ,
-      [
-        {
-          name:"Beds",
-          value:[
-            { value: "Qualsiasi", active: true },
+            { value: "8", active: false },
+          ],
+      filtersBeds:[
+            { value: "0", active: true },
             { value: "1", active: false },
             { value: "2", active: false },
             { value: "3", active: false },
@@ -264,15 +282,10 @@ export default {
             { value: "5", active: false },
             { value: "6", active: false },
             { value: "7", active: false },
-            { value: "8+", active: false },
-          ]
-        }
-      ],
-      [
-        {
-          name:"Bathrooms",
-          value:[
-            { value: "Qualsiasi", active: true },
+            { value: "8", active: false },
+          ],
+      filtersBathrooms:[
+            { value: "0", active: true },
             { value: "1", active: false },
             { value: "2", active: false },
             { value: "3", active: false },
@@ -280,13 +293,9 @@ export default {
             { value: "5", active: false },
             { value: "6", active: false },
             { value: "7", active: false },
-            { value: "8+", active: false },
-          ]
-        }
-      ], */
-       
-      ],
-
+            { value: "8", active: false },
+          ],
+     
       //Chiamata API data
       query: null,
       bedFilter: null,
@@ -325,8 +334,33 @@ export default {
         this.bathFilter = "";
       }
     },
-    classCheck(array){
-      console.log(array);
+    classCheck(name,value){
+
+   if(name=="Bathrooms"){
+        name=this.filtersBathrooms
+      }
+      else if(name=="Beds"){
+        name=this.filtersBeds
+      }
+      else if(name=="Rooms"){
+        name=this.filterRooms
+      }
+      else{
+        alert("Si ok ed io sono scemo")
+      }
+      
+      for (let index = 0; index < name.length; index++) {
+        if(value==index){
+          name[index].active=true
+        }
+        else{
+          name[index].active=false
+        }
+        
+      }
+ 
+
+
     },
     setTypology(id) {
       this.typology_id = id;
