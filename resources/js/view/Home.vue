@@ -1,6 +1,7 @@
 <template>
 
   <div>
+    <NavBar></NavBar>
     <modal-advanced-search :object="takeObject" ></modal-advanced-search>
       <!-- sezione con carosello di immagini -->
       <!-- <div class="debug_carosel d-none">
@@ -17,9 +18,9 @@
   
       <!-- sezione main con card => chiamata api -->
       <div class="container py-5">
-          <div class="row">
+          <div class="row row-cols-lg-4 row-cols-md-2 row-cols-sm-1">
             
-              <div class="col-3" v-for="accommodation in accommodations" :key="accommodation.id">
+              <div class="col" v-for="accommodation in accommodations" :key="accommodation.id">
 
                 <router-link :to="{ name: 'accommodations.show' , params : { slug:accommodation.slug} }">  <CardItem :accommodation="accommodation"></CardItem></router-link>
                 
