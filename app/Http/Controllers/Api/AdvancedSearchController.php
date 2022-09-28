@@ -47,28 +47,31 @@ class AdvancedSearchController extends Controller
         ]);
     }
     public function show($slug)
-    {
-        $raw = 'SELECT
-        accommodations.*,
-        typologies.*,
-        services.*,
-        users.firstName, users.lastName
+    {   
+           
 
-    FROM
-        users
-        JOIN accommodations ON accommodations.user_id = users.id
-    JOIN typologies ON typologies.id = accommodations.typology_id
-    JOIN service_accommodation ON service_accommodation.accommodation_id = accommodations.id
-    JOIN services ON services.id = service_accommodation.service_id
-    WHERE accommodations.slug =  "'.$slug.'";';
+            $raw='SELECT
+            `accommodations`.*,
+            `typologies`.*,
+            `services`.*
+           
+        FROM
+            `accommodations`
+        JOIN `typologies` ON `typologies`.`id` = `accommodations`.`typology_id`
+        JOIN `service_accommodation` ON `service_accommodation`.`accommodation_id` = `accommodations`.`id`
+        JOIN `services` ON `services`.`id` = `service_accommodation`.`service_id`
+        WHERE `accommodations`.`slug` = "accommodation-example";';
 
 
-        $accommodation = DB::select($raw);
-
-       
+        $accommodation=DB::select($raw);
+        
+           $typologies = Typology::findOrFail($accommodation[0]->typology_id);
+        
         return response()->json([
+            "typology" => $typologies,
             "accommodation" => $accommodation
         ]);
+       
     }
 
    
@@ -185,6 +188,6 @@ $raw = 'SELECT *,
         
         
 
-        return response()->json($accommodations);
+        return response()->json($request);
     }
 }

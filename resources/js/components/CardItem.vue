@@ -1,4 +1,5 @@
 <template>
+
     <div class="body-height">
         <div class="container">
                 <div class="col">
@@ -12,6 +13,7 @@
                         </div>
                     </a>
                 </div>
+
         </div>
     </div>
 </template>
