@@ -52,17 +52,21 @@ class AdvancedSearchController extends Controller
         $raw = 'SELECT
         accommodations.*,
         typologies.*,
-        services.*
+        services.*,
+        users.firstName, users.lastName
 
-        FROM
-            `accommodations`
-        JOIN `typologies` ON `typologies`.`id` = `accommodations`.`typology_id`
-        JOIN `service_accommodation` ON `service_accommodation`.`accommodation_id` = `accommodations`.`id`
-        JOIN `services` ON `services`.`id` = `service_accommodation`.`service_id`
-        WHERE `accommodations`.`slug` = "'.$slug.'';
+    FROM
+        users
+        JOIN accommodations ON accommodations.user_id = users.id
+    JOIN typologies ON typologies.id = accommodations.typology_id
+    JOIN service_accommodation ON service_accommodation.accommodation_id = accommodations.id
+    JOIN services ON services.id = service_accommodation.service_id
+    WHERE accommodations.slug =  "'.$slug.'";';
+
 
         $accommodation = DB::select($raw);
 
+        $typologies = Typology::findOrFail($accommodation[0]->typology_id);
         /* $typologies = [];
 
 
@@ -71,6 +75,7 @@ class AdvancedSearchController extends Controller
         } */
 
         return response()->json([
+            "typology" => $typologies,
             "accommodation" => $accommodation
         ]);
     }
