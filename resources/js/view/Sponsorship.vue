@@ -35,13 +35,16 @@
                 </div>
                 
                 <div class="d-flex justify-content-center">
-                    <button  v-if="date && sponsorship_id && accommodation_id" class="btn btn-primary" @click="gocheckout()">Acquista</button> 
+                    <button  v-if="date && sponsorship_id && accommodation_id &&checkDate" class="btn btn-primary" @click="gocheckout()">Acquista</button> 
 
                      <button v-else class="btn btn-primary" v-on:click="change()" >Acquista</button>
 
                 </div>
-                <div v-if="alert" class="alert alert-danger text-center w-50 mx-auto mt-3" role="alert">
+                <div v-if="alert " class="alert alert-danger text-center w-50 mx-auto mt-3" role="alert">
                   <span >Inserisci tutti i dati richiesti</span>
+                </div>
+                <div v-if="date && sponsorship_id && accommodation_id && !checkDate" class="alert alert-danger text-center w-50 mx-auto mt-3" role="alert">
+                  <span >Inserisci una data valida da cui far partire la sponsorship</span>
                 </div>
             </div>
         <div v-if="checkout" class="text-center paymentContainer">
@@ -81,7 +84,9 @@ export default {
             date:null,
             alert:false,
             checkout:false,
-            dataSubmit:true
+            dataSubmit:true,
+            nowDate:null,
+            checkDate:null
         }
     },
     methods:{
@@ -92,7 +97,10 @@ export default {
             })
         },
         change(){
-            this.alert=true
+            if(!this.dataCheck || !this.accommodation_id || !this.sponsorship_id){
+                 this.alert=true
+            }
+           
         },
         gocheckout(){
             this.dataSubmit=false;
@@ -102,7 +110,12 @@ export default {
     },
 
     mounted() {
-        this.fetchdata()
+        this.fetchdata();
+            let today = new Date();
+            let date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+            let time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+            let dateTime = date+' '+time;
+        this.nowDate=dateTime;
     },
     
     watch:{
@@ -115,6 +128,9 @@ export default {
                     this.sponsorshipName=value.name;
                 }
           });
+          if(newValue){
+            this.alert=false
+          }
 
         },
         accommodation_id(newValue){
@@ -125,7 +141,21 @@ export default {
                     
                 }
           });
+          if(newValue){
+            this.alert=false
+          }
 
+        },
+        date(newValue){
+            const date1 = new Date(this.nowDate);
+            const date2 =new Date(this.date);
+            const diffTime = Math.floor(date2 - date1);
+            const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)); 
+           
+            if(diffDays>0){
+                this.checkDate=true
+                this.alert=false
+            }
         }
     }
 
