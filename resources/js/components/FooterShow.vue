@@ -3,7 +3,7 @@
         <div class="container">
             <div class="row py-5">
                 <div class="col">
-                    <h6 class="mb-4 primaryColorText">Assistance</h6>
+                    <h6 class="mb-4">Assistance</h6>
                     <ul class="list-unstyled">
                         <li class="mb-2" v-for="link1 in footerLinksAssistance" :key="link1.name">
                             <a :href="link1.href">{{link1.name}}</a>
@@ -11,7 +11,7 @@
                     </ul>
                 </div>
                 <div class="col">
-                    <h6 class="mb-4 primaryColorText">Host</h6>
+                    <h6 class="mb-4">Host</h6>
                     <ul class="list-unstyled">
                         <li class="mb-2" v-for="link2 in footerLinksHost" :key="link2.name">
                             <a :href="link2.href">{{link2.name}}</a>
@@ -19,7 +19,7 @@
                     </ul>
                 </div>
                 <div class="col">
-                    <h6 class="mb-4 primaryColorText">Boolbnb</h6>
+                    <h6 class="mb-4">Boolbnb</h6>
                     <ul class="list-unstyled">
                         <li class="mb-2" v-for="link3 in footerLinksBoolbnb" :key="link3.name">
                             <a :href="link3.href">{{link3.name}}</a>

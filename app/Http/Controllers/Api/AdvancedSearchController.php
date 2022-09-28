@@ -42,15 +42,16 @@ class AdvancedSearchController extends Controller
 
         $accommodation = DB::select($raw);
 
-        /* $services = [];
+        $typologies = Typology::findOrFail($accommodation[0]->typology_id);
+        /* $typologies = [];
 
 
-        foreach ($accommodation as $service) {
-            $services[] = ["name" => $service->name, "icon" => $service->icon];
+        foreach ($accommodation as $typology) {
+            $typologies[] = ["name" => $typology->name];
         } */
 
         return response()->json([
-            
+            "typology" => $typologies,
             "accommodation" => $accommodation
         ]);
     }

@@ -5,11 +5,13 @@ namespace App\Http\Controllers\Admin;
 use App\Accommodation;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\AccommodationRequest;
+use App\Mail\MessageMail;
 use App\Service;
 use App\Typology;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
@@ -141,6 +143,9 @@ class AccommodationController extends Controller
         if (key_exists("services", $data)) {
             $accommodation->services()->attach($data["services"]);
         }
+
+        Mail::to($accommodation->user->email)->send(new MessageMail($accommodation));
+
 
         return  redirect()->route("admin.accommodation.show", $accommodation->slug);
     }

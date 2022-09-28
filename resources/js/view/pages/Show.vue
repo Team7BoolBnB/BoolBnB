@@ -1,6 +1,11 @@
 <template>
     <div class="position-relative">
-        <!-- <NavBarShow></NavBarShow> -->
+        <div>
+            <NavBar></NavBar>
+        </div>
+        <div id="navScrollShow" class="" v-on:scroll="backgroundNavBar()" :class="{ 'scroll': !view.scroll}">
+            <NavBarShow></NavBarShow>
+        </div>
         <div class="container py-5">
             <div>
                 <h2>{{accommodation[0].title}}</h2>
@@ -12,8 +17,6 @@
                                 d="M5.354 5.119 7.538.792A.516.516 0 0 1 8 .5c.183 0 .366.097.465.292l2.184 4.327 4.898.696A.537.537 0 0 1 16 6.32a.548.548 0 0 1-.17.445l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256a.52.52 0 0 1-.146.05c-.342.06-.668-.254-.6-.642l.83-4.73L.173 6.765a.55.55 0 0 1-.172-.403.58.58 0 0 1 .085-.302.513.513 0 0 1 .37-.245l4.898-.696zM8 12.027a.5.5 0 0 1 .232.056l3.686 1.894-.694-3.957a.565.565 0 0 1 .162-.505l2.907-2.77-4.052-.576a.525.525 0 0 1-.393-.288L8.001 2.223 8 2.226v9.8z" />
                         </svg>
                     </div>
-                    <h5 class="mb-0">views</h5>
-                    <h5 class="mb-0">-</h5>
                     <h5 class="mb-0">{{accommodation[0].address}}</h5>
                 </div>
             </div>
@@ -40,7 +43,8 @@
                 <!-- col di sinistra con info accommodation in scroll -->
                 <div class="col-8">
                     <div>
-                        <h5>Accommodation type: {{accommodation[0].typology}}</h5>
+                        {{typology}}
+                        <h5>Accommodation type: </h5>
                         <h5>Host: {{accommodation[0].firstName}} {{accommodation[0].lastName}}</h5>
 
                         <ol class="ps-0 mb-5 d-flex list-unstyled ">
@@ -81,7 +85,7 @@
                         </p>
                     </div> -->
                         <div class="py-5 fw-light">
-                            <h4 class="mb-3 primaryColorText fst-italic">Treat yourself with a nice vacation</h4>
+                            <h4 class="mb-3 fst-italic">Treat yourself with a nice vacation</h4>
                             <p>
                                 Treat yourself to a journey of relaxation, find your psychophysical balance and recharge
                                 your energy in the most evocative destinations in the world.
@@ -109,7 +113,7 @@
                         <div class="py-4" id="sectionServices">
                             <div>
                                 <h4 class="mb-3">What will you find</h4>
-                                <ul class="list-unstyled">
+                                <ul class="list-unstyled row row-cols-2">
                                     <li class="py-2 fw-light" v-for="serv in accommodation" :key="serv.name">
                                         <i class="me-3" :class="serv.icon"></i>
                                         {{serv.name}}
@@ -121,9 +125,9 @@
 
                     <hr>
 
-                    <div class="py-5 row row-cols-2 g-3">
+                    <div class="py-5 row row-cols-2 g-5">
                         <div class="col">
-                            <h6 class="primaryColorText">Garanzia di conformità</h6>
+                            <h6>Garanzia di conformità</h6>
                             <p>Se in qualsiasi momento durante il soggiorno ti rendi conto che l'alloggio non
                                 corrisponde alla descrizione presente nell'annuncio, ad esempio se il frigorifero smette
                                 di funzionare e l'host non può ripararlo facilmente, o se l'alloggio dispone di un
@@ -133,21 +137,21 @@
                         </div>
 
                         <div class="col">
-                            <h6 class="primaryColorText">Garanzia di prenotazione</h6>
+                            <h6>Garanzia di prenotazione</h6>
                             <p>Nell'improbabile eventualità che un host debba cancellare la tua prenotazione entro 30
                                 giorni dal check-in, ti troveremo un alloggio simile o migliore, oppure ti rimborseremo.
                             </p>
                         </div>
 
                         <div class="col">
-                            <h6 class="primaryColorText">Garanzia di check-in</h6>
+                            <h6 >Garanzia di check-in</h6>
                             <p>Se non riesci a effettuare il check-in presso l'alloggio e l'host non risolve il
                                 problema, ti troveremo una sistemazione simile o migliore per la durata del tuo
                                 soggiorno originario, oppure ti rimborseremo.</p>
                         </div>
 
                         <div class="col">
-                            <h6 class="primaryColorText">Supporto sicurezza H24</h6>
+                            <h6 >Supporto sicurezza H24</h6>
                             <p>Se non ti senti al sicuro, avrai accesso prioritario a operatori appositamente formati
                                 sul tema della sicurezza, sia di giorno che di notte.</p>
                         </div>
@@ -166,7 +170,7 @@
                 <hr>
 
                 <!-- sezione con barre di recensione -->
-                <div class="row py-5 gap-5">
+                <!-- <div class="row py-5 gap-5">
                     <div class="col">
                         <div class="d-flex justify-content-between align-items-center w-100 py-2 me-3"
                             v-for="rec1 in accViews1" :key="rec1.name">
@@ -191,9 +195,9 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> -->
 
-                <hr>
+<!--                 <hr> -->
 
                 <div class="py-5" id="sectionInfo">
                     <h4 class="mb-5">Things to know before booking</h4>
@@ -268,12 +272,14 @@ import Axios from 'axios';
 import FooterShow from '../../components/FooterShow.vue';
 import TheForm from '../../components/TheForm.vue';
 import NavBarShow from '../../components/NavBarShow.vue';
+import NavBar from '../../components/NavBar.vue';
 
 export default {
-    components: { FooterShow, TheForm, NavBarShow },
+    components: { FooterShow, TheForm, NavBarShow, NavBar },
     data() {
         return {
             accommodation: {},
+            typology: null,
             accViews1: [
                 { name: "Pulizia" },
                 { name: "Comunicazione" },
@@ -284,28 +290,25 @@ export default {
                 { name: "Posizione" },
                 { name: "QUalità/prezzo" },
             ],
-            /* view: {
+            view: {
                 scroll: true,
-            } */
+            }
         };
     },
 
-    /* beforeMount() {
-    window.addEventListener('scroll', this.backgroundNavBar)
-    }, */
-
     methods: {
-        /* backgroundNavBar(element) {
-            if(window.scrollY) {
+        backgroundNavBar(element, element2) {
+            if(window.scrollY > 70) {
                 this.view.scroll = false;
-                element = document.getElementById("navScroll");
-                element.classList.add("d-none");
+
+                element2 = document.getElementById("navScrollShow");
+                element2.classList.add("d-block");
             } else {
                 this.view.scroll = true;
-                element = document.getElementById("navScroll");
-                element.classList.remove("d-none");
+                element2 = document.getElementById("navScrollShow");
+                element2.classList.add("d-none");
             }
-        }, */
+        },
         fetch() {
             Axios.get("/api/accommodations/" + this.$route.params.slug).then((resp) => {
                 this.accommodation = resp.data.accommodation;
@@ -316,6 +319,11 @@ export default {
             return roundedNum = num.toFixed(1);
         }
     },
+
+    beforeMount() {
+    window.addEventListener('scroll', this.backgroundNavBar)
+    },
+
     mounted() {
         this.fetch();
     },
@@ -325,16 +333,15 @@ export default {
 <style lang="scss" scoped>
 @import "../../../sass/partials/variables";
 
-/* .scroll {
-    padding: 1rem;
-    position: absolute;
-    top: -70px;
+.scroll {
+    position: fixed;
+    top: 0px;
     right: 0;
     left: 0;
     z-index: 9999;
     scroll-behavior: smooth;
-    display: block;
-} */
+    visibility: visible;
+}
 
 .img_debug {
     border-radius: 1rem;

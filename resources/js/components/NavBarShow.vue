@@ -1,6 +1,6 @@
 <template>
     <div>
-        <header id="navScroll" class="border sticky-top" v-on:scroll="backgroundNavBar()" :class="{ 'scroll': !view.scroll}">
+        <header class="border">
             <nav class="navbar navbar-expand-md navbar-light bg-white">
                 <div class="container d-flex justify-content-between">
                     <!-- logo -->
@@ -44,7 +44,7 @@
 <script >
 
 export default {
-    data(){
+    /* data(){
         return{
             view: {
                 scroll: true,
@@ -68,13 +68,13 @@ export default {
                 element.classList.remove("d-none");
             }
         },
-    }
+    } */
 }
 </script>
 
 <style lang="scss" scoped>
 
-.scroll {
+/* .scroll {
     padding: 1rem;
     position: absolute;
     top: -70px;
@@ -83,5 +83,5 @@ export default {
     z-index: 9999;
     scroll-behavior: smooth;
     display: block;
-}
+} */
 </style>
