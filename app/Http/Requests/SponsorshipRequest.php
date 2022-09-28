@@ -27,7 +27,7 @@ class SponsorshipRequest extends FormRequest
 
             "sponsorship_id" => "required",
             "accommodation_id" => "required",
-            "startTime" => "required",
+            "startTime" => "required|date",
 
 
         ];

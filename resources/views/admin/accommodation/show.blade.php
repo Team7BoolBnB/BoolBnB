@@ -4,7 +4,15 @@
 
     <div class="pageHeader d-flex align-items-center">
         <div class="container text-white">
-            <h2>Accommodation "{{ $accommodation->title }}"</h2>
+            <div class="row">
+                <div class="col overflow-auto">
+                    <div>
+                        <h2>Accommodation</h2>
+                        <p class="font-sm">"{{ $accommodation->title }}"</p>
+                    </div>
+                    
+                </div>
+            </div>
         </div>
     </div>
 
@@ -12,7 +20,7 @@
 
         <img src="{{ asset('storage/' . $accommodation->image) }}" alt="{{ $accommodation->title }}" width="100%">
 
-        <h5 class="pt-4">{{ $accommodation->title }}</h5>
+        <p class="font-sm pt-4">{{ $accommodation->title }}</p>
 
         <p class="py-4"><strong>Description:</strong><br>{{ $accommodation->description }}</p>
 
