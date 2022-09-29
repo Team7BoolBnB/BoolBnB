@@ -17,11 +17,24 @@
                     <h5 class="mb-0 subtitle-font">{{accommodation[0].address}}</h5>
                 </div>
             </div>
-                <div class="col-8">
-                    <!-- da sistemare path immagini -->
-                    <div class="py-3">
-                        <img class="img-fluid" src="https://www.myhocasa.it/images/slide/0001new.jpg"
-                            :alt="'Accommodation of ' + accommodation[0].title">
+                <div id="carouselExampleFade1" class="col-8 novisible carousel slide carousel-fade" data-bs-ride="carousel">
+                    <div class="carousel-inner mt-2">
+                        <div class="carousel-item active d-flex justify-content-center">
+                            <img class="img-fluid" :src="'/storage/' + accommodation[0].image" alt="">
+                        </div>
+                        <div class="carousel-item d-flex justify-content-center" v-for="element in listaTestimonial" :key="element.name">
+                            <div>
+                                <img class="img-fluid" :src="element.img" alt="">
+                            </div>
+                        </div>
+                        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade1" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon btn-visible" aria-hidden="true"></span>
+                            <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleFade1" data-bs-slide="next">
+                            <span class="carousel-control-next-icon btn-visible" aria-hidden="true"></span>
+                            <span class="visually-hidden">Next</span>
+                        </button>
                     </div>
                 </div>
         </div>
@@ -42,17 +55,34 @@
                 </div>
             </div>
             <div class="row container-img mb-5">
-                <div class="col-8 visible">
-                    <!-- da sistemare path immagini -->
-                    <div class="py-3">
-                        <img class="img-fluid img_debug" src="https://www.myhocasa.it/images/slide/0001new.jpg"
-                            :alt="'Accommodation of ' + accommodation[0].title">
+                <div id="carouselExampleFade" class="col-8 visible carousel slide carousel-fade" data-bs-ride="carousel">
+                    <div class="carousel-inner mt-2">
+                        <div class="carousel-item active d-flex justify-content-center">
+                            <img class="img-fluid img_debug" :src="'/storage/' + accommodation[0].image" alt="">
+                        </div>
+                        <div class="carousel-item d-flex justify-content-center" v-for="element in listaTestimonial" :key="element.name">
+                            <div>
+                                <img class="img-fluid img_debug" :src="element.img" alt="">
+                            </div>
+                        </div>
+                        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="prev">
+                            <div class="btn btn-dark opacity-75 rounded-circle classe-btn-carousel">
+                                <span class="carousel-control-prev-icon primaryBtn" aria-hidden="true"></span>
+                            </div>
+                            <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="next">
+                            <div class="btn btn-dark opacity-75 rounded-circle classe-btn-carousel">
+                                <span class="carousel-control-next-icon primaryBtn" aria-hidden="true"></span>
+                            </div>
+                            <span class="visually-hidden">Next</span>
+                        </button>
                     </div>
                 </div>
                 <div class="col-4">
                     <div class="py-3">
                         <p class="m-0 text-uppercase primaryColorText">mappa tom tom da sistemare</p>
-                        <img class="w-100 img_debug"
+                        <img class="w-100 img_debug img-smollest-display"
                             src="https://www.google.com/maps/d/thumbnail?mid=1R-z0nvlZTWYN9LH3bxAtMhZScxo&hl=it"
                             :alt="'Accommodation of ' + accommodation[0].title">
                     </div>
@@ -85,7 +115,7 @@
                         <hr>
 
                         <!-- descrizione accommodation -->
-                        <p class="py-5" v-html="accommodation[0].description"></p>
+                        <p class="py-5 text-break" v-html="accommodation[0].description"></p>
 
                         <hr>
 
@@ -321,9 +351,7 @@
                 </div>
             </div>
         </div>
-
-        <!-- sezione footer statica con link fasulli -->
-        <!-- <FooterShow></FooterShow> -->
+    </div>
     </div>
 </template>
 
@@ -336,12 +364,14 @@ export default {
     components: {  NavBar },
     data() {
         return {
+            endAlert: true,
             content:"",
             name:"",
             email:"",
             messageSended:false,
             messageDeny:false,
             check: false,
+
             accommodation: {},
             user:null,
             typology: null,
@@ -358,7 +388,40 @@ export default {
             view: {
                 scroll: true,
             },
-            endAlert: true
+
+            listaTestimonial: [
+                {
+                    title: "High level of efficiency and scientific teching methods",
+                    paragraph: "I am free to learn at my own pace, follow my own schedule and choose the subject I want to learn from the syllabus. Great study portal for people like me.",
+                    name: "MINA HOLLACE",
+                    job: "Freelancer",
+                    img: "https://www.mesaimmobiliare.it/images/gallery/C%202324.jpeg"
+                },
+                {
+                    title: "Professional team of specialists and appasionate mentors at reach",
+                    paragraph: "I need get a certification for English proficiency ad MaxCoach is my best choise. Their tutors are smart and professional when dealing with students.",
+                    name: "MADLEY PONDOR",
+                    job: "IT Specialists",
+                    img: "https://www.mesaimmobiliare.it/images/gallery/BAGNO%20NEW.jpeg"
+                },
+                {
+                    title: "Nice Community, and constant help for all client",
+                    paragraph: "I need get a certification for English proficiency ad MaxCoach is my best choise. Their tutors are smart and professional when dealing with students.",
+                    name: "ARTUR PORTUA",
+                    job: "Social Media Manager",
+                    img: "https://www.mesaimmobiliare.it/images/gallery/BAGNO%201.jpeg"
+                },
+                {
+                    title: "Beatiful ambience, and friendly custumer care",
+                    paragraph: "I need get a certification for English proficiency ad MaxCoach is my best choise. Their tutors are smart and professional when dealing with students.",
+                    name: "NATASHA MILIKOVA",
+                    job: "Data Analyst",
+                    img: "https://www.mesaimmobiliare.it/images/gallery/BAGNO.jpeg"
+                },
+            ]
+
+            
+
         };
     },
 
@@ -474,6 +537,9 @@ export default {
 
 .img_debug {
     border-radius: 1rem;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
 .primaryColorText {
@@ -540,6 +606,11 @@ i {
             border-radius: 0 0 20px 20px;
         }
     }
+    .img-smollest-display{
+        height: 15rem;
+        overflow: hidden;
+        border-radius: 20px;
+    }
 }
 
 @media only screen and (max-width: 577px){
@@ -560,5 +631,57 @@ i {
         display: flex;
         flex-direction: column;
     }
+}
+
+.carousel-inner {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    max-height: 30rem;
+    border-radius: 34px;
+}
+
+.classe-btn-carousel{
+    display: flex;
+    padding: 0.7rem;
+}
+
+@media only screen and (max-width: 1400px) {
+    .carousel-inner{
+        max-height: 24rem;
+    }
+}
+@media only screen and (max-width: 1200px) {
+    .carousel-inner{
+        max-height: 21rem;
+    }
+}
+@media only screen and (max-width: 767px) {
+    .carousel-inner{
+        max-height: 18rem;
+    }
+    .btn-visible{
+        display: none;
+    }
+}
+@media only screen and (max-width: 600px) {
+    .carousel-inner{
+        max-height: 18rem;
+        border-radius: 0;
+    }
+    .btn-visible{
+        display: none;
+    }
+}
+@media only screen and (max-width: 575px) {
+    .carousel-inner{
+        max-height: 15rem;
+    }
+}
+@media only screen and (max-width: 405px) {
+    .carousel-inner{
+        max-height: 11rem;
+    }
+
 }
 </style>
