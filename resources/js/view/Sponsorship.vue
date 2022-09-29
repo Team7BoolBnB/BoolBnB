@@ -2,6 +2,8 @@
     <div>
         <div class="container">
 
+            
+
             <div v-if="dataSubmit" >
 
                 <h5 class="mt-5 mb-4">Which accommodation you want to sponsor?</h5>
@@ -33,25 +35,35 @@
                 </div>
                 
                 <div class="d-flex justify-content-center">
-                    <button  v-if="date && sponsorship_id && accommodation_id" class="btn btn-primary" @click="gocheckout()">Acquista</button> 
+                    <button  v-if="date && sponsorship_id && accommodation_id &&checkDate" class="btn btn-primary" @click="gocheckout()">Acquista</button> 
 
                      <button v-else class="btn btn-primary" v-on:click="change()" >Acquista</button>
 
                 </div>
-                <div v-if="alert" class="alert alert-danger text-center w-50 mx-auto mt-3" role="alert">
+                <div v-if="alert " class="alert alert-danger text-center w-50 mx-auto mt-3" role="alert">
                   <span >Inserisci tutti i dati richiesti</span>
                 </div>
+                <div v-if="date && sponsorship_id && accommodation_id && !checkDate" class="alert alert-danger text-center w-50 mx-auto mt-3" role="alert">
+                  <span >Inserisci una data valida da cui far partire la sponsorship</span>
+                </div>
             </div>
-        
-            <div v-if="checkout" class="text-center">
-                <h2>CHECKOUT:</h2>
-                <h4>Stai sponsorizzando: {{accommodationName}}</h4>
-                <h4>Nome Servizio: {{sponsorshipName}}</h4>
-                <h4>Data di Inizio: {{date}}</h4>
-                <h4>Durata sponsorizzazione: {{time}} h</h4>
-                <h4>Prezzo: {{price}}</h4>
-                <router-link  :to="{ name: 'sponsorship.payment' , params : { date:date , sponsorship_id:sponsorship_id , accommodation_id:accommodation_id} } "><button  class="btn btn-primary">Acquista</button> </router-link>
+            <div v-if="checkout" class="container  d-flex justify-content-center align-items-center flex-column py-5">
+                <div class="cardCheckout gradient-border">
+                    <h2 class="py-4 text-center mb-3">CHECKOUT</h2>
+                    <h4 class="mb-3">Stai sponsorizzando: <span class="fst-light fst-italic">{{accommodationName}} </span></h4>
+                    <h4 class="mb-3">Nome Servizio: <span class="fst-light fst-italic">{{sponsorshipName}}</span> </h4>
+                    <h4 class="mb-3">Data di Inizio: <span class="fst-light fst-italic"> {{date}}</span></h4>
+                    <h4 class="mb-3">Durata sponsorizzazione: <span class="fst-light fst-italic">{{time}} h</span></h4>
+                    <h4 class="mb-3">Prezzo: <span class="fst-light fst-italic"> {{price}} €</span></h4>
+                    <div class="d-flex justify-content-between py-4">
+                        <a class="basicBtn bigBtn secondaryBtn" href="/admin/sponsorship/create/buy">Indietro</a>
+                        <router-link  :to="{ name: 'sponsorship.payment' , params : { date:date , sponsorship_id:sponsorship_id , accommodation_id:accommodation_id} } ">
+                            <button  class="basicBtn bigBtn primaryBtn">Acquista</button> 
+                        </router-link>
+                    </div>
+                </div>
             </div>
+           
             
             
         
@@ -77,7 +89,9 @@ export default {
             date:null,
             alert:false,
             checkout:false,
-            dataSubmit:true
+            dataSubmit:true,
+            nowDate:null,
+            checkDate:null
         }
     },
     methods:{
@@ -88,7 +102,10 @@ export default {
             })
         },
         change(){
-            this.alert=true
+            if(!this.dataCheck || !this.accommodation_id || !this.sponsorship_id){
+                 this.alert=true
+            }
+           
         },
         gocheckout(){
             this.dataSubmit=false;
@@ -98,7 +115,12 @@ export default {
     },
 
     mounted() {
-        this.fetchdata()
+        this.fetchdata();
+            let today = new Date();
+            let date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+            let time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+            let dateTime = date+' '+time;
+        this.nowDate=dateTime;
     },
     
     watch:{
@@ -111,6 +133,9 @@ export default {
                     this.sponsorshipName=value.name;
                 }
           });
+          if(newValue){
+            this.alert=false
+          }
 
         },
         accommodation_id(newValue){
@@ -121,9 +146,74 @@ export default {
                     
                 }
           });
+          if(newValue){
+            this.alert=false
+          }
 
+        },
+        date(newValue){
+            const date1 = new Date(this.nowDate);
+            const date2 =new Date(this.date);
+            const diffTime = Math.floor(date2 - date1);
+            const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)); 
+           
+            if(diffDays>0){
+                this.checkDate=true
+                this.alert=false
+            }
         }
     }
 
 }
 </script>
+
+<style lang="scss" scoped>
+    @import "../../sass/partials/variables";
+
+:root{
+    --borderWidth: 7px;
+    --borderRadius: 2rem;
+}
+.paymentContainer{
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.cardCheckout{
+    padding: 2rem 6rem;
+    background-color: white;
+}
+
+.gradient-border {
+    --borderWidth: .5rem;
+    position: relative;
+    border-radius: var(--borderWidth);
+
+    &:after{
+        content: '';
+    position: absolute;
+    top: calc(-1 * var(--borderWidth));
+    left: calc(-1 * var(--borderWidth));
+    height: calc(100% + var(--borderWidth) * 2);
+    width: calc(100% + var(--borderWidth) * 2);
+    background: linear-gradient(60deg, #f79533, #f37055, #ef4e7b, #a166ab, #5073b8, #1098ad, #07b39b, #6fba82);
+    border-radius: calc(2 * var(--borderWidth));
+    z-index: -1;
+    animation: animatedgradient 4s ease alternate infinite;
+    background-size: 300% 300%;
+    }
+
+    @keyframes animatedgradient {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+}
+</style>

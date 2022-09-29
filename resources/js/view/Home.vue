@@ -27,7 +27,9 @@
               </div>
           </div>
       </div>
-  
+  <div>
+    <TheFooter></TheFooter>
+  </div>
   </div>
   
   </template>
@@ -37,9 +39,11 @@
     import NavBar from "../components/NavBar.vue";
     import CardItem from "../components/CardItem.vue";
     import ModalAdvancedSearch from '../components/ModalAdvancedSearch.vue';
+import TheFooter from '../components/TheFooter.vue';
+
     
     export default {
-      components: { NavBar, CardItem, ModalAdvancedSearch },
+      components: { NavBar, CardItem, ModalAdvancedSearch, TheFooter },
       data() {
         return {
             accommodations: [],

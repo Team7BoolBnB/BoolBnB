@@ -29,7 +29,7 @@
           <div class="modal-body p-4">
             <!-- Where -->
             <div class="modal-container-section pt-2">
-              <h5>Where</h5>
+              <h4>Where</h4>
               <div class="form-floating mb-5">
                 <input
                   class="form-control"
@@ -47,7 +47,7 @@
 
             <!-- Range -->
             <div class="modal-container-section pb-4">
-              <h5>Range</h5>
+              <h4>Range</h4>
               <label for="customRange3" class="form-label">Km</label>
               <input
                 type="range"
@@ -59,17 +59,17 @@
                 v-model="radius"
               />
               <div class="row justify-content-between">
-                <div class="col">0</div>
-                <div class="col">2</div>
-                <div class="col">4</div>
-                <div class="col">6</div>
-                <div class="col">8</div>
-                <div class="col">10</div>
-                <div class="col">12</div>
-                <div class="col">14</div>
-                <div class="col">16</div>
-                <div class="col">18</div>
-                <div class="col">20</div>
+                <div class="col pe-0">0</div>
+                <div class="col p-0">2</div>
+                <div class="col p-0">4</div>
+                <div class="col p-0">6</div>
+                <div class="col p-0">8</div>
+                <div class="col p-0">10</div>
+                <div class="col p-0">12</div>
+                <div class="col p-0">14</div>
+                <div class="col p-0">16</div>
+                <div class="col p-0">18</div>
+                <div class="col p-0">20</div>
               </div>
             </div>
 
@@ -78,19 +78,19 @@
             <!-- Typology -->
             <div class="modal-container-section pt-2 pb-4">
               <div class="mt-3 mb-3">
-                <h5>Typology</h5>
+                <h4>Typology</h4>
               </div>
-              <div class="row">
+              <div class="row row-cols-lg-4 row-cols-md-2 row-cols-sm-1 direction-typologies-display-sm">
                 <div
                   v-for="typology in data.typologies"
                   :key="typology.name"
-                  class="col"
+                  class="col py-2"
                 >
                   <button
-                    class="basicBtn bigBtn typologyBtn"
+                    class=" btn btn-outline-dark"
                     v-on:click="setTypology(typology.id)"
                   >
-                    <div class="d-flex justify-content-center">
+                    <div class="d-flex justify-content-center items-start">
                       <div><i :class="typology.icon"></i></div>
                       <div class="ps-2">{{ typology.name }}</div>
                     </div>
@@ -103,35 +103,62 @@
 
             <!-- Rooms / Beds / Bathrooms -->
             <div class="modal-container-section py-2">
-              <div v-for="filter in filters" :key="filter.name" class="row">
-                <div class="py-3">
-                <!--   <h5 class="mb-3">{{ filter.name }}</h5> -->
-                  <div class="row flex-align-center">
-                    <div class="col-2">
-                      
-                    <div v-for="array in filter.value" :key="array.value" class="col">
-                      <button
-                        class="btn btn-outline-secondary rounded-pill rounded-5"
-                        :class="array.active ? 'active' : '' "
-                        v-on:click="setFilterValue(filter.name, array.value),classCheck(array)"
-                      >
-                        {{ array.value }}
-                      </button>
-                      
-                    </div>
-                  </div>
-                </div>
-              </div>
+              <div  class="row ">
+                <h4 class="py-4">Beds</h4>
+                <div v-for="value in filtersBeds" :key="value.value" class="col">
+                  <button
+                    class="btn btn btn-outline-dark rounded-pill rounded-5"
+                    :class="value.active ? 'active' : '' "
+                    v-on:click="setFilterValue(filters[0], value.value),classCheck(filters[0], value.value)"
+                  >
+                  <span v-if="value.value ==0">Qualsiasi</span>
+                  <span v-else-if="value.value ==8">8+</span>
+                  <span v-else-if="value.value !=0">{{ value.value }}</span>
+
+
+                  
+                  </button>
             </div>
             </div>
+            <div  class="row ">
+                <h4 class="py-4">Rooms</h4>
+                <div v-for="value in filterRooms" :key="value.value" class="col">
+                  <button
+                    class="btn btn btn-outline-dark rounded-pill rounded-5"
+                    :class="value.active ? 'active' : '' "
+                    v-on:click="setFilterValue(filters[1], value.value),classCheck(filters[1], value.value)"
+                  >
+                  <span v-if="value.value ==0">Qualsiasi</span>
+                  <span v-else-if="value.value ==8">8+</span>
+                  <span v-else-if="value.value !=0">{{ value.value }}</span>
+
+                  </button>
+            </div>
+            </div>
+            <div  class="row ">
+                <h4 class="py-4">Bathrooms</h4>
+                <div v-for="value in filtersBathrooms" :key="value.value" class="col">
+                  <button
+                    class="btn btn btn-outline-dark rounded-pill rounded-5"
+                    :class="value.active ? 'active' : '' "
+                    v-on:click="setFilterValue(filters[2], value.value),classCheck(filters[2], value.value)"
+                  >
+                  <span v-if="value.value ==0">Qualsiasi</span>
+                  <span v-else-if="value.value ==8">8+</span>
+                  <span v-else-if="value.value !=0">{{ value.value }}</span>
+
+                  </button>
+            </div>
+            </div>
+          </div>
 
             <hr />
 
             <div class="modal-container-section py-2">
               <div class="mt-3 mb-3">
-                <h5>Services</h5>
+                <h4>Services</h4>
               </div>
-              <div class="row row-cols-2">
+              <div class="row row-cols-lg-2 row-cols-md-1 direction-services-display-sm"">
                 <div
                   v-for="service in data.services"
                   :key="service.name"
@@ -160,7 +187,7 @@
           </div>
 
           <div class="modal-footer d-flex justify-content-between">
-            <button type="button" class="textLink" @click="clearParams()">
+            <button type="basicBtn" class="textLink" @click="clearParams()">
               Clear all
             </button>
             <div
@@ -229,18 +256,14 @@ export default {
     return {
       data: [],
       accommodations: null,
-     
+      filters:["Beds","Rooms","Bathrooms"],
       buttonFilterNumber: 8,
       buttonActive: "",
       filterActiceClass: "",
       checkQuery: false,
       radiusCheck: false,
-      filters: [
-      [
-        {
-          name:"Rooms",
-          value:[
-            { value: "Qualsiasi", active: true },
+      filterRooms:[
+            { value: "0", active: true },
             { value: "1", active: false },
             { value: "2", active: false },
             { value: "3", active: false },
@@ -248,15 +271,10 @@ export default {
             { value: "5", active: false },
             { value: "6", active: false },
             { value: "7", active: false },
-            { value: "8+", active: false },
-          ]
-        }
-      ]/* ,
-      [
-        {
-          name:"Beds",
-          value:[
-            { value: "Qualsiasi", active: true },
+            { value: "8", active: false },
+          ],
+      filtersBeds:[
+            { value: "0", active: true },
             { value: "1", active: false },
             { value: "2", active: false },
             { value: "3", active: false },
@@ -264,15 +282,10 @@ export default {
             { value: "5", active: false },
             { value: "6", active: false },
             { value: "7", active: false },
-            { value: "8+", active: false },
-          ]
-        }
-      ],
-      [
-        {
-          name:"Bathrooms",
-          value:[
-            { value: "Qualsiasi", active: true },
+            { value: "8", active: false },
+          ],
+      filtersBathrooms:[
+            { value: "0", active: true },
             { value: "1", active: false },
             { value: "2", active: false },
             { value: "3", active: false },
@@ -280,13 +293,9 @@ export default {
             { value: "5", active: false },
             { value: "6", active: false },
             { value: "7", active: false },
-            { value: "8+", active: false },
-          ]
-        }
-      ], */
-       
-      ],
-
+            { value: "8", active: false },
+          ],
+     
       //Chiamata API data
       query: null,
       bedFilter: null,
@@ -325,8 +334,33 @@ export default {
         this.bathFilter = "";
       }
     },
-    classCheck(array){
-      console.log(array);
+    classCheck(name,value){
+
+   if(name=="Bathrooms"){
+        name=this.filtersBathrooms
+      }
+      else if(name=="Beds"){
+        name=this.filtersBeds
+      }
+      else if(name=="Rooms"){
+        name=this.filterRooms
+      }
+      else{
+        alert("Si ok ed io sono scemo")
+      }
+      
+      for (let index = 0; index < name.length; index++) {
+        if(value==index){
+          name[index].active=true
+        }
+        else{
+          name[index].active=false
+        }
+        
+      }
+ 
+
+
     },
     setTypology(id) {
       this.typology_id = id;
@@ -379,17 +413,38 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "../../sass/partials/variables";
-
-.typologyBtn {
-  padding: 20px !important;
-  background-color: #ffffff;
-  border: 1px solid $tertiaryColor;
-}
-
-.textLink {
-  background-color: unset;
-  border: unset;
-  text-decoration: underline;
-}
-</style>
+  @import "../../sass/partials/variables";
+  
+  .typologyBtn {
+    padding: 20px !important;
+    background-color: #ffffff;
+    border: 1px solid $tertiaryColor;
+  }
+  
+  .textLink {
+    background-color: unset;
+    border: unset;
+    text-decoration: underline;
+  }
+  
+  @media only screen and (max-width: 768px){
+      .direction-services-display-sm{
+          flex-direction: column;
+      }
+  }
+  @media only screen and (max-width: 571px){
+      .direction-typologies-display-sm{
+          flex-direction: column;
+      }
+  }
+  @media only screen and (max-width: 571px){
+      .pe-4{
+          padding-right: 0.3rem !important;
+      }
+  }
+  @media only screen and (max-width: 420px){
+      .items-start{
+          justify-content: start !important;
+      }
+  }
+  </style>
