@@ -3,7 +3,7 @@
 
   <div v-if="check">
     <NavBar :user="user"></NavBar>
-    <modal-advanced-search :object="takeObject" ></modal-advanced-search>
+   
       <!-- sezione con carosello di immagini -->
       <!-- <div class="debug_carosel d-none">
           <div class="heroOverlay d-none">
@@ -36,7 +36,7 @@
        
        <atom-spinner :animation-duration="1000" :size="100" color="#ff1d5e" />
    </div>
-  
+   <modal-advanced-search :object="takeObject" ></modal-advanced-search>
 </div>
   </template>
   
