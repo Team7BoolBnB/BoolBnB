@@ -84,7 +84,7 @@
                                         </svg>
                                     </a>
                                 </button>
-                                    <a class="link_admin" href="{{ route('admin.sponsorship.create', $accommodation->slug) }}"
+                                    <a class="link_admin" href="/admin/sponsorship/create/buy"
                                         class="btn btn-primary">
                                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="currentColor">
                                             <!--! Font Awesome Pro 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. -->

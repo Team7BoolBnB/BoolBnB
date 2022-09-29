@@ -195,12 +195,13 @@ class AccommodationController extends Controller
         $data = $request->validated();
  
         $accommodation = $this->findBySlug($slug);
-
+      
         if ($data["title"] !== $accommodation->title) {
             //genero un nuovo slug
+           
             $accommodation->slug = $this->generateSlug($data["title"]);
         }
-
+        $accommodation->title=$data["title"];
         if($accommodation->image){
             Storage::delete($accommodation->image);
             $accommodation->image = Storage::put("/accommodation", $data["image"]);

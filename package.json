@@ -25,6 +25,7 @@
     "dependencies": {
         "braintree-web-drop-in": "^1.33.4",
         "cors": "^2.8.5",
+        "epic-spinners": "^1.1.0",
         "vue-braintree": "^2.1.0",
         "vue-router": "^3.6.5"
     }
