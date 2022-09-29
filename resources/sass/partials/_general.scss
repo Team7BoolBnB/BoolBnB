@@ -378,3 +378,11 @@ nav {
     }
 }
 
+.full-height-message-container{
+    height: calc(100vh - 75px);
+    padding: .5rem 1rem;
+}
+
+.search-box-messages-section{
+    height: 10%;
+}
