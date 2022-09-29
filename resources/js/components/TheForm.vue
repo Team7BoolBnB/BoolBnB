@@ -1,23 +1,23 @@
 <template>
     <div class="card card_debug w-100 fixed pb-3">
         <div class="py-2 px-2">
-            <h5 class="text-uppercase text-center">Contatta l'host</h5>
+            <h4 class="text-center pb-3">Contatta l'host</h4>
             <form action="">
                 <div class="mb-3">
-                    <label for="nameInput" class="form-label">Name</label>
+                    <label for="nameInput" class="form-label"><p class="mb-0">Name</p></label>
                     <input type="text" class="form-control" id="nameInput"
                         placeholder="John Doe">
                 </div>
                 <div class="mb-3">
-                    <label for="emailInput" class="form-label">Email address</label>
+                    <label for="emailInput" class="form-label"><p class="mb-0">Email</p></label>
                     <input type="email" class="form-control" id="emailInput"
                         placeholder="name@example.com">
                 </div>
                 <div class="mb-3">
-                    <label for="messageInput" class="form-label">Example textarea</label>
+                    <label for="messageInput" class="form-label"><p class="mb-0">Message</p></label>
                     <textarea class="form-control" id="messageInput" rows="4" style="height: 6rem;"></textarea>
                 </div>
-                <div class="mb-3 text-center">
+                <div class="mb-3 pt-3 text-center">
                     <button type="submit" class="basicBtn primaryBtn bigBtn">Submit</button>
                 </div>
             </form>

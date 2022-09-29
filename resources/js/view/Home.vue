@@ -3,6 +3,7 @@
   <div>
     <NavBar></NavBar>
     <modal-advanced-search :object="takeObject" ></modal-advanced-search>
+
       <!-- sezione con carosello di immagini -->
       <!-- <div class="debug_carosel d-none">
           <div class="heroOverlay d-none">
@@ -22,13 +23,16 @@
             
               <div class="col" v-for="accommodation in accommodations" :key="accommodation.id">
 
-                <router-link :to="{ name: 'accommodations.show' , params : { slug:accommodation.slug} }">  <CardItem :accommodation="accommodation"></CardItem></router-link>
+                <router-link class="text-decoration-none" :to="{ name: 'accommodations.show' , params : { slug:accommodation.slug} }">  <CardItem :accommodation="accommodation"></CardItem></router-link>
                 
               </div>
           </div>
       </div>
+
   <div>
-    <TheFooter></TheFooter>
+
+  <TheFooter></TheFooter>
+
   </div>
   </div>
   
@@ -153,4 +157,5 @@ import TheFooter from '../components/TheFooter.vue';
         backdrop-filter: blur(4px);
         -webkit-backdrop-filter: blur(6px);
       }
+
       </style>
