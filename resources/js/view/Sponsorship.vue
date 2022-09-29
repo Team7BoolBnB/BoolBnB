@@ -46,7 +46,7 @@
                         <div class="row row-cols-lg-2 row-cols-sm-1 sponsortime">
                             <div class="col-6">
                                 <h5 class="mt-5 mb-4">Start date</h5>
-                                <input v-model="date" type="datetime-local" id="startTime" name="startTime">
+                                <input v-model="date" type="datetime-local" id="startTime" name="startTime" style="border: 1px solid #ced4da; height: 3rem; padding: 0 20px; background-color: unset; border-radius: 8px; width: 100%">
                             </div>
 
                             <div class="col-6">
@@ -61,8 +61,8 @@
 
                         <div class="d-flex justify-content-center py-5">
                             <button v-if="date && sponsorship_id && accommodation_id &&checkDate"
-                                class="basicBtn bigBtn primaryBtn" @click="gocheckout()">Purchase</button>
-                            <button v-else class="basicBtn bigBtn primaryBtn" v-on:click="change()">Purchase</button>
+                                class="basicBtn bigBtn primaryBtn mt-5" @click="gocheckout()">Purchase</button>
+                            <button v-else class="basicBtn bigBtn primaryBtn mt-5" v-on:click="change()">Purchase</button>
                         </div>
 
                         <div v-if="alert " class="alert alert-danger text-center w-50 mx-auto mt-3" role="alert">
@@ -76,26 +76,65 @@
 
                     <!-- checkout -->
                     <div v-if="checkout"
-                        class="container  d-flex justify-content-center align-items-center flex-column py-5">
-                        <div class="cardCheckout gradient-border">
-                            <h2 class="py-4 text-center mb-3">CHECKOUT</h2>
-                            <h4 class="mb-3">You are sponsoring: 
-                                <span
-                                    class="fst-light fst-italic">{{accommodationName}} 
-                                </span>
-                            </h4>
-                            <h4 class="mb-3">Service Name: 
-                                <span
-                                    class="fst-light fst-italic">{{sponsorshipName}}
-                                </span> 
-                            </h4>
-                            <h4 class="mb-3">Start date: <span class="fst-light fst-italic"> {{date}}</span></h4>
-                            <h4 class="mb-3">Sponsorship duration: <span class="fst-light fst-italic">{{time}}
-                                    h</span></h4>
-                            <h4 class="mb-3">Price: <span class="fst-light fst-italic"> {{price}} €</span></h4>
+                        class="container">
+
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="text-end pb-5">
+                                    <a href="/admin/sponsorship/create/buy" class="textLink me-2">
+                                        <i class="fa-solid fa-arrow-left pe-2"></i>
+                                        <span class="nodisplay">Back to purchase</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <h2 class="py-4 mb-5">One last check, before paying</h2>
+
+
+                            <div class="row py-4">
+                                <div class="col">
+                                    <div>
+                                        <h6>Sponsored accommodation:</h6>
+                                        <p>{{accommodationName}}</p>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div>
+                                        <h6>Sponsorship pack:</h6>
+                                        <p>{{sponsorshipName}}</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            
+
+                            <hr>
+                            
+                            <div class="row py-4">
+                                <div class="col">
+                                    <div>
+                                        <h6>Start date:</h6>
+                                        <p>{{date}}</p>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div>
+                                        <h6>Sponsorship duration:</h6>
+                                        <p>{{time}}h</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <hr>
+
+                            <div class="py-4">
+                                <h4>You will pay: {{price}} €</h4>
+                            </div>
+
+                    
                             <div class="d-flex justify-content-between py-4">
-                                <a class="basicBtn bigBtn secondaryBtn"
-                                    href="/admin/sponsorship/create/buy">Back</a>
                                 <router-link
                                     :to="{ name: 'sponsorship.payment' , params : { date:date , sponsorship_id:sponsorship_id , accommodation_id:accommodation_id} } ">
                                     <button class="basicBtn bigBtn primaryBtn">Continue</button>

@@ -77,8 +77,9 @@
                 <div class="col-lg-2 col-md-12 col-sm-12">
                     <div>
                         <a class="card_link card-all card-all-index"
-                            href="{{ route('admin.accommodation.index', $accommodation->slug) }}">See
-                            all</a>
+                            href="{{ route('admin.accommodation.index', $accommodation->slug) }}">
+                            <h6>See all</h6>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -133,7 +134,9 @@
                 <div class="col-lg-2 col-md-12 col-sm-12">
                     <div>
                         <a class="card_link card-all card-all-index"
-                            href="{{ route('admin.sponsorship.index', $accommodation->slug) }}">See all</a>
+                            href="{{ route('admin.sponsorship.index', $accommodation->slug) }}">
+                            <h6>See all</h6>
+                        </a>
                     </div>
                 </div>
             </div>
