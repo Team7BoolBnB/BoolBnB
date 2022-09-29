@@ -183,12 +183,12 @@
 
                 <!-- col di destra con dentro form fisso durante lo scroll della col di sinistra -->
                 <div class="col-4 " id="sectionForm">
-                    <div v-if="messageSended" class="alert alert-success text-center w-50 mx-auto mt-3" role="alert">
+                    <!-- <div v-if="messageSended" class="alert alert-success text-center w-50 mx-auto mt-3" role="alert">
                   <span >Messaggio inviato correttamente</span>
                 </div>
                 <div v-if="messageDeny" class="alert alert-danger text-center w-50 mx-auto mt-3" role="alert">
                   <span >Errore durante l'invio dei dati, riprova più tardi.</span>
-                </div>
+                </div> -->
                     <div class="card card_debug w-100 fixed pb-3">
         <div class="py-2 px-2">
             <h5 class="text-uppercase text-center">Contatta l'host</h5>
@@ -214,6 +214,12 @@
                     <button type="submit" class="basicBtn primaryBtn bigBtn">Submit</button>
                 </div>
               
+                <div v-if="messageSended && endAlert" class="alert alert-success text-center w-50 mx-auto mt-3" role="alert">
+                  <span >Messaggio inviato correttamente</span>
+                </div>
+                <div v-if="messageDeny && endAlert" class="alert alert-danger text-center w-50 mx-auto mt-3" role="alert">
+                  <span >Errore durante l'invio dei dati, riprova più tardi.</span>
+                </div>
                 
             </form>
         </div>
@@ -333,8 +339,8 @@ export default {
             content:"",
             name:"",
             email:"",
-            messageSended:null,
-            messageDeny:null,
+            messageSended:false,
+            messageDeny:false,
             check: false,
             accommodation: {},
             user:null,
@@ -351,7 +357,8 @@ export default {
             ],
             view: {
                 scroll: true,
-            }
+            },
+            endAlert: true
         };
     },
 
@@ -390,6 +397,7 @@ export default {
 
                     Axios.post("/api/messages", formData).
         then(resp => {
+            this.timerAlert();
           if(resp.data.message){
             this.messageSended=true
 
@@ -398,6 +406,11 @@ export default {
             this.messageDeny=true
           }
         })
+        },
+        timerAlert(){
+            setTimeout(() => {
+                this.endAlert = false;
+            }, 3000);
         }
     },
 
