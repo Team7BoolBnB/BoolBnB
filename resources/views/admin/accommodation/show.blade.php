@@ -104,12 +104,7 @@
                         <div class="pt-5">
                             <span class="mb-3"><strong>Services:</strong></span>
                             <ul class="list-unstyled d-flex w-100 justify-content-between">
-                                <li>1</li>
-                                <li>1</li>
-                                <li>1</li>
-                                <li>1</li>
-                                <li>1</li>
-                                <li>1</li>
+                                @dump($accommodation->services)
                             </ul>
                         </div>
                     </div>
