@@ -126,7 +126,6 @@ class AccommodationController extends Controller
         $newImage= Storage::put("/accommodation", $data["image"]);
         $accommodation->image = $newImage;
 
-
         // Check if the 'available' toggle is on
         if (key_exists("available", $data)) {
             $accommodation->available = 1;
