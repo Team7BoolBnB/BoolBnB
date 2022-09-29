@@ -22,6 +22,8 @@ Route::middleware("auth")->group(function () {
     });
 
 Route::get("/accommodations","Api\HomeController@index");
+Route::post("/messages","Api\MessageController@store");
+
 /* Route::middleware('auth')->get("/accommodations/sponsorship","Api\HomeController@sponsorshipData");
 
 Route::get("/sponsorship","Api\PaymentController@generate");
