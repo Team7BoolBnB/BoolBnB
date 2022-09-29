@@ -18,19 +18,104 @@
 
     <div class="container pt-5">
 
-        <img src="{{ asset('storage/' . $accommodation->image) }}" alt="{{ $accommodation->title }}" width="100%">
+       {{--  <div>
+            <img style="border-radius: 2rem;" class="w-100 h-50" src="{{ asset('storage/' . $accommodation->image) }}" alt="{{ $accommodation->title }}">
+        </div>
+        <div class="row g-5">
+            <div class="col">
+                <h4 class="font-sm py-4"> Typology: <span class="fst-italic fw-light">{{ $accommodation->typology->name }}</span></h4>
+                <div>
+                    <p class="py-4"><strong>Description:</strong><br>{{ $accommodation->description }}</p>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <div>
+                            <ul class="list-unstyled">
+                                <li class="mb-3"><strong>Rooms:</strong><br>{{ $accommodation->rooms }}</li>
+                                <li class="mb-3"><strong>Beds:</strong><br>{{ $accommodation->beds }}</li>
+                                <li class="mb-3"><strong>Bathrooms:</strong><br>{{ $accommodation->bathrooms }}</li>
+                                <li class="mb-3"><strong>Square meters:</strong><br>{{ $accommodation->mt_square }}</li>
+                                <li class="mb-3">
+                                    @if($accommodation->available == "0")
+                                        <strong>Available:</strong><br>No
+                                    @else
+                                        <strong>Available:</strong><br>Yes
+                                    @endif
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div>
+                            <span class="mb-3"><strong>Services:</strong></span>
+                            <ul class="list-unstyled">
+                                @dump($accommodation->service)
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+            <div class="col">
+                <h4 class="font-sm py-4 text-end"> {{ $accommodation->address }}</h4>
+                <div class="py-4">
+                    <img style="border-radius: 2rem;"  class="w-100" src="https://www.google.com/maps/d/thumbnail?mid=1R-z0nvlZTWYN9LH3bxAtMhZScxo&hl=it" alt="">
+                </div>
+            </div>
+        </div> --}}
 
-        <p class="font-sm pt-4">{{ $accommodation->title }}</p>
-
-        <p class="py-4"><strong>Description:</strong><br>{{ $accommodation->description }}</p>
-
-        <p><strong>Longitude:</strong><br>{{ $accommodation->longitude }}</p>
-        <p><strong>Latitude:</strong><br>{{ $accommodation->latitude }}</p>
-        <p><strong>Rooms:</strong><br>{{ $accommodation->rooms }}</p>
-        <p><strong>Beds:</strong><br>{{ $accommodation->beds }}</p>
-        <p><strong>Bathrooms:</strong><br>{{ $accommodation->bathrooms }}</p>
-        <p><strong>Square Metre:</strong><br>{{ $accommodation->mt_square }}</p>
-        <p><strong>Available:</strong><br>{{ $accommodation->available }}</p>
+        <div class="row row-cols-2 g-3">
+            <div class="col-8">
+                <img style="border-radius: 2rem;" class="img-fluid" src="{{ asset('storage/' . $accommodation->image) }}" alt="{{ $accommodation->title }}">
+            </div>
+            <div class="col-4">
+                <img style="border-radius: 2rem; max-width: 100%;"  class="h-100" src="https://www.google.com/maps/d/thumbnail?mid=1R-z0nvlZTWYN9LH3bxAtMhZScxo&hl=it" alt="">
+            </div>
+        </div>
+        <div class="row g-5">
+            <div class="col">
+                <h4 class="font-sm py-4"> Typology: <span class="fst-italic fw-light">{{ $accommodation->typology->name }}</span></h4>
+                <div>
+                    <p class="py-4"><strong>Description:</strong><br>{{ $accommodation->description }}</p>
+                </div>
+            </div>
+            <div class="col">
+                <h4 class="font-sm py-4 text-end"> {{ $accommodation->address }}</h4>
+                <div class="row flex-column">
+                    <div class="col">
+                        <div class="py-4">
+                            <ul class="list-unstyled d-flex w-100 justify-content-between">
+                                <li class="mb-3"><strong>Rooms:</strong><br>{{ $accommodation->rooms }}</li>
+                                <li class="mb-3"><strong>Beds:</strong><br>{{ $accommodation->beds }}</li>
+                                <li class="mb-3"><strong>Bathrooms:</strong><br>{{ $accommodation->bathrooms }}</li>
+                                <li class="mb-3"><strong>Square meters:</strong><br>{{ $accommodation->mt_square }}</li>
+                                <li class="mb-3">
+                                    @if($accommodation->available == "0")
+                                        <strong>Available:</strong><br>No
+                                    @else
+                                        <strong>Available:</strong><br>Yes
+                                    @endif
+                                </li>
+                            </ul>
+                        </div>
+                        <hr>
+                    </div>
+                    <div class="col">
+                        <div class="pt-5">
+                            <span class="mb-3"><strong>Services:</strong></span>
+                            <ul class="list-unstyled d-flex w-100 justify-content-between">
+                                <li>1</li>
+                                <li>1</li>
+                                <li>1</li>
+                                <li>1</li>
+                                <li>1</li>
+                                <li>1</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
         {{-- <div>
             <a href="{{ route('admin.accommodation.edit', $accommodation->id) }}" class="cdBtn btn btn-primary">
