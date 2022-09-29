@@ -15,8 +15,10 @@
         "
       >
         <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="staticBackdropLabel">Filtri</h5>
+          <div class="modal-header px-4">
+            <h3 class="modal-title" id="staticBackdropLabel">
+              Advanced Search
+            </h3>
             <button
               type="button"
               class="btn-close"
@@ -24,27 +26,28 @@
               aria-label="Close"
             ></button>
           </div>
-          <div class="modal-body">
-            <div class="modal-container-section">
-              <h3>Dove vuoi andare?</h3>
+          <div class="modal-body p-4">
+            <!-- Where -->
+            <div class="modal-container-section pt-2">
+              <h4>Where</h4>
               <div class="form-floating mb-5">
                 <input
                   class="form-control"
                   list="datalistOptions"
                   name="address"
                   id="exampleDataList"
-                  placeholder="Type to
-                search..."
+                  placeholder="Search for your destination..."
                   v-model="query"
                   v-on:change="coordinateSet($event)"
                 />
-                <label for="exampleDataList">Type to search...</label>
+                <label for="exampleDataList">Search for your destination</label>
                 <datalist id="datalistOptions"> </datalist>
               </div>
             </div>
 
-            <div class="modal-container-section">
-              <h3>Distanza dal punto di interesse</h3>
+            <!-- Range -->
+            <div class="modal-container-section pb-4">
+              <h4>Range</h4>
               <label for="customRange3" class="form-label">Km</label>
               <input
                 type="range"
@@ -56,95 +59,112 @@
                 v-model="radius"
               />
               <div class="row justify-content-between">
-                <div class="col">0</div>
-                <div class="col">2</div>
-                <div class="col">4</div>
-                <div class="col">6</div>
-                <div class="col">8</div>
-                <div class="col">10</div>
-                <div class="col">12</div>
-                <div class="col">14</div>
-                <div class="col">16</div>
-                <div class="col">18</div>
-                <div class="col">20</div>
-              </div>
-            </div>
-            <hr />
-            <div class="modal-container-section">
-              <div class="mt-3 mb-3">
-                <h3>Stanze e letti</h3>
-              </div>
-              <div v-for="filter in filters" :key="filter" class="row">
-                <div class="py-3">
-                  <h5 class="mb-3">{{ filter }}</h5>
-                  <div class="row flex-align-center">
-                    <div class="col-2">
-                      <button
-                        class="btn btn-outline-secondary rounded-pill"
-                        :class="buttonActive ? 'active' : ''"
-                        v-on:click="setFilterValue(filter, i)"
-                      >
-                        Qualsiasi
-                      </button>
-                    </div>
-                    <div v-for="i in buttonFilterNumber" :key="i" class="col">
-                      <button
-                        v-if="i < 8"
-                        class="btn btn-outline-secondary rounded-pill rounded-5"
-                        :class="filter + i ? filterActiceClass : ''"
-                        v-on:click="setFilterValue(filter, i)"
-                      >
-                        {{ i }}
-                      </button>
-                      <button
-                        v-else
-                        class="btn btn-outline-secondary rounded-pill rounded-5"
-                        :class="filter + i ? filterActiceClass : ''"
-                        v-on:click="setFilterValue(filter, i)"
-                      >
-                        {{ i }}+
-                      </button>
-                    </div>
-                  </div>
-                </div>
+                <div class="col pe-0">0</div>
+                <div class="col p-0">2</div>
+                <div class="col p-0">4</div>
+                <div class="col p-0">6</div>
+                <div class="col p-0">8</div>
+                <div class="col p-0">10</div>
+                <div class="col p-0">12</div>
+                <div class="col p-0">14</div>
+                <div class="col p-0">16</div>
+                <div class="col p-0">18</div>
+                <div class="col p-0">20</div>
               </div>
             </div>
 
-            <div class="modal-container-section">
+            <hr />
+
+            <!-- Typology -->
+            <div class="modal-container-section pt-2 pb-4">
               <div class="mt-3 mb-3">
-                <h3>Tipo di alloggio</h3>
+                <h4>Typology</h4>
               </div>
-              <div class="row">
+              <div class="row row-cols-lg-4 row-cols-md-2 row-cols-sm-1 direction-typologies-display-sm">
                 <div
                   v-for="typology in data.typologies"
                   :key="typology.name"
-                  class="col"
+                  class="col py-2"
                 >
                   <button
-                    class="btn btn-outline-secondary"
+                    class=" btn btn-outline-dark"
                     v-on:click="setTypology(typology.id)"
                   >
-                    <div class="d-flex flex-column">
+                    <div class="d-flex justify-content-center items-start">
                       <div><i :class="typology.icon"></i></div>
-                      <div>{{ typology.name }}</div>
+                      <div class="ps-2">{{ typology.name }}</div>
                     </div>
                   </button>
                 </div>
               </div>
             </div>
 
-            <div class="modal-container-section">
+            <hr />
+
+            <!-- Rooms / Beds / Bathrooms -->
+            <div class="modal-container-section py-2">
+              <div  class="row ">
+                <h4 class="py-4">Beds</h4>
+                <div v-for="value in filtersBeds" :key="value.value" class="col">
+                  <button
+                    class="btn btn btn-outline-dark rounded-pill rounded-5"
+                    :class="value.active ? 'active' : '' "
+                    v-on:click="setFilterValue(filters[0], value.value),classCheck(filters[0], value.value)"
+                  >
+                  <span v-if="value.value ==0">Qualsiasi</span>
+                  <span v-else-if="value.value ==8">8+</span>
+                  <span v-else-if="value.value !=0">{{ value.value }}</span>
+
+
+                  
+                  </button>
+            </div>
+            </div>
+            <div  class="row ">
+                <h4 class="py-4">Rooms</h4>
+                <div v-for="value in filterRooms" :key="value.value" class="col">
+                  <button
+                    class="btn btn btn-outline-dark rounded-pill rounded-5"
+                    :class="value.active ? 'active' : '' "
+                    v-on:click="setFilterValue(filters[1], value.value),classCheck(filters[1], value.value)"
+                  >
+                  <span v-if="value.value ==0">Qualsiasi</span>
+                  <span v-else-if="value.value ==8">8+</span>
+                  <span v-else-if="value.value !=0">{{ value.value }}</span>
+
+                  </button>
+            </div>
+            </div>
+            <div  class="row ">
+                <h4 class="py-4">Bathrooms</h4>
+                <div v-for="value in filtersBathrooms" :key="value.value" class="col">
+                  <button
+                    class="btn btn btn-outline-dark rounded-pill rounded-5"
+                    :class="value.active ? 'active' : '' "
+                    v-on:click="setFilterValue(filters[2], value.value),classCheck(filters[2], value.value)"
+                  >
+                  <span v-if="value.value ==0">Qualsiasi</span>
+                  <span v-else-if="value.value ==8">8+</span>
+                  <span v-else-if="value.value !=0">{{ value.value }}</span>
+
+                  </button>
+            </div>
+            </div>
+          </div>
+
+            <hr />
+
+            <div class="modal-container-section py-2">
               <div class="mt-3 mb-3">
-                <h3>Servizi</h3>
+                <h4>Services</h4>
               </div>
-              <h5 class="mb-3">Servizi essenziali</h5>
-              <div class="row row-cols-2">
+              <div class="row row-cols-lg-2 row-cols-md-1 direction-services-display-sm"">
                 <div
                   v-for="service in data.services"
                   :key="service.name"
                   class="col"
                 >
-                  <div class="form-check cardForm">
+                  <div class="form-check cardForm ps-0">
                     <input
                       v-model="services"
                       class="form-check-input my-4 d-none"
@@ -154,17 +174,10 @@
                       :id="service.name"
                     />
                     <label
-                      class="
-                        form-check-label
-                        basicBtn
-                        formBtn
-                        ms-1
-                        px-4
-                        py-3
-                        my-2
-                      "
+                      class="form-check-label basicBtn formBtn px-4 py-3 my-2"
                       :for="service.name"
-                      ><i class="fa-solid pe-2" :class="service.icon"></i
+                    >
+                      <i class="fa-solid pe-2" :class="service.icon"> </i
                       >{{ service.name }}</label
                     >
                   </div>
@@ -174,22 +187,25 @@
           </div>
 
           <div class="modal-footer d-flex justify-content-between">
-            <button
-              type="button"
-              class="btn btn btn-light"
-              @click="clearParams()"
-            >
-              Cancella tutto
+            <button type="basicBtn" class="textLink" @click="clearParams()">
+              Clear all
             </button>
-            <div v-if="checkQuery && radiusCheck" class="alert alert-danger" role="alert">
-              <span > Inserisci parametri di ricerca</span>
+            <div
+              v-if="checkQuery && radiusCheck"
+              class="alert alert-danger"
+              role="alert"
+            >
+              <span>Inserisci parametri di ricerca</span>
             </div>
-            <div v-else-if="checkQuery || radiusCheck" class="alert alert-danger" role="alert">
-              <span v-if="checkQuery"> Inserisci un indirizzo di ricerca</span>
-              <span v-else-if="radiusCheck"> Inserisci raggio di ricerca</span>
-           
+            <div
+              v-else-if="checkQuery || radiusCheck"
+              class="alert alert-danger"
+              role="alert"
+            >
+              <span v-if="checkQuery">Inserisci un indirizzo di ricerca</span>
+              <span v-else-if="radiusCheck">Inserisci raggio di ricerca</span>
             </div>
-            
+
             <button
               v-if="query && radius"
               v-on:click="
@@ -197,10 +213,8 @@
                   query: query,
                   bedFilter: bedFilter,
                   bathFilter: bathFilter,
-                  longitude: longitude,
-                  latitude: latitude,
                   radius: radius,
-                  services: services,
+                  services,
                   typology_id: typology_id,
                   roomFilter: roomFilter,
                 })
@@ -209,10 +223,15 @@
               class="btn btn-dark queryButton"
               data-bs-dismiss="modal"
             >
-              Mostra mille alloggi
+              Search
             </button>
-            <button v-else type="button" class="btn btn-dark queryButton" v-on:click="alertPopup()">
-              Mostra mille alloggi
+            <button
+              v-else
+              type="button"
+              class="basicBtn bigBtn primaryBtn"
+              v-on:click="alertPopup()"
+            >
+              Search
             </button>
 
             <!--  <router-link
@@ -237,13 +256,46 @@ export default {
     return {
       data: [],
       accommodations: null,
-      filters: ["Camere da letto", "Letti", "Bagni"],
+      filters:["Beds","Rooms","Bathrooms"],
       buttonFilterNumber: 8,
       buttonActive: "",
       filterActiceClass: "",
       checkQuery: false,
-      radiusCheck:false,
-
+      radiusCheck: false,
+      filterRooms:[
+            { value: "0", active: true },
+            { value: "1", active: false },
+            { value: "2", active: false },
+            { value: "3", active: false },
+            { value: "4", active: false },
+            { value: "5", active: false },
+            { value: "6", active: false },
+            { value: "7", active: false },
+            { value: "8", active: false },
+          ],
+      filtersBeds:[
+            { value: "0", active: true },
+            { value: "1", active: false },
+            { value: "2", active: false },
+            { value: "3", active: false },
+            { value: "4", active: false },
+            { value: "5", active: false },
+            { value: "6", active: false },
+            { value: "7", active: false },
+            { value: "8", active: false },
+          ],
+      filtersBathrooms:[
+            { value: "0", active: true },
+            { value: "1", active: false },
+            { value: "2", active: false },
+            { value: "3", active: false },
+            { value: "4", active: false },
+            { value: "5", active: false },
+            { value: "6", active: false },
+            { value: "7", active: false },
+            { value: "8", active: false },
+          ],
+     
       //Chiamata API data
       query: null,
       bedFilter: null,
@@ -252,8 +304,6 @@ export default {
       typology_id: null,
       services: [],
       radius: null,
-      latitude: 45.45881,
-      longitude: 9.13208,
     };
   },
   methods: {
@@ -262,34 +312,61 @@ export default {
         this.data = resp.data;
       });
     },
-    tomtomfetchCoordinate() {
-      Axios.get("https://api.tomtom.com/search/2/search/"+ encodeURIComponent(this.query) +".json?key=ziNw7Yn7FMXsuIsY65fMoQmyy7qrHcM3")
-     .then((resp) => {
-        console.log(resp.data);;
-      });
-    },
 
     setFilterValue(filter, i) {
-      if (filter == "Camere da letto" && i > 0) {
+      if (filter == "Rooms" && i == "8+") {
+        this.roomFilter = "all";
+      } else if (filter == "Beds" && i == "8+") {
+        this.bedFilter = "all";
+      } else if (filter == "Bathrooms" && i == "8+") {
+        this.bathFilter = "all";}
+      if (filter == "Rooms" && i > 0) {
         this.roomFilter = i;
-      } else if (filter == "Letti" && i > 0) {
+      } else if (filter == "Beds" && i > 0) {
         this.bedFilter = i;
-      } else if (filter == "Bagni" && i > 0) {
+      } else if (filter == "Bathrooms" && i > 0) {
         this.bathFilter = i;
-      } else if (filter == "Camere da letto") {
+      } else if (filter == "Rooms") {
         this.roomFilter = "";
-      } else if (filter == "Letti") {
+      } else if (filter == "Beds") {
         this.bedFilter = "";
-      } else if (filter == "Bagni") {
+      } else if (filter == "Bathrooms") {
         this.bathFilter = "";
       }
+    },
+    classCheck(name,value){
+
+   if(name=="Bathrooms"){
+        name=this.filtersBathrooms
+      }
+      else if(name=="Beds"){
+        name=this.filtersBeds
+      }
+      else if(name=="Rooms"){
+        name=this.filterRooms
+      }
+      else{
+        alert("Si ok ed io sono scemo")
+      }
+      
+      for (let index = 0; index < name.length; index++) {
+        if(value==index){
+          name[index].active=true
+        }
+        else{
+          name[index].active=false
+        }
+        
+      }
+ 
+
+
     },
     setTypology(id) {
       this.typology_id = id;
     },
     coordinateSet(e) {
       this.query = e.target.value;
-      this.tomtomfetchCoordinate()
     },
     clearParams() {
       (this.query = null),
@@ -299,84 +376,75 @@ export default {
         (this.typology_id = null),
         (this.services = []),
         (this.radius = null);
-      /* (this.latitude = null);
-        (this.longitude = null); */
     },
-    alertPopup(){
-      if(this.radius){
-        this.checkQuery=true
+    alertPopup() {
+      if (this.radius) {
+        this.checkQuery = true;
+      } else if (this.query) {
+        this.radiusCheck = true;
+      } else {
+        this.radiusCheck = true;
+        this.checkQuery = true;
       }
-      else if (this.query){
-        this.radiusCheck=true
-      }
-      else{
-        this.radiusCheck=true
-        this.checkQuery=true
-      }
-    }
+    },
   },
   props: {
     object: Function,
+    loadServices: Function,
   },
   created() {
     this.buttonActive = "active";
     this.fetchdata();
   },
 
-  watch:{
-    query(newValue){
-      if(newValue.length > 0){
-        this.checkQuery=false
+  watch: {
+    query(newValue) {
+      if (newValue.length > 0) {
+        this.checkQuery = false;
       }
     },
-    radius(newValue){
-      if(newValue != null){
-        this.radiusCheck=false
+    radius(newValue) {
+      if (newValue != null) {
+        this.radiusCheck = false;
       }
-    }
-
-  }
-
-  /* computed: {
-    axiosParams() {
-      // passare meglio i dati dell'array services
-      const params = new URLSearchParams();
-      if (this.bedFilter) {
-        params.append("beds", this.bedFilter);
-      }
-      if (this.bathFilter) {
-        params.append("baths", this.bathFilter);
-      }
-      if (this.typology_id) {
-        params.append("typology_id", this.typology_id);
-      }
-      if (this.roomFilter) {
-        params.append("rooms", this.roomFilter);
-      }
-      if (this.radius) {
-        params.append("radius", this.radius);
-      }
-      if (this.services) {
-        this.services.forEach((service) => {
-          params.append("services", service);
-        });
-      }
-      if (this.latitude) {
-        params.append("latitude", this.latitude);
-      }
-      if (this.longitude) {
-        params.append("longitude", this.longitude);
-      }
-      if (this.query) {
-        params.append("address", this.query);
-      }
-      else{
-        params.append("address", "Milano piazza leonardo");
-      }
-      
-
-      return params;
     },
-  }, */
+  },
 };
 </script>
+
+<style lang="scss" scoped>
+  @import "../../sass/partials/variables";
+  
+  .typologyBtn {
+    padding: 20px !important;
+    background-color: #ffffff;
+    border: 1px solid $tertiaryColor;
+  }
+  
+  .textLink {
+    background-color: unset;
+    border: unset;
+    text-decoration: underline;
+  }
+  
+  @media only screen and (max-width: 768px){
+      .direction-services-display-sm{
+          flex-direction: column;
+      }
+  }
+  @media only screen and (max-width: 571px){
+      .direction-typologies-display-sm{
+          flex-direction: column;
+      }
+  }
+  @media only screen and (max-width: 571px){
+      .pe-4{
+          padding-right: 0.3rem !important;
+      }
+  }
+  @media only screen and (max-width: 420px){
+      .items-start{
+          justify-content: start !important;
+      }
+  }
+  </style>

@@ -115,17 +115,16 @@ class AccommodationController extends Controller
         $accommodation = new Accommodation();
 
         $data = $request->validated();
-
+        
         $accommodation->fill($data);
 
         $accommodation->user_id = Auth::user()->id;
 
-        
+       
 
-        $coverImg = Storage::put("/accommodation", $data["image"]);
-
-        $accommodation->image = $coverImg;
-
+       
+        $newImage= Storage::put("/accommodation", $data["image"]);
+        $accommodation->image = $newImage;
 
         // Check if the 'available' toggle is on
         if (key_exists("available", $data)) {
@@ -190,20 +189,28 @@ class AccommodationController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(AccommodationRequest $request, $slug)
-    {
-
+    {  
+        
         $data = $request->validated();
-
+ 
         $accommodation = $this->findBySlug($slug);
-
+      
         if ($data["title"] !== $accommodation->title) {
             //genero un nuovo slug
+           
             $accommodation->slug = $this->generateSlug($data["title"]);
         }
+        $accommodation->title=$data["title"];
+        if($accommodation->image){
+            Storage::delete($accommodation->image);
+            $accommodation->image = Storage::put("/accommodation", $data["image"]);
+        }
+        else{
+            $accommodation->image = Storage::put("/accommodation", $data["image"]);
+        }
+       
 
-
-        /* Storage::delete($accommodation->image);
-        $accommodation->image = Storage::put("/accommodation", $data["image"]); */
+        
 
         if (key_exists("services", $data) && key_exists("sponsorships", $data)) {
 
@@ -217,7 +224,7 @@ class AccommodationController extends Controller
         }
 
 
-        $accommodation->update($data);
+        $accommodation->update();
 
         return  redirect()->route("admin.accommodation.show", $accommodation->slug);
     }

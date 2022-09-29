@@ -25,7 +25,7 @@ class PaymentRequest extends FormRequest
     {
         return [
             "token"=>"required",
-            "amount"=>"required"
+            "idSponsorship"=>"required"
         ];
     }
 }
