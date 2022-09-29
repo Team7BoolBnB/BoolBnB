@@ -37,6 +37,7 @@ class AccommodationRequest extends FormRequest
             "image" => "nullable|image",
             "available"=>"nullable",
             "services" => "required",
+            "available" => "nullable",
         ];
     }
 }
