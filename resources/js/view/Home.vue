@@ -1,6 +1,7 @@
 <template>
+<div >
 
-  <div>
+  <div v-if="check">
     <NavBar :user="user"></NavBar>
     <modal-advanced-search :object="takeObject" ></modal-advanced-search>
       <!-- sezione con carosello di immagini -->
@@ -31,10 +32,16 @@
     <TheFooter></TheFooter>
   </div>
   </div>
+  <div v-else class="spinner flex-column py-4 mb-5">
+       
+       <atom-spinner :animation-duration="1000" :size="100" color="#ff1d5e" />
+   </div>
   
+</div>
   </template>
   
   <script>
+    import { AtomSpinner } from "epic-spinners";
     import axios from "axios";
     import NavBar from "../components/NavBar.vue";
     import CardItem from "../components/CardItem.vue";
@@ -43,9 +50,10 @@ import TheFooter from '../components/TheFooter.vue';
 
     
     export default {
-      components: { NavBar, CardItem, ModalAdvancedSearch, TheFooter },
+      components: { NavBar, CardItem, ModalAdvancedSearch, TheFooter, AtomSpinner },
       data() {
         return {
+            check:false,
             accommodations: [],
             apiParams:null,
             user:null
@@ -56,20 +64,20 @@ import TheFooter from '../components/TheFooter.vue';
             await axios.get("/api/accommodations").then((resp) => {
                 this.accommodations = resp.data.accommodations;
                 this.user = resp.data.user;
-
+                this.check=true
             })
         },
         takeObject(data){
           this.apiParams=data
         },
         async filteringDataFetch() {
-     
+     this.check=false
     await  axios.get("/api/advancedsearch/ ", {
       params: this.axiosParams
       
     }).then((resp) => {
         this.accommodations = resp.data;
-       
+        this.check=true
       });
       
     },
@@ -129,7 +137,12 @@ import TheFooter from '../components/TheFooter.vue';
     
     <style lang="scss" scoped>
       @import "../../sass/partials/variables";
-      
+      .spinner{
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
       .debug_carosel {
         height: 50vh;
         background-image: url("../../../public/img/img-prova.jpg");
