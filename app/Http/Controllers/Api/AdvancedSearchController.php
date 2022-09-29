@@ -51,20 +51,21 @@ class AdvancedSearchController extends Controller
         $raw = 'SELECT
         accommodations.*,
         typologies.*,
-        services.*,
-        users.firstName, users.lastName
+        services.*
+        
 
     FROM
-        users
-        JOIN accommodations ON accommodations.user_id = users.id
-    JOIN typologies ON typologies.id = accommodations.typology_id
-    JOIN service_accommodation ON service_accommodation.accommodation_id = accommodations.id
-    JOIN services ON services.id = service_accommodation.service_id
+        accommodations
+
+    LEFT JOIN service_accommodation ON service_accommodation.accommodation_id = accommodations.id
+    LEFT JOIN services ON services.id = service_accommodation.service_id  
+    LEFT JOIN users ON accommodations.user_id = users.id
+     JOIN typologies ON typologies.id = accommodations.typology_id
     WHERE accommodations.slug =  "'.$slug.'";';
 
 
         $accommodation = DB::select($raw);
-
+        
         $typologies = Typology::findOrFail($accommodation[0]->typology_id);
         /* $typologies = [];
 
@@ -126,17 +127,17 @@ $raw = 'SELECT *,
             $accommodations = DB::select($raw);
         }
         else{
-            if(key_exists("beds",$filters) && $count==3){ $query='WHERE `accommodations`.`beds` <= '.$filters["beds"].'';};
-            if(key_exists("rooms",$filters) && $count==3){$query='WHERE `accommodations`.`rooms` <= '.$filters["rooms"].'';};
-            if(key_exists("bathrooms",$filters) && $count==3){$query='WHERE `accommodations`.`bathrooms` <= '.$filters["bathrooms"].'';};
-            if(key_exists("bathrooms",$filters) && key_exists("rooms",$filters) && $count==4){$query='WHERE `accommodations`.`bathrooms` <= '.$filters["bathrooms"].'AND `accommodations`.`rooms` <= '.$filters["rooms"].'';};
-            if(key_exists("bathrooms",$filters) && key_exists("beds",$filters) && $count==4){$query='WHERE `accommodations`.`beds` <= '.$filters["beds"].'   AND  `accommodations`.`bathrooms` <= '.$filters["bathrooms"].'';};
-            if(key_exists("rooms",$filters) && key_exists("beds",$filters) && $count==4) { $query='WHERE `accommodations`.`beds` <= '.$filters["beds"].' AND `accommodations`.`rooms` <= '.$filters["rooms"].'';};
-            if(key_exists("rooms",$filters) && key_exists("bathrooms",$filters) && key_exists("beds",$filters) && $count==5) {$query='WHERE `accommodations`.`bathrooms` <= '.$filters["bathrooms"].'AND `accommodations`.`rooms` <= '.$filters["rooms"].' AND `accommodations`.`beds` <= '.$filters["beds"].'';};
+            if(key_exists("beds",$filters) && $count==3){ $query='WHERE `accommodations`.`beds` >= '.$filters["beds"].'';};
+            if(key_exists("rooms",$filters) && $count==3){$query='WHERE `accommodations`.`rooms` >= '.$filters["rooms"].'';};
+            if(key_exists("bathrooms",$filters) && $count==3){$query='WHERE `accommodations`.`bathrooms` >= '.$filters["bathrooms"].'';};
+            if(key_exists("bathrooms",$filters) && key_exists("rooms",$filters) && $count==4){$query='WHERE `accommodations`.`bathrooms` >= '.$filters["bathrooms"].'AND `accommodations`.`rooms` >= '.$filters["rooms"].'';};
+            if(key_exists("bathrooms",$filters) && key_exists("beds",$filters) && $count==4){$query='WHERE `accommodations`.`beds` >= '.$filters["beds"].'   AND  `accommodations`.`bathrooms` >= '.$filters["bathrooms"].'';};
+            if(key_exists("rooms",$filters) && key_exists("beds",$filters) && $count==4) { $query='WHERE `accommodations`.`beds` >= '.$filters["beds"].' AND `accommodations`.`rooms` >= '.$filters["rooms"].'';};
+            if(key_exists("rooms",$filters) && key_exists("bathrooms",$filters) && key_exists("beds",$filters) && $count==5) {$query='WHERE `accommodations`.`bathrooms` >= '.$filters["bathrooms"].'AND `accommodations`.`rooms` <= '.$filters["rooms"].' AND `accommodations`.`beds` <= '.$filters["beds"].'';};
             
             //da fare ancora
             
-
+/* 
             if(key_exists("beds",$filters) && key_exists("services",$filters) && $count==4){ $query='WHERE `accommodations`.`beds` <= '.$filters["beds"].'AND `accommodations`.`rooms` <= '.$filters["rooms"].'';};
             if(key_exists("rooms",$filters)&& key_exists("services",$filters)  && $count==4){$query='WHERE `accommodations`.`rooms` <= '.$filters["rooms"].'';};
             if(key_exists("bathrooms",$filters)&& key_exists("services",$filters)  && $count==4){$query='WHERE `accommodations`.`bathrooms` <= '.$filters["bathrooms"].'';};
@@ -159,7 +160,7 @@ $raw = 'SELECT *,
 
             if(key_exists("typology_id",$filters) && $count==3){
                 $query='WHERE `typologies`.`id` = '.$filters["typology_id"].'';
-            }
+            } */
 
             $raw = 'SELECT
             `accommodations`.*,
@@ -186,8 +187,8 @@ $raw = 'SELECT *,
 
 
 
-         $ALLaccommodations = DB::select($raw);
-         $accommodations=[];
+         $accommodations = DB::select($raw);
+        /*  $accommodations=[]; */
         //ELIMINARE ACCOMMODATIONS DOPPIE A CAUSA DI SERVIZI  MULTIPPLI
         
         }

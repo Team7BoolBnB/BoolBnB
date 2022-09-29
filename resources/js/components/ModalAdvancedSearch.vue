@@ -59,17 +59,17 @@
                 v-model="radius"
               />
               <div class="row justify-content-between">
-                <div class="col">0</div>
-                <div class="col">2</div>
-                <div class="col">4</div>
-                <div class="col">6</div>
-                <div class="col">8</div>
-                <div class="col">10</div>
-                <div class="col">12</div>
-                <div class="col">14</div>
-                <div class="col">16</div>
-                <div class="col">18</div>
-                <div class="col">20</div>
+                <div class="col pe-0">0</div>
+                <div class="col p-0">2</div>
+                <div class="col p-0">4</div>
+                <div class="col p-0">6</div>
+                <div class="col p-0">8</div>
+                <div class="col p-0">10</div>
+                <div class="col p-0">12</div>
+                <div class="col p-0">14</div>
+                <div class="col p-0">16</div>
+                <div class="col p-0">18</div>
+                <div class="col p-0">20</div>
               </div>
             </div>
 
@@ -80,17 +80,17 @@
               <div class="mt-3 mb-3">
                 <h4>Typology</h4>
               </div>
-              <div class="row">
+              <div class="row row-cols-lg-4 row-cols-md-2 row-cols-sm-1 direction-typologies-display-sm">
                 <div
                   v-for="typology in data.typologies"
                   :key="typology.name"
-                  class="col"
+                  class="col py-2"
                 >
                   <button
                     class=" btn btn-outline-dark"
                     v-on:click="setTypology(typology.id)"
                   >
-                    <div class="d-flex justify-content-center">
+                    <div class="d-flex justify-content-center items-start">
                       <div><i :class="typology.icon"></i></div>
                       <div class="ps-2">{{ typology.name }}</div>
                     </div>
@@ -158,7 +158,7 @@
               <div class="mt-3 mb-3">
                 <h4>Services</h4>
               </div>
-              <div class="row row-cols-2">
+              <div class="row row-cols-lg-2 row-cols-md-1 direction-services-display-sm"">
                 <div
                   v-for="service in data.services"
                   :key="service.name"
@@ -413,17 +413,38 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "../../sass/partials/variables";
-
-.typologyBtn {
-  padding: 20px !important;
-  background-color: #ffffff;
-  border: 1px solid $tertiaryColor;
-}
-
-.textLink {
-  background-color: unset;
-  border: unset;
-  text-decoration: underline;
-}
-</style>
+  @import "../../sass/partials/variables";
+  
+  .typologyBtn {
+    padding: 20px !important;
+    background-color: #ffffff;
+    border: 1px solid $tertiaryColor;
+  }
+  
+  .textLink {
+    background-color: unset;
+    border: unset;
+    text-decoration: underline;
+  }
+  
+  @media only screen and (max-width: 768px){
+      .direction-services-display-sm{
+          flex-direction: column;
+      }
+  }
+  @media only screen and (max-width: 571px){
+      .direction-typologies-display-sm{
+          flex-direction: column;
+      }
+  }
+  @media only screen and (max-width: 571px){
+      .pe-4{
+          padding-right: 0.3rem !important;
+      }
+  }
+  @media only screen and (max-width: 420px){
+      .items-start{
+          justify-content: start !important;
+      }
+  }
+  </style>

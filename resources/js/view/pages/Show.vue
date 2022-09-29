@@ -3,11 +3,10 @@
         <div>
             <NavBar></NavBar>
         </div>
-        
-        <div class="container py-5">
-            <div>
-                <h2>{{accommodation[0].title}}</h2>
-                <div class="d-flex gap-3 align-items-end">
+        <div class="no-visible">
+            <div class="p-2">
+                <p class="title-font">{{accommodation[0].title}}</p>
+                <div class="d-flex gap-3 align-items-center">
                     <div id="sectionPhoto">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                             class="bi bi-star-half" viewBox="0 0 16 16">
@@ -15,11 +14,35 @@
                                 d="M5.354 5.119 7.538.792A.516.516 0 0 1 8 .5c.183 0 .366.097.465.292l2.184 4.327 4.898.696A.537.537 0 0 1 16 6.32a.548.548 0 0 1-.17.445l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256a.52.52 0 0 1-.146.05c-.342.06-.668-.254-.6-.642l.83-4.73L.173 6.765a.55.55 0 0 1-.172-.403.58.58 0 0 1 .085-.302.513.513 0 0 1 .37-.245l4.898-.696zM8 12.027a.5.5 0 0 1 .232.056l3.686 1.894-.694-3.957a.565.565 0 0 1 .162-.505l2.907-2.77-4.052-.576a.525.525 0 0 1-.393-.288L8.001 2.223 8 2.226v9.8z" />
                         </svg>
                     </div>
-                    <h5 class="mb-0">{{accommodation[0].address}}</h5>
+                    <h5 class="mb-0 subtitle-font">{{accommodation[0].address}}</h5>
                 </div>
             </div>
-            <div class="row mb-5">
                 <div class="col-8">
+                    <!-- da sistemare path immagini -->
+                    <div class="py-3">
+                        <img class="img-fluid" src="https://www.myhocasa.it/images/slide/0001new.jpg"
+                            :alt="'Accommodation of ' + accommodation[0].title">
+                    </div>
+                </div>
+        </div>
+        
+        
+        <div class="container py-5">
+            <div class="visible">
+                <p class="title-font">{{accommodation[0].title}}</p>
+                <div class="d-flex gap-3 align-items-center">
+                    <div id="sectionPhoto">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                            class="bi bi-star-half" viewBox="0 0 16 16">
+                            <path
+                                d="M5.354 5.119 7.538.792A.516.516 0 0 1 8 .5c.183 0 .366.097.465.292l2.184 4.327 4.898.696A.537.537 0 0 1 16 6.32a.548.548 0 0 1-.17.445l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256a.52.52 0 0 1-.146.05c-.342.06-.668-.254-.6-.642l.83-4.73L.173 6.765a.55.55 0 0 1-.172-.403.58.58 0 0 1 .085-.302.513.513 0 0 1 .37-.245l4.898-.696zM8 12.027a.5.5 0 0 1 .232.056l3.686 1.894-.694-3.957a.565.565 0 0 1 .162-.505l2.907-2.77-4.052-.576a.525.525 0 0 1-.393-.288L8.001 2.223 8 2.226v9.8z" />
+                        </svg>
+                    </div>
+                    <h5 class="mb-0 subtitle-font">{{accommodation[0].address}}</h5>
+                </div>
+            </div>
+            <div class="row container-img mb-5">
+                <div class="col-8 visible">
                     <!-- da sistemare path immagini -->
                     <div class="py-3">
                         <img class="img-fluid img_debug" src="https://www.myhocasa.it/images/slide/0001new.jpg"
@@ -28,7 +51,7 @@
                 </div>
                 <div class="col-4">
                     <div class="py-3">
-                        <h4 class="text-uppercase primaryColorText">mappa tom tom da sistemare</h4>
+                        <p class="m-0 text-uppercase primaryColorText">mappa tom tom da sistemare</p>
                         <img class="w-100 img_debug"
                             src="https://www.google.com/maps/d/thumbnail?mid=1R-z0nvlZTWYN9LH3bxAtMhZScxo&hl=it"
                             :alt="'Accommodation of ' + accommodation[0].title">
@@ -111,7 +134,7 @@
                         <div class="py-4" id="sectionServices">
                             <div>
                                 <h4 class="mb-3">What will you find</h4>
-                                <ul class="list-unstyled row row-cols-2">
+                                <ul class="list-unstyled row row-cols-lg-2 row-cols-sm-3 direction-display-sm">
                                     <li class="py-2 fw-light" v-for="serv in accommodation" :key="serv.name">
                                         <i class="me-3" :class="serv.icon"></i>
                                         {{serv.name}}
@@ -123,7 +146,7 @@
 
                     <hr>
 
-                    <div class="py-5 row row-cols-2 g-5">
+                    <div class="py-5 row row-cols-lg-2 row-cols-sm-1 direction-display-sm g-5">
                         <div class="col">
                             <h6>Garanzia di conformità</h6>
                             <p>Se in qualsiasi momento durante il soggiorno ti rendi conto che l'alloggio non
@@ -199,8 +222,8 @@
 
                 <div class="py-5" id="sectionInfo">
                     <h4 class="mb-5">Things to know before booking</h4>
-                    <div class="row">
-                        <div class="col">
+                    <div class="row direction-display-sm">
+                        <div class="col py-2">
                             <div>
                                 <h6>general rules</h6>
                                 <ul class="list-unstyled">
@@ -232,7 +255,7 @@
                                 </ul>
                             </div>
                         </div>
-                        <div class="col">
+                        <div class="col py-2">
                             <div>
                                 <h6>general information</h6>
                                 <ul class="list-unstyled">
@@ -258,13 +281,10 @@
                 </div>
             </div>
         </div>
-        <div>
-            <TheFooter></TheFooter>
-        </div>
+
         <!-- sezione footer statica con link fasulli -->
         <!-- <FooterShow></FooterShow> -->
     </div>
-    
 </template>
 
 
@@ -342,6 +362,22 @@ export default {
     visibility: visible;
 }
 
+.title-font{
+    font-size: 28px;
+    font-weight: 500;
+}
+
+@media only screen and (max-width: 448px){
+    .title-font{
+        font-size: 17px;
+        font-weight: 600;
+    }
+    .subtitle-font{
+        font-size: 0.7rem !important;
+        font-weight: 500 !important;
+    }
+}
+
 .img_debug {
     border-radius: 1rem;
 }
@@ -390,5 +426,45 @@ i {
 
 .border {
     border-top: 1px solid $tertiaryColor;
+}
+
+@media only screen and (max-width: 992px) {
+    .container-img{
+        flex-direction: column;
+        align-content: center;
+    }
+    .col-8{
+        width: 100%;
+    }
+    .col-4 {
+        width: 100%;
+
+        div{
+            overflow: hidden;
+            max-height: 600px;
+            border: solid #f8fafc;
+            border-radius: 0 0 20px 20px;
+        }
+    }
+}
+
+@media only screen and (max-width: 577px){
+    .direction-display-sm{
+        flex-direction: column;
+    }
+   
+}
+.no-visible{
+    display: none;
+}
+@media only screen and (max-width: 600px) {
+    .visible{
+        display: none;
+    }
+
+    .no-visible{
+        display: flex;
+        flex-direction: column;
+    }
 }
 </style>
