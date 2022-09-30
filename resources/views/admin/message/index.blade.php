@@ -7,17 +7,16 @@
 
         {{-- Sidebar --}}
 
-        <div class="col-2 side-bar-message border border-primary full-height-message-container">
-            <div class="text-center">
-                <i class="fa-solid fa-envelope fs-1"></i>
+        <div class="col-2 side-bar-message  full-height-message-container">
+            <h3>Accommodations</h3>
+            <div class="row flex-column">
+                @foreach ($accommodations as $accommodation)
+                    <div class="card">
+                        {{$accommodation->title}}
+                    </div>
+                @endforeach
             </div>
-            <ul>
-                <li class="mb-3"><a href="#">Prova layout</a></li>
-                <li class="mb-3"><a href="#">Prova layout</a></li>
-                <li class="mb-3"><a href="#">Prova layout</a></li>
-                <li class="mb-3"><a href="#">Prova layout</a></li>
-                <li class="mb-3"><a href="#">Prova layout</a></li>
-            </ul>
+            
         </div>
 
         {{-- Main section di destra --}}
