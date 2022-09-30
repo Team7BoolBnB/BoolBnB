@@ -190,9 +190,10 @@ class AccommodationController extends Controller
      */
     public function update(AccommodationRequest $request, $slug)
     {  
-        
+       
+
         $data = $request->validated();
- 
+       
         $accommodation = $this->findBySlug($slug);
       
         if ($data["title"] !== $accommodation->title) {
@@ -200,31 +201,35 @@ class AccommodationController extends Controller
            
             $accommodation->slug = $this->generateSlug($data["title"]);
         }
-        $accommodation->title=$data["title"];
-        if($accommodation->image){
-            Storage::delete($accommodation->image);
-            $accommodation->image = Storage::put("/accommodation", $data["image"]);
-        }
-        else{
-            $accommodation->image = Storage::put("/accommodation", $data["image"]);
-        }
-       
-
         
 
-        if (key_exists("services", $data) && key_exists("sponsorships", $data)) {
+        //non ricevo available ed immagine--le bypasso
 
-            $accommodation->services()->sync($data["services"]);
-            $accommodation->sponsorship()->sync($data["sponsorships"]);
-        } elseif (key_exists("services", $data)) {
-            $accommodation->services()->sync([]);
-        } elseif (key_exists("sponsorships", $data)) {
-
-            $accommodation->sponsorship()->sync($data["sponsorships"]);
+        if(key_exists("image",$data)){
+            Storage::delete($accommodation->image);
+            $data["image"] = Storage::put("/accommodation", $data["image"]);
+        }
+       
+        if (key_exists("available", $data)) {
+            if ($data["available"]=="on"){
+                $data["available"] = 1;
+            }
+            else{
+                $data["available"] = 0;
+            }
+        } 
+        else{
+            $data["available"] = 0;
         }
 
+        if (key_exists("services", $data) ) {
 
-        $accommodation->update();
+            $accommodation->services()->sync($data["services"]);
+           
+        } 
+
+
+        $accommodation->update($data);
 
         return  redirect()->route("admin.accommodation.show", $accommodation->slug);
     }

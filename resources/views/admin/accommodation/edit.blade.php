@@ -66,7 +66,7 @@
                 <div class="d-flex">
                     
                     <input type="file" name="image" class="form-control-file @error('image') is-invalid @enderror"
-                        id="image" value="{{$accommodation->image ?? old('image') }}" >
+                        id="image" value="{{old('image') ?? $accommodation->image  }}" >
 
                 </div>
                 <div class="invalid-feedback">
@@ -81,7 +81,7 @@
             <div class="form-floating mb-5">
                 <textarea type="text" rows="5"
                     class="form-control formTextArea {{ $errors->has('description') ? 'is-invalid' : '' }}" name="description"
-                    id="descriptionInput" placeholder="Insert a description..." required="required">{!! old('description') ?? $accommodation->description !!}</textarea>
+                    id="descriptionInput" placeholder="Insert a description..." required="required"> {{old('description') ?? $accommodation->description }}</textarea>
                 <label for="descriptionInput">Insert a description for your accommodation</label>
                 <div class="invalid-feedback">
                     @foreach ($errors->get('description') as $error)
@@ -235,7 +235,7 @@
             <div class="my-5">
                 <div class="form-check form-switch">
                     <input class="form-check-input formSwitch" type="checkbox" role="switch" id="availableInput"
-                        name="available" checked>
+                        name="available"  {{$accommodation->available ? 'checked' : ''}} >
                     <label class="form-check-label" for="availableInput">
                         <h5>Is it visible?</h5>
                     </label>

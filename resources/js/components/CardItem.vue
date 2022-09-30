@@ -23,7 +23,13 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss" scoped>
+
+@import "../../sass/partials/variables";
+
+h5 {
+    color: $quaternaryColor;
+}
 .body-height{
     height: 100vh;
 }
