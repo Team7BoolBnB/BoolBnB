@@ -129,7 +129,13 @@
         </div>
         <div class="col-4">
           <div class="py-3">
-            <img class="w-100 img_debug img-smollest-display" src="https://www.google.com/maps/d/thumbnail?mid=1R-z0nvlZTWYN9LH3bxAtMhZScxo&hl=it" :alt="'Accommodation of ' + accommodation[0].title" />
+
+            <p class="m-0 text-uppercase primaryColorText">
+              mappa tom tom da sistemare
+            </p>
+
+            <MapsContainer :latitude="accommodation[0].latitude" :longitude="accommodation[0].longitude"></MapsContainer>
+
           </div>
         </div>
       </div>
@@ -344,10 +350,12 @@
 import Axios from "axios";
 import NavBar from "../../components/NavBar.vue";
 import { AtomSpinner } from "epic-spinners";
-import TheFooter from "../../components/TheFooter.vue";
 
+import MapsContainer from "../../components/MapsContainer.vue";
+import TheFooter from "../../components/TheFooter.vue";
 export default {
-    components: { NavBar, AtomSpinner, TheFooter },
+    components: { NavBar, AtomSpinner, MapsContainer, TheFooter  },
+
   data() {
     return {
       endAlert: true,
@@ -426,6 +434,7 @@ export default {
                 element2.classList.add("d-none"); */
       }
     },
+    
     fetch() {
       Axios.get("/api/accommodations/" + this.$route.params.slug).then(
         (resp) => {
@@ -433,6 +442,7 @@ export default {
           this.accommodation = resp.data.accommodation;
           this.typology = resp.data.typology;
           this.user = resp.data.user;
+          
         }
       );
     },
@@ -468,6 +478,7 @@ export default {
   },
 
   mounted() {
+   
     this.check = false;
     this.fetch();
   },
