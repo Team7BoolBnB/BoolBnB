@@ -7,8 +7,7 @@
             <div class="row">
                 <div class="col overflow-auto">
                     <div>
-                        <h2>Accommodation</h2>
-                        <p class="font-sm">"{{ $accommodation->title }}"</p>
+                        <h2>{{ $accommodation->title }}</h2>
                     </div>
                     
                 </div>
@@ -66,52 +65,61 @@
 
         <div class="row row-cols-2 g-3">
             <div class="col-8">
-                <img style="border-radius: 2rem;" class="img-fluid" src="{{ asset('storage/' . $accommodation->image) }}" alt="{{ $accommodation->title }}">
+                <img width="90%" style="min-height: 300px" class="img-fluid rounded" src="{{ asset('storage/' . $accommodation->image) }}" alt="{{ $accommodation->title }}">
             </div>
-            <div id="map" class="col-4">
+            <div id="map" class="col-4 rounded" height="100%">
                 <input id="latInput" type="text" class="d-none" value="{{$accommodation->latitude}}">
                 <input id="lonInput" type="text" class="d-none" value="{{$accommodation->longitude}}">
             </div>
         </div>
         <div class="row g-5">
             <div class="col">
-                <h4 class="font-sm py-4"> Typology: <span class="fst-italic fw-light">{{ $accommodation->typology->name }}</span></h4>
-                <div>
-                    <p class="py-4"><strong>Description:</strong><br>{{ $accommodation->description }}</p>
-                </div>
+                <h5 class="font-sm py-4"> Typology: {{ $accommodation->typology->name }}</h5>
             </div>
             <div class="col">
-                <h4 class="font-sm py-4 text-end"> {{ $accommodation->address }}</h4>
-                <div class="row flex-column">
-                    <div class="col">
-                        <div class="py-4">
-                            <ul class="list-unstyled d-flex w-100 justify-content-between">
-                                <li class="mb-3"><strong>Rooms:</strong><br>{{ $accommodation->rooms }}</li>
-                                <li class="mb-3"><strong>Beds:</strong><br>{{ $accommodation->beds }}</li>
-                                <li class="mb-3"><strong>Bathrooms:</strong><br>{{ $accommodation->bathrooms }}</li>
-                                <li class="mb-3"><strong>Square meters:</strong><br>{{ $accommodation->mt_square }}</li>
-                                <li class="mb-3">
-                                    @if($accommodation->available == "0")
-                                        <strong>Available:</strong><br>No
-                                    @else
-                                        <strong>Available:</strong><br>Yes
-                                    @endif
-                                </li>
-                            </ul>
-                        </div>
-                        <hr>
-                    </div>
-                    <div class="col">
-                        <div class="pt-5">
-                            <span class="mb-3"><strong>Services:</strong></span>
-                            <ul class="list-unstyled d-flex w-100 justify-content-between">
-                                @dump($accommodation->services)
-                            </ul>
-                        </div>
-                    </div>
-                </div>
+                <h5 class="font-sm py-4 text-end"> {{ $accommodation->address }}</h4>
             </div>
         </div>
+
+        <hr>
+        
+        <div class="row py-4">
+            <div class="col">
+                <p><strong>Description:</strong><br>{{ $accommodation->description }}</p>
+            </div>
+        </div>
+
+        <hr>
+        
+        <div class="row pt-4 pb-3">
+            <div class="col">
+                <ul class="list-unstyled d-flex w-100 justify-content-between">
+                    <li><h5>Rooms:</h5><p>{{ $accommodation->rooms }}</p></li>
+                    <li><h5>Beds:</h5><p>{{ $accommodation->beds }}</p></li>
+                    <li><h5>Bathrooms:</h5><p>{{ $accommodation->bathrooms }}</p></li>
+                    <li><h5>Square meters:</h5><p>{{ $accommodation->mt_square }}</p></li>
+                    <li>
+                        @if($accommodation->available == "0")
+                            <h5>Available:</h5><p>No</p>
+                        @else
+                            <h5>Available:</h5><p>Yes</p>
+                        @endif
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <hr>
+
+        <div class="row py-4">
+            <div class="col">
+                <h5 class="pb-2">Services:</h5>
+                    @foreach ($accommodation->services as $item)
+                        <p>{{$item->name}}</p>
+                    @endforeach
+            </div>
+        </div>
+
 
         {{-- <div>
             <a href="{{ route('admin.accommodation.edit', $accommodation->id) }}" class="cdBtn btn btn-primary">
