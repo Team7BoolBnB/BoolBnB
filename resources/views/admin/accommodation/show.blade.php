@@ -68,8 +68,9 @@
             <div class="col-8">
                 <img style="border-radius: 2rem;" class="img-fluid" src="{{ asset('storage/' . $accommodation->image) }}" alt="{{ $accommodation->title }}">
             </div>
-            <div class="col-4">
-                <img style="border-radius: 2rem; max-width: 100%;"  class="h-100" src="https://www.google.com/maps/d/thumbnail?mid=1R-z0nvlZTWYN9LH3bxAtMhZScxo&hl=it" alt="">
+            <div id="map" class="col-4">
+                <input id="latInput" type="text" class="d-none" value="{{$accommodation->latitude}}">
+                <input id="lonInput" type="text" class="d-none" value="{{$accommodation->longitude}}">
             </div>
         </div>
         <div class="row g-5">
