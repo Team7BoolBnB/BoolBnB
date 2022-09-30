@@ -23,7 +23,7 @@
             
               <div class="col" v-for="accommodation in accommodations" :key="accommodation.id">
 
-                <router-link :to="{ name: 'accommodations.show' , params : { slug:accommodation.slug} }">  <CardItem :accommodation="accommodation"></CardItem></router-link>
+                <router-link class="text-decoration-none" :to="{ name: 'accommodations.show' , params : { slug:accommodation.slug} }">  <CardItem :accommodation="accommodation"></CardItem></router-link>
                 
               </div>
           </div>
