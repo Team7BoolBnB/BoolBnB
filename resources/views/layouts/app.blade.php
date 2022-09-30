@@ -49,6 +49,8 @@
                     <a class="nav-link {{ Request::route()->getName() === 'admin.home' ? 'navActivePage' : '' }}" aria-current="page" href="/admin">Dashboard</a>
                     <a class="nav-link {{ Request::route()->getName() === 'admin.accommodation.index' ? 'navActivePage' : '' }}" href="{{ route('admin.accommodation.index') }}">Accommodations</a>
                     <a class="nav-link {{ Request::route()->getName() === 'admin.sponsorship.index' ? 'navActivePage' : '' }}" href="{{ route('admin.sponsorship.index') }}">Sponsorships</a>
+                    <a class="nav-link {{ Request::route()->getName() === 'admin.message.index' ? 'navActivePage' : '' }}" href="{{ route('admin.message.index') }}">Messages</a>
+
                     
                 {{-- User --}}
 

@@ -50,7 +50,7 @@
                 </div>
               </button>
               <button v-else type="button" class="btn p-0 border-0 d-flex align-items-center">
-                <div class="px-2">Ciao {{user.name}}</div>
+                <div class="px-2">Ciao {{user.firstName}}</div>
                 <div class="p-1">
                   <a href="/admin"><i class="nav-link p-2 border border-dark rounded-circle border-opacity-10 fa-solid fa-user"></i></a>
                 </div>
@@ -91,9 +91,10 @@
 export default {
   data(){
     return{
-      user : true
+     
     }
-  }
+  },
+  props:["user"]
 };
 </script>
 
