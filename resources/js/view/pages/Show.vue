@@ -236,9 +236,12 @@
                   <textarea class="form-control" id="messageInput" rows="4" style="height: 6rem" v-model="content"></textarea>
                 </div>
                 <div class="mb-3 text-center">
-                  <button type="submit" class="basicBtn primaryBtn bigBtn">Send</button>
+                  <button v-if="email && content && name " type="submit" class="basicBtn primaryBtn bigBtn">Send</button>
+                  <button v-else type="submit" class="basicBtn primaryBtn bigBtn" @click="alertForm">Send</button>
                 </div>
-
+                <div v-if="alert " class="alert alert-danger text-center w-50 mx-auto mt-3" role="alert">
+                            <span>Enter all the required data</span>
+                        </div>
                 <div v-if="messageSended && endAlert" class="alert alert-success text-center w-50 mx-auto mt-3" role="alert">
                   <span>Message sent</span>
                 </div>
@@ -369,6 +372,7 @@ export default {
       messageSended: false,
       messageDeny: false,
       check: false,
+      alert:false,
 
       accommodation: {},
       user: null,
@@ -438,7 +442,9 @@ export default {
                 element2.classList.add("d-none"); */
       }
     },
-    
+    alertForm(){
+      this.alert=true
+    },
     fetch() {
       Axios.get("/api/accommodations/" + this.$route.params.slug).then(
         (resp) => {
@@ -456,6 +462,7 @@ export default {
       return (roundedNum = num.toFixed(1));
     },
     onFormSubmit() {
+     
       const formData = new FormData();
       formData.append("email", this.email);
       formData.append("name", this.name);
@@ -466,6 +473,7 @@ export default {
         this.timerAlert();
         if (resp.data.message) {
           this.messageSended = true;
+          this.alert=false
           
         } else {
           this.messageDeny = true;
