@@ -65,13 +65,6 @@
             
             
           </div>
-          <div class="justify-content-center login-no">
-            <ul class="p-0 list-unstyled d-flex">
-              <li class="p-1"><a class="nav-link" href="/admin"><i class="px-1 fa-solid fa-right-to-bracket"></i>Registrati</a></li>
-              <li class="p-1"><a class="nav-link" href="/admin"><i class="px-1 fa-solid fa-clipboard-user"></i>Area Host</a></li>
-              <li class="p-1"><a class="nav-link" href="/login"><i class="px-1 fa-solid fa-door-open"></i>Accedi</a></li>
-            </ul>
-          </div>
           </div>
           <!-- menu -->
           <!-- <div class="collapse navbar-collapse d-flex justify-content-center" id="navbarText">

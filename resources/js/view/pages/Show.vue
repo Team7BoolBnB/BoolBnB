@@ -1,7 +1,7 @@
 <template>
   <div v-if="check" class="position-relative">
     <div>
-      <NavBar></NavBar>
+      <NavBarShow :user="user"></NavBarShow>
     </div>
 
     <!-- Mobile section -->
@@ -145,7 +145,8 @@
         <!-- col di sinistra con info accommodation in scroll -->
         <div class="col-8">
           <div>
-            <h5>{{typology.name}}</h5>
+            <h5>{{typology.name}} - Host: {{ userDetails[0].firstName }}</h5>
+           
             <p class="pb-4">{{ accommodation[0].rooms }} Rooms  · {{ accommodation[0].beds }} Beds · {{ accommodation[0].bathrooms }} Bathrooms</p>
 
             <hr />
@@ -348,13 +349,14 @@
 <script>
 
 import Axios from "axios";
-import NavBar from "../../components/NavBar.vue";
+import NavBarShow from "../../components/NavBarShow.vue";
 import { AtomSpinner } from "epic-spinners";
 
 import MapsContainer from "../../components/MapsContainer.vue";
 import TheFooter from "../../components/TheFooter.vue";
+
 export default {
-    components: { NavBar, AtomSpinner, MapsContainer, TheFooter  },
+    components: { NavBarShow, AtomSpinner, MapsContainer, TheFooter},
 
   data() {
     return {
@@ -362,6 +364,8 @@ export default {
       content: "",
       name: "",
       email: "",
+      user:null,
+      userDetails:null,
       messageSended: false,
       messageDeny: false,
       check: false,
@@ -442,6 +446,7 @@ export default {
           this.accommodation = resp.data.accommodation;
           this.typology = resp.data.typology;
           this.user = resp.data.user;
+          this.userDetails=resp.data.userDetails;
           
         }
       );
