@@ -18,11 +18,16 @@ Route::middleware("auth")->group(function () {
     Route::get("/sponsorship","Api\PaymentController@generate");
     Route::post("/make/payment","Api\PaymentController@makePayment");
     Route::post("/update/database","Api\PaymentController@update");
+    Route::get("/messages","Api\MessageController@index");
+    Route::get("/messages/{message}","Api\MessageController@show");
+
 
     });
 
 Route::get("/accommodations","Api\HomeController@index");
 Route::post("/messages","Api\MessageController@store");
+
+
 
 /* Route::middleware('auth')->get("/accommodations/sponsorship","Api\HomeController@sponsorshipData");
 

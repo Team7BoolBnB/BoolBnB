@@ -2,12 +2,34 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Accommodation;
 use App\Http\Controllers\Controller;
 use App\Message;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class MessageController extends Controller
 {
+    public function index()
+    {
+        $user_id = Auth::id();
+
+        //Get all the accommodations of logged user
+        $accommodations = Accommodation::where("user_id", $user_id)->get();
+
+    
+        return response()->json($accommodations);
+    }
+    public function show($id)
+    {
+        
+        $messages = Message::where("accommodation_id", $id)->get();
+
+      
+
+
+        return response()->json($messages);
+    }
     public function store(Request $request){
         $data=$request->validate([
             "accommodation_id"=>"required",

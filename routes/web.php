@@ -29,7 +29,7 @@ Route::middleware("auth")
 
         Route::resource("accommodation", "AccommodationController");
         Route::resource("sponsorship", "SponsorshipController");
-        Route::resource("message", "MessageController");
+        
 
     });
 Route::get('/backend', 'HomeController@index')->name('backend');
