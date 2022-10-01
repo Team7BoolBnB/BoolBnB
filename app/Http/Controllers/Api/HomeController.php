@@ -23,7 +23,7 @@ class HomeController extends Controller
         $sponsorized = [];
 
         for ($i=0; $i < count($accommodations); $i++) { 
-            if (count($accommodations[$i]->sponsorship) > 0) {
+            if (count($accommodations[$i]->sponsorship) > 0 && $accommodations[$i]->available) {
                 $sponsorized[]=$accommodations[$i];
                 
             }

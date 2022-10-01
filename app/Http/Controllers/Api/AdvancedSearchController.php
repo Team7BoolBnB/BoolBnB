@@ -133,7 +133,7 @@ $raw = 'SELECT *,
                          `accommodations` 
                 
                  HAVING
-                         `distance` <= '.$filters["radius"].'
+                         `distance` <= '.$filters["radius"].' AND `accommodations`.`available` = 1
                  ORDER BY
                          `distance` ASC;';
 
@@ -196,7 +196,7 @@ $raw = 'SELECT *,
         
         '.$query.'
         HAVING
-            `distance` <= '.$filters["radius"].'
+            `distance` <= '.$filters["radius"].' AND `accommodations`.`available` = 1
         ORDER BY
             `distance` ASC;';
 
