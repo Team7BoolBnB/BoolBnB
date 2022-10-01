@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Service;
 use App\Typology;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
 
@@ -76,8 +77,9 @@ $raw2 = 'SELECT
     WHERE accommodations.slug =  "'.$slug.'";';
 
         $accommodation = DB::select($raw);
-        $user=DB::select($raw2);
+        $userDetails=DB::select($raw2);
         $typologies = Typology::findOrFail($accommodation[0]->typology_id);
+        $user=Auth::user();
         /* $typologies = [];
 
 
@@ -88,6 +90,7 @@ $raw2 = 'SELECT
         return response()->json([
             "typology" => $typologies,
             "accommodation" => $accommodation,
+            "userDetails"=>$userDetails,
             "user"=>$user
         ]);
     }
@@ -130,7 +133,7 @@ $raw = 'SELECT *,
                          `accommodations` 
                 
                  HAVING
-                         `distance` <= '.$filters["radius"].'
+                         `distance` <= '.$filters["radius"].' AND `accommodations`.`available` = 1
                  ORDER BY
                          `distance` ASC;';
 
@@ -193,7 +196,7 @@ $raw = 'SELECT *,
         
         '.$query.'
         HAVING
-            `distance` <= '.$filters["radius"].'
+            `distance` <= '.$filters["radius"].' AND `accommodations`.`available` = 1
         ORDER BY
             `distance` ASC;';
 

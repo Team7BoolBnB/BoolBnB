@@ -1,7 +1,7 @@
 <template>
   <div v-if="check" class="position-relative">
     <div>
-      <NavBar></NavBar>
+      <NavBarShow :user="user"></NavBarShow>
     </div>
 
     <!-- Mobile section -->
@@ -145,7 +145,8 @@
         <!-- col di sinistra con info accommodation in scroll -->
         <div class="col-8">
           <div>
-            <h5>{{typology.name}}</h5>
+            <h5>{{typology.name}} - Host: {{ userDetails[0].firstName }}</h5>
+           
             <p class="pb-4">{{ accommodation[0].rooms }} Rooms  · {{ accommodation[0].beds }} Beds · {{ accommodation[0].bathrooms }} Bathrooms</p>
 
             <hr />
@@ -235,9 +236,12 @@
                   <textarea class="form-control" id="messageInput" rows="4" style="height: 6rem" v-model="content"></textarea>
                 </div>
                 <div class="mb-3 text-center">
-                  <button type="submit" class="basicBtn primaryBtn bigBtn">Send</button>
+                  <button v-if="email && content && name " type="submit" class="basicBtn primaryBtn bigBtn">Send</button>
+                  <button v-else type="submit" class="basicBtn primaryBtn bigBtn" @click="alertForm">Send</button>
                 </div>
-
+                <div v-if="alert " class="alert alert-danger text-center w-50 mx-auto mt-3" role="alert">
+                            <span>Enter all the required data</span>
+                        </div>
                 <div v-if="messageSended && endAlert" class="alert alert-success text-center w-50 mx-auto mt-3" role="alert">
                   <span>Message sent</span>
                 </div>
@@ -348,13 +352,14 @@
 <script>
 
 import Axios from "axios";
-import NavBar from "../../components/NavBar.vue";
+import NavBarShow from "../../components/NavBarShow.vue";
 import { AtomSpinner } from "epic-spinners";
 
 import MapsContainer from "../../components/MapsContainer.vue";
 import TheFooter from "../../components/TheFooter.vue";
+
 export default {
-    components: { NavBar, AtomSpinner, MapsContainer, TheFooter  },
+    components: { NavBarShow, AtomSpinner, MapsContainer, TheFooter},
 
   data() {
     return {
@@ -362,9 +367,12 @@ export default {
       content: "",
       name: "",
       email: "",
+      user:null,
+      userDetails:null,
       messageSended: false,
       messageDeny: false,
       check: false,
+      alert:false,
 
       accommodation: {},
       user: null,
@@ -434,7 +442,9 @@ export default {
                 element2.classList.add("d-none"); */
       }
     },
-    
+    alertForm(){
+      this.alert=true
+    },
     fetch() {
       Axios.get("/api/accommodations/" + this.$route.params.slug).then(
         (resp) => {
@@ -442,6 +452,7 @@ export default {
           this.accommodation = resp.data.accommodation;
           this.typology = resp.data.typology;
           this.user = resp.data.user;
+          this.userDetails=resp.data.userDetails;
           
         }
       );
@@ -451,6 +462,7 @@ export default {
       return (roundedNum = num.toFixed(1));
     },
     onFormSubmit() {
+     
       const formData = new FormData();
       formData.append("email", this.email);
       formData.append("name", this.name);
@@ -461,6 +473,7 @@ export default {
         this.timerAlert();
         if (resp.data.message) {
           this.messageSended = true;
+          this.alert=false
           
         } else {
           this.messageDeny = true;
