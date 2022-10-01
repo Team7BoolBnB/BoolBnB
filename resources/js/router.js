@@ -5,6 +5,7 @@ import AdvancedSearch from "./view/AdvancedSearch.vue"
 import Show from "./view/pages/Show.vue"
 import Sponsorship from "./view/Sponsorship.vue"
 import Payment from "./components/Payment.vue"
+import Messages from "./view/Messages.vue"
 Vue.use(VueRouter);
 
 const routes = [
@@ -19,6 +20,8 @@ const routes = [
     {path: "/accommodations/:slug" , component: Show ,name: "accommodations.show",},
     {path: "/admin/sponsorship/create/buy" , component: Sponsorship ,name: "sponsorship.buy",},
     {path: "/admin/sponsorship/payment/:date/:accommodation_id/:sponsorship_id" , component: Payment ,name: "sponsorship.payment",},
+    {path: "/admin/messages" , component: Messages ,name: "messages",},
+
 
     
 

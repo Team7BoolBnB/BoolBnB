@@ -7,12 +7,14 @@
 <script>
 export default {
   props:{
-    latitude:Number,
-    longitude:Number
+    latitude:String,
+    longitude:String
   },
-  data:{
-    latitude:null,
-    logitude:null,
+  data(){
+    return{
+     
+    }
+    
   },
     methods:{
         mapRender(){
@@ -24,12 +26,10 @@ export default {
 var marker = L.marker([this.latitude, this.longitude]).addTo(map);
     }
     },
-    beforeMount(){
-      this.latitude=latitude
-      this.longitude=longitude
-    },
+ 
     mounted(){
         this.mapRender();
+      
     }
 }
 </script>

@@ -461,12 +461,16 @@ export default {
         this.timerAlert();
         if (resp.data.message) {
           this.messageSended = true;
+          
         } else {
           this.messageDeny = true;
         }
       });
     },
     timerAlert() {
+      this.content=null;
+          this.email=null;
+          this.name=null;
       setTimeout(() => {
         this.endAlert = false;
       }, 3000);
