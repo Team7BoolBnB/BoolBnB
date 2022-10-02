@@ -142,13 +142,14 @@ $raw = 'SELECT *,
             $accommodations = DB::select($raw);
         }
         else{
+           
             if(key_exists("beds",$filters) && $count==3){ $query='WHERE `accommodations`.`beds` >= '.$filters["beds"].'';};
             if(key_exists("rooms",$filters) && $count==3){$query='WHERE `accommodations`.`rooms` >= '.$filters["rooms"].'';};
             if(key_exists("bathrooms",$filters) && $count==3){$query='WHERE `accommodations`.`bathrooms` >= '.$filters["bathrooms"].'';};
-            if(key_exists("bathrooms",$filters) && key_exists("rooms",$filters) && $count==4){$query='WHERE `accommodations`.`bathrooms` >= '.$filters["bathrooms"].'AND `accommodations`.`rooms` >= '.$filters["rooms"].'';};
+            if(key_exists("bathrooms",$filters) && key_exists("rooms",$filters) && $count==4){$query='WHERE `accommodations`.`bathrooms` >= '.$filters["bathrooms"].' AND `accommodations`.`rooms` >= '.$filters["rooms"].'';};
             if(key_exists("bathrooms",$filters) && key_exists("beds",$filters) && $count==4){$query='WHERE `accommodations`.`beds` >= '.$filters["beds"].'   AND  `accommodations`.`bathrooms` >= '.$filters["bathrooms"].'';};
             if(key_exists("rooms",$filters) && key_exists("beds",$filters) && $count==4) { $query='WHERE `accommodations`.`beds` >= '.$filters["beds"].' AND `accommodations`.`rooms` >= '.$filters["rooms"].'';};
-            if(key_exists("rooms",$filters) && key_exists("bathrooms",$filters) && key_exists("beds",$filters) && $count==5) {$query='WHERE `accommodations`.`bathrooms` >= '.$filters["bathrooms"].'AND `accommodations`.`rooms` <= '.$filters["rooms"].' AND `accommodations`.`beds` <= '.$filters["beds"].'';};
+            if(key_exists("rooms",$filters) && key_exists("bathrooms",$filters) && key_exists("beds",$filters) && $count==5) { $query='WHERE `accommodations`.`beds` >= '.$filters["beds"].' AND `accommodations`.`rooms` >= '.$filters["rooms"].' AND `accommodations`.`bathrooms` >= '.$filters["bathrooms"].'';};
             
             //da fare ancora
             
@@ -177,10 +178,9 @@ $raw = 'SELECT *,
                 $query='WHERE `typologies`.`id` = '.$filters["typology_id"].'';
             } */
 
-            $raw = 'SELECT
+            $raw = 'SELECT Distinct
             `accommodations`.*,
-            `typologies`.`id`,
-            `services`.`id`,
+           
             ST_DISTANCE_SPHERE(
                 POINT(
                     `accommodations`.`longitude`,
@@ -198,7 +198,7 @@ $raw = 'SELECT *,
         HAVING
             `distance` <= '.$filters["radius"].' AND `accommodations`.`available` = 1
         ORDER BY
-            `distance` ASC;';
+            `distance` ASC; ';
 
 
 

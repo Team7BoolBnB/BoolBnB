@@ -18,7 +18,7 @@
       </div> -->
   
       <!-- sezione main con card => chiamata api -->
-      <div class="container py-5">
+      <div v-if="accommodations.length >0" class="container py-5">
           <div class="row row-cols-lg-4 row-cols-md-2 row-cols-sm-1">
             
               <div class="col" v-for="accommodation in accommodations" :key="accommodation.id">
@@ -26,6 +26,15 @@
                 <router-link class="text-decoration-none" :to="{ name: 'accommodations.show' , params : { slug:accommodation.slug} }">  <CardItem :accommodation="accommodation"></CardItem></router-link>
                 
               </div>
+          </div>
+      </div>
+      <div v-else class="container py-5">
+          <div class="row row-cols-lg-4 row-cols-md-2 row-cols-sm-1 ">
+            
+            Hey! it seems that there are still no accommodations for these filters, try again with other choices!
+            
+
+
           </div>
       </div>
   <div>
@@ -78,6 +87,7 @@ import TheFooter from '../components/TheFooter.vue';
     }).then((resp) => {
         this.accommodations = resp.data;
         this.check=true
+        
       });
       
     },
@@ -94,22 +104,22 @@ import TheFooter from '../components/TheFooter.vue';
         params.append("beds", this.apiParams.bedFilter);
       }
       if (this.apiParams.bathFilter) {
-        params.append("baths", this.apiParams.bathFilter);
+        params.append("bathrooms", this.apiParams.bathFilter);
       }
-      if (this.apiParams.typology_id) {
+      /* if (this.apiParams.typology_id) {
         params.append("typology_id", this.apiParams.typology_id);
-      }
+      } */
       if (this.apiParams.roomFilter) {
         params.append("rooms", this.apiParams.roomFilter);
       }
       if (this.apiParams.radius) {
         params.append("radius", this.apiParams.radius);
       }
-      if (this.apiParams.services) {
+     /*  if (this.apiParams.services) {
         this.apiParams.services.forEach((service) => {
           params.append("services", service);
         });
-      }
+      } */
       if (this.apiParams.latitude) {
         params.append("latitude", this.apiParams.latitude);
       }
