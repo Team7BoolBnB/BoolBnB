@@ -1,9 +1,11 @@
 <template>
+<div >
 
-  <div>
-    <modal-advanced-search :object="takeObject"></modal-advanced-search>
+  <div v-if="check">
+    <NavBar :user="user"></NavBar>
+   
       <!-- sezione con carosello di immagini -->
-      <div class="debug_carosel d-none">
+      <!-- <div class="debug_carosel d-none">
           <div class="heroOverlay d-none">
               <div class="h-100 d-flex justify-content-center align-items-center">
                   <div class="container_link_advanced d-flex flex-column justify-content-center align-items-center">
@@ -13,63 +15,82 @@
                   </div>
               </div>
           </div>
-      </div>
+      </div> -->
   
       <!-- sezione main con card => chiamata api -->
-      <div class="container py-5">
-          <h2 class="text-center pt-3 pb-5">Sponsorized Accommodations</h2>
-          <div class="row">
+      <div v-if="accommodations.length >0" class="container py-5">
+          <div class="row row-cols-lg-4 row-cols-md-2 row-cols-sm-1">
             
-              <div class="col-3" v-for="accommodation in accommodations" :key="accommodation.id">
-                  <CardItem :accommodation="accommodation"></CardItem>
+              <div class="col" v-for="accommodation in accommodations" :key="accommodation.id">
+
+                <router-link class="text-decoration-none" :to="{ name: 'accommodations.show' , params : { slug:accommodation.slug} }">  <CardItem :accommodation="accommodation"></CardItem></router-link>
+                
               </div>
           </div>
       </div>
-  
+      <div v-else class="container py-5">
+          <div class="row row-cols-lg-4 row-cols-md-2 row-cols-sm-1 ">
+            
+            Hey! it seems that there are still no accommodations for these filters, try again with other choices!
+            
+
+
+          </div>
+      </div>
+  <div>
+    <TheFooter></TheFooter>
   </div>
-  
+  </div>
+  <div v-else class="spinner flex-column py-4 mb-5">
+       
+       <atom-spinner :animation-duration="1000" :size="100" color="#ff1d5e" />
+   </div>
+   <modal-advanced-search :object="takeObject" ></modal-advanced-search>
+</div>
   </template>
   
   <script>
+    import { AtomSpinner } from "epic-spinners";
     import axios from "axios";
     import NavBar from "../components/NavBar.vue";
     import CardItem from "../components/CardItem.vue";
-  import ModalAdvancedSearch from '../components/ModalAdvancedSearch.vue';
+    import ModalAdvancedSearch from '../components/ModalAdvancedSearch.vue';
+import TheFooter from '../components/TheFooter.vue';
+
     
     export default {
-      components: { NavBar, CardItem, ModalAdvancedSearch },
+      components: { NavBar, CardItem, ModalAdvancedSearch, TheFooter, AtomSpinner },
       data() {
         return {
+            check:false,
             accommodations: [],
-            apiParams:null
+            apiParams:null,
+            user:null
         };
     },
     methods: {
         async fetchdata() {
             await axios.get("/api/accommodations").then((resp) => {
-                this.accommodations = resp.data;
+                this.accommodations = resp.data.accommodations;
+                this.user = resp.data.user;
+                this.check=true
             })
         },
         takeObject(data){
           this.apiParams=data
         },
         async filteringDataFetch() {
-      /* this.tomtomfetchCoordinate(); */
+     this.check=false
     await  axios.get("/api/advancedsearch/ ", {
       params: this.axiosParams
       
     }).then((resp) => {
         this.accommodations = resp.data;
-       
+        this.check=true
+        
       });
       
     },
-   /*  tomtomfetchCoordinate() {
-      Axios.get("https://api.tomtom.com/search/2/search/"+ encodeURIComponent(this.query) +".json?key=ziNw7Yn7FMXsuIsY65fMoQmyy7qrHcM3")
-     .then((resp) => {
-        console.log(resp.data);;
-      });
-    }, */
         
     },
     mounted() {
@@ -83,22 +104,22 @@
         params.append("beds", this.apiParams.bedFilter);
       }
       if (this.apiParams.bathFilter) {
-        params.append("baths", this.apiParams.bathFilter);
+        params.append("bathrooms", this.apiParams.bathFilter);
       }
-      if (this.apiParams.typology_id) {
+      /* if (this.apiParams.typology_id) {
         params.append("typology_id", this.apiParams.typology_id);
-      }
+      } */
       if (this.apiParams.roomFilter) {
         params.append("rooms", this.apiParams.roomFilter);
       }
       if (this.apiParams.radius) {
         params.append("radius", this.apiParams.radius);
       }
-      if (this.apiParams.services) {
+     /*  if (this.apiParams.services) {
         this.apiParams.services.forEach((service) => {
           params.append("services", service);
         });
-      }
+      } */
       if (this.apiParams.latitude) {
         params.append("latitude", this.apiParams.latitude);
       }
@@ -126,7 +147,12 @@
     
     <style lang="scss" scoped>
       @import "../../sass/partials/variables";
-      
+      .spinner{
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
       .debug_carosel {
         height: 50vh;
         background-image: url("../../../public/img/img-prova.jpg");

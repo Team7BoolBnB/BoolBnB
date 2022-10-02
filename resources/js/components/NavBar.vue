@@ -2,25 +2,70 @@
   <div class="sticky-top border">
     <header>
       <nav class="navbar navbar-expand-md navbar-light bg-white">
-        <div class="container d-flex justify-content-between">
+        <div class="container-fluid  small-device-nav">
           <!-- logo -->
-          <div>
-            <a class="navbar-brand" href="/">
-              <img src="/img/logo.png" alt="BoolBnb Logo" width="120" />
-            </a>
-            <button
-              class="navbar-toggler"
-              type="button"
-              data-bs-toggle="collapse"
-              data-bs-target="#navbarText"
-              aria-controls="navbarText"
-              aria-expanded="false"
-              aria-label="Toggle navigation"
-            >
+          <div class="row">
+            <div class="col">
+              <a class="navbar-brand" href="/">
+                <img src="/img/logo.png" alt="BoolBnb Logo" width="120" />
+              </a>
+            </div>
+            <div class="col">
+              <button
+                class="float-end navbar-toggler"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#navbarNavDropdown"
+                aria-controls="navbarText"
+                aria-expanded="false"
+                aria-label="Toggle navigation"
+              >
               <span class="navbar-toggler-icon"></span>
+              </button>
+            </div>
+          </div>
+          <div class="collapse navbar-collapse dropdown-style" id="navbarNavDropdown">
+          <div class="flex-grow-1 text-center">
+            <button
+              type="button"
+              class="basicBtn smallBtn primaryBtn"
+              data-bs-toggle="modal"
+              data-bs-target="#prova"
+            >
+            <i class="fa-solid fa-magnifying-glass"></i><span class="ms-2 filterModal">Start searching</span>
             </button>
           </div>
 
+          <!-- user -->
+          <div class="user-space login-view btn-group">
+            <div class=" hover-log link-log border border-secondary border-opacity-10 rounded-pill d-flex align-items-center">
+              <button v-if="!user" type="button" class="btn dropdown-toggle dropdown-toggle-split border-0" data-bs-toggle="dropdown" aria-expanded="false">
+                <div class="p-1 px-2">
+                  <i class="fa-solid fa-bars"></i>
+                </div>
+              </button>
+              <button v-if="!user" type="button" class="btn p-0 border-0">
+                <div class="p-1">
+                  <i class="p-2 border border-dark rounded-circle border-opacity-10 fa-solid fa-user"></i>
+                </div>
+              </button>
+              <a v-else type="button" href="/admin" class="btn p-0 border-0 d-flex align-items-center">
+                <div class="px-2">Ciao {{user.firstName}}</div>
+                <div class="p-1">
+                  <i class="nav-link p-2 border border-dark rounded-circle border-opacity-10 fa-solid fa-user"></i>
+                </div>
+              </a>
+              
+              <ul class="dropdown-menu dropdown-style-login">
+                <li class="p-1"><a class="nav-link" href="/register"><i class="px-1 fa-solid fa-right-to-bracket"></i>Registrati</a></li>
+                <li class="p-1"><a class="nav-link" href="/login"><i class="px-1 fa-solid fa-door-open"></i>Accedi</a></li>
+                <hr>
+            </ul>
+            </div>
+            
+            
+          </div>
+          </div>
           <!-- menu -->
           <!-- <div class="collapse navbar-collapse d-flex justify-content-center" id="navbarText">
                     <a class="nav-link" aria-current="page" href="#">Soggiorni</a>
@@ -28,22 +73,7 @@
                     <a class="nav-link" href="#">Esperienze Personali</a>
                 </div> -->
 
-          <!-- user -->
-          <div class="collapse navbar-collapse d-flex justify-content-end">
-            <a class="nav-link" aria-current="page" href="/admin"
-              >Passa alla modalità Host</a
-            >
-          </div>
-
-          <button
-            type="button"
-            class="btn btn-outline-secondary queryButton"
-            data-bs-toggle="modal"
-            data-bs-target="#prova"
-          >
-          <svg fill="none" height="15" viewBox="0 0 24 24" width="15" xmlns="http://www.w3.org/2000/svg"><path clip-rule="evenodd" d="m18 12c2.2091 0 4-1.7909 4-4 0-2.20914-1.7909-4-4-4-1.8638 0-3.4299 1.27477-3.874 3h-11.126c-.55228 0-1 .44772-1 1 0 .55229.44772 1 1 1h11.126c.4441 1.7252 2.0102 3 3.874 3zm-2-4c0 1.10457.8954 2 2 2s2-.89543 2-2-.8954-2-2-2-2 .89543-2 2zm-14 8c0-2.2091 1.79086-4 4-4 1.86384 0 3.42994 1.2748 3.87398 3h11.12602c.5523 0 1 .4477 1 1s-.4477 1-1 1h-11.12602c-.44404 1.7252-2.01014 3-3.87398 3-2.20914 0-4-1.7909-4-4zm6 0c0-1.1046-.89543-2-2-2s-2 .8954-2 2 .89543 2 2 2 2-.8954 2-2z" fill="rgb(0,0,0)" fill-rule="evenodd"/></svg>
-            <span  class="ms-2 filterModal">Filtri</span>
-          </button>
+          
         </div>
       </nav>
     </header>
@@ -51,9 +81,13 @@
 </template>
 
 <script>
-
 export default {
- 
+  data(){
+    return{
+     
+    }
+  },
+  props:["user"]
 };
 </script>
 
@@ -63,4 +97,44 @@ export default {
 .border {
   border-top: 1px solid $tertiaryColor;
 }
+
+@media only screen and (max-width: 767px) {
+    .small-device-nav{
+      display: inline-block;
+    }
+
+    .dropdown-style{
+    padding-top: 20px;
+    background-color: white;
+    border: solid white;
+    border-radius: 0 0 20px 20px;
+    box-shadow: 0px 28px 13px 0px #80808094;
+    }
+}
+
+.dropdown-style-login{
+    padding-top: 20px;
+    background-color: white;
+    border: solid white;
+    border-radius: 0 0 20px 20px;
+    box-shadow: 8px 12px 10px 0px #80808094;
+    z-index: -1;
+}
+
+.user-space{
+  padding-left: 100px;
+}
+
+.dropdown-toggle::after {
+    display: none
+}
+
+.link-log{
+  color: gray;
+}
+.hover-log:hover{
+  box-shadow: 2px 5px 4px 0px #80808066;
+  transition-duration: 0.5s, 1s;
+}
+
 </style>

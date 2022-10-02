@@ -115,17 +115,16 @@ class AccommodationController extends Controller
         $accommodation = new Accommodation();
 
         $data = $request->validated();
-
+        
         $accommodation->fill($data);
 
         $accommodation->user_id = Auth::user()->id;
 
-        
+       
 
-        $coverImg = Storage::put("/accommodation", $data["image"]);
-
-        $accommodation->image = $coverImg;
-
+       
+        $newImage= Storage::put("/accommodation", $data["image"]);
+        $accommodation->image = $newImage;
 
         // Check if the 'available' toggle is on
         if (key_exists("available", $data)) {
@@ -190,31 +189,44 @@ class AccommodationController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(AccommodationRequest $request, $slug)
-    {
+    {  
+       
 
         $data = $request->validated();
-
+       
         $accommodation = $this->findBySlug($slug);
-
+      
         if ($data["title"] !== $accommodation->title) {
             //genero un nuovo slug
+           
             $accommodation->slug = $this->generateSlug($data["title"]);
         }
+        
 
+        //non ricevo available ed immagine--le bypasso
 
-        /* Storage::delete($accommodation->image);
-        $accommodation->image = Storage::put("/accommodation", $data["image"]); */
+        if(key_exists("image",$data)){
+            Storage::delete($accommodation->image);
+            $data["image"] = Storage::put("/accommodation", $data["image"]);
+        }
+       
+        if (key_exists("available", $data)) {
+            if ($data["available"]=="on"){
+                $data["available"] = 1;
+            }
+            else{
+                $data["available"] = 0;
+            }
+        } 
+        else{
+            $data["available"] = 0;
+        }
 
-        if (key_exists("services", $data) && key_exists("sponsorships", $data)) {
+        if (key_exists("services", $data) ) {
 
             $accommodation->services()->sync($data["services"]);
-            $accommodation->sponsorship()->sync($data["sponsorships"]);
-        } elseif (key_exists("services", $data)) {
-            $accommodation->services()->sync([]);
-        } elseif (key_exists("sponsorships", $data)) {
-
-            $accommodation->sponsorship()->sync($data["sponsorships"]);
-        }
+           
+        } 
 
 
         $accommodation->update($data);

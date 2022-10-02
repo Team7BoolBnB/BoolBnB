@@ -14,7 +14,7 @@ button {
 
 // Navbar
 nav {
-    height: 70px;
+    height: $navBarHeight;
     font-family: 'Plus Jakarta Sans', sans-serif;
 
     .nav-link {
@@ -58,7 +58,7 @@ nav {
     background: #38c172;
 }
 
-.accommodation_info {
+.accommodation_info, .accommodation_info_sponsor {
     padding: 1rem;
     /* border: 1px solid $primaryColor; */
     z-index: 2;
@@ -184,12 +184,49 @@ nav {
     padding: 1rem;
     /* box-shadow: 0px 7px 10px rgba(black, 0.5); */
     text-decoration: none;
-    color: white;
+    color: white !important;
+    z-index: 1;
+    position: relative;
+    border-radius: 10px !important;
 
-    &:hover {
+    &:before {
+        position: absolute;
+        content: "";
+        top: 0;
+        right: 0;
+        left: 0;
+        bottom: 0;
+        z-index: -1;
+        border-radius: 10px !important;
+        transition: opacity 0.3s linear;
+        opacity: 0;
+        background-image: linear-gradient(135deg, rgb(99, 94, 96) 0%, rgb(173, 165, 166) 100%);
+        color: white !important;
+    }
+
+    &:hover::before {
+        opacity: 1;
+        border-radius: 10px !important;
         text-decoration: none;
-        color: white;
+        color: white !important;
         cursor: pointer;
+    }
+}
+@media only screen and (min-width: 992px) {
+    .card-all-index {
+        width: 8rem;
+        }
+}
+
+@media only screen and (max-width: 991px) {
+    .card-all {
+    background-image: linear-gradient(135deg, rgb(173, 165, 166) 0%, rgb(99, 94, 96) 100%);
+    height: 40px;
+    justify-content: center;
+    border-radius: 1rem;
+    padding: 1rem;
+    text-decoration: none;
+    color: white;
     }
 }
 
@@ -215,6 +252,23 @@ nav {
         overflow: auto;
     }
 }
+@media only screen and (max-width: 625px) {
+    .creationCol{
+        padding: 0.5rem;
+        width: 100vw;
+    }
+}
+@media only screen and (max-width: 630px) {
+    .herobunner{
+        display: flex;
+        flex-direction: column;
+    }
+    .leftCol {
+        height: 30vh;
+
+    }
+}
+
 
 .form-control {
     height: 3rem;
@@ -246,6 +300,7 @@ nav {
     }
 }
 
+
 .modal-footer {
     a{
         color: black;
@@ -255,4 +310,79 @@ nav {
         padding: 1rem 2rem;
 
     }
+}
+
+
+//gestione text banner
+@media only screen and (max-width: 400px) {
+    .font-sm {
+    font-size: 10px;
+    }
+}
+@media only screen and (min-width: 900px) {
+    .font-sm {
+    font-size: 20px;
+    }
+}
+
+//cambio scritte in icon
+.yesdisplay1{
+    display: none;
+}
+@media only screen and (max-width: 576px) {
+    .nodisplay{
+        display: none;
+    }
+    .yesdisplay{
+        padding-right: 2px;
+    }
+    .yesdisplay1{
+        padding-left: 13px;
+        display: inline-block;
+    }
+}
+
+//gestione della parte sponsorship
+
+@media only screen and (max-width: 550px) {
+    .sponsortime{
+        display: flex;
+        flex-direction: column;
+    }
+}
+
+//nav-humbergermenu
+.bg-nav{
+    background: white;
+    border: 20px;
+    border-radius: 16px;
+    margin-top: 10px;
+}
+
+.login-no{
+    display: none
+}
+
+.login-view{
+    display: flex;
+    align-items: center;
+    margin-top: 8px;
+}
+@media only screen and (max-width: 767px) {
+    .login-view{
+        display: none;
+    }
+
+    .login-no{
+        display: flex;
+    }
+}
+
+.full-height-message-container{
+    height: calc(100vh - 75px);
+    padding: .5rem 1rem;
+}
+
+.search-box-messages-section{
+    height: 10%;
 }

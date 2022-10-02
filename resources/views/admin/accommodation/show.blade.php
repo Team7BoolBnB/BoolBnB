@@ -4,25 +4,122 @@
 
     <div class="pageHeader d-flex align-items-center">
         <div class="container text-white">
-            <h2>Accommodation "{{ $accommodation->title }}"</h2>
+            <div class="row">
+                <div class="col overflow-auto">
+                    <div>
+                        <h2>{{ $accommodation->title }}</h2>
+                    </div>
+                    
+                </div>
+            </div>
         </div>
     </div>
 
     <div class="container pt-5">
 
-        <img src="{{ asset('storage/' . $accommodation->image) }}" alt="{{ $accommodation->title }}" width="100%">
+       {{--  <div>
+            <img style="border-radius: 2rem;" class="w-100 h-50" src="{{ asset('storage/' . $accommodation->image) }}" alt="{{ $accommodation->title }}">
+        </div>
+        <div class="row g-5">
+            <div class="col">
+                <h4 class="font-sm py-4"> Typology: <span class="fst-italic fw-light">{{ $accommodation->typology->name }}</span></h4>
+                <div>
+                    <p class="py-4"><strong>Description:</strong><br>{{ $accommodation->description }}</p>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <div>
+                            <ul class="list-unstyled">
+                                <li class="mb-3"><strong>Rooms:</strong><br>{{ $accommodation->rooms }}</li>
+                                <li class="mb-3"><strong>Beds:</strong><br>{{ $accommodation->beds }}</li>
+                                <li class="mb-3"><strong>Bathrooms:</strong><br>{{ $accommodation->bathrooms }}</li>
+                                <li class="mb-3"><strong>Square meters:</strong><br>{{ $accommodation->mt_square }}</li>
+                                <li class="mb-3">
+                                    @if($accommodation->available == "0")
+                                        <strong>Available:</strong><br>No
+                                    @else
+                                        <strong>Available:</strong><br>Yes
+                                    @endif
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div>
+                            <span class="mb-3"><strong>Services:</strong></span>
+                            <ul class="list-unstyled">
+                                @dump($accommodation->service)
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+            <div class="col">
+                <h4 class="font-sm py-4 text-end"> {{ $accommodation->address }}</h4>
+                <div class="py-4">
+                    <img style="border-radius: 2rem;"  class="w-100" src="https://www.google.com/maps/d/thumbnail?mid=1R-z0nvlZTWYN9LH3bxAtMhZScxo&hl=it" alt="">
+                </div>
+            </div>
+        </div> --}}
 
-        <h5 class="pt-4">{{ $accommodation->title }}</h5>
+        <div class="row row-cols-2 g-3">
+            <div class="col-8">
+                <img width="90%" style="min-height: 300px" class="img-fluid rounded" src="{{ asset('storage/' . $accommodation->image) }}" alt="{{ $accommodation->title }}">
+            </div>
+            <div id="map" class="col-4 rounded" height="100%">
+                <input id="latInput" type="text" class="d-none" value="{{$accommodation->latitude}}">
+                <input id="lonInput" type="text" class="d-none" value="{{$accommodation->longitude}}">
+            </div>
+        </div>
+        <div class="row g-5">
+            <div class="col">
+                <h5 class="font-sm py-4"> Typology: {{ $accommodation->typology->name }}</h5>
+            </div>
+            <div class="col">
+                <h5 class="font-sm py-4 text-end"> {{ $accommodation->address }}</h4>
+            </div>
+        </div>
 
-        <p class="py-4"><strong>Description:</strong><br>{{ $accommodation->description }}</p>
+        <hr>
+        
+        <div class="row py-4">
+            <div class="col">
+                <p><strong>Description:</strong><br>{{ $accommodation->description }}</p>
+            </div>
+        </div>
 
-        <p><strong>Longitude:</strong><br>{{ $accommodation->longitude }}</p>
-        <p><strong>Latitude:</strong><br>{{ $accommodation->latitude }}</p>
-        <p><strong>Rooms:</strong><br>{{ $accommodation->rooms }}</p>
-        <p><strong>Beds:</strong><br>{{ $accommodation->beds }}</p>
-        <p><strong>Bathrooms:</strong><br>{{ $accommodation->bathrooms }}</p>
-        <p><strong>Square Metre:</strong><br>{{ $accommodation->mt_square }}</p>
-        <p><strong>Available:</strong><br>{{ $accommodation->available }}</p>
+        <hr>
+        
+        <div class="row pt-4 pb-3">
+            <div class="col">
+                <ul class="list-unstyled d-flex w-100 justify-content-between">
+                    <li><h5>Rooms:</h5><p>{{ $accommodation->rooms }}</p></li>
+                    <li><h5>Beds:</h5><p>{{ $accommodation->beds }}</p></li>
+                    <li><h5>Bathrooms:</h5><p>{{ $accommodation->bathrooms }}</p></li>
+                    <li><h5>Square meters:</h5><p>{{ $accommodation->mt_square }}</p></li>
+                    <li>
+                        @if($accommodation->available == "0")
+                            <h5>Available:</h5><p>No</p>
+                        @else
+                            <h5>Available:</h5><p>Yes</p>
+                        @endif
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <hr>
+
+        <div class="row py-4">
+            <div class="col">
+                <h5 class="pb-2">Services:</h5>
+                    @foreach ($accommodation->services as $item)
+                        <p>{{$item->name}}</p>
+                    @endforeach
+            </div>
+        </div>
+
 
         {{-- <div>
             <a href="{{ route('admin.accommodation.edit', $accommodation->id) }}" class="cdBtn btn btn-primary">

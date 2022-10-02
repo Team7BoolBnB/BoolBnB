@@ -9,7 +9,12 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>{{ config('app.name', 'Laravel') }}</title>
-
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.1/dist/leaflet.css"
+    integrity="sha256-sA+zWATbFveLLNqWO2gtiw3HL/lh1giY/Inf1BJ0z14="
+    crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.9.1/dist/leaflet.js"
+    integrity="sha256-NDI0K41gVbWqfkkaHj15IzU7PtMoelkzyKp8TOaFQ3s="
+    crossorigin=""></script>
     <!-- Scripts -->
     <script src="{{ asset('js/backend.js') }}" defer></script>
     
@@ -18,17 +23,19 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
         integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.1/dist/leaflet.css" integrity="sha256-sA+zWATbFveLLNqWO2gtiw3HL/lh1giY/Inf1BJ0z14=" crossorigin="" />
+        <script src="https://unpkg.com/leaflet@1.9.1/dist/leaflet.js" integrity="sha256-NDI0K41gVbWqfkkaHj15IzU7PtMoelkzyKp8TOaFQ3s=" crossorigin="" defer></script>
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-
+    <script src="{{asset("js/handlerMaps.js")}}" defer></script>
 </head>
 
 <body>
     <div id="app">
 
         {{-- Navbar --}}
-        <nav class="navbar navbar-expand-md navbar-light bg-white">
+        <nav class="navbar navbar-expand-md navbar-light bg-white sticky-top">
             <div class="container-fluid d-flex justify-content-between">
 
                 {{-- Logo --}}
@@ -36,26 +43,48 @@
                     <a class="navbar-brand" href="{{ url('/') }}">
                         <img src="{{ asset('/img/logo.png') }}" alt="BoolBnb Logo" width="120">
                     </a>
+                </div>
+                <div>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText"
-                        aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
+                            aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
                     </button>
                 </div>
 
                 {{-- Menu --}}
-                <div class="collapse navbar-collapse d-flex justify-content-center" id="navbarText">
+                <div class="collapse navbar-collapse justify-content-center bg-nav" id="navbarText">
                     <a class="nav-link {{ Request::route()->getName() === 'admin.home' ? 'navActivePage' : '' }}" aria-current="page" href="/admin">Dashboard</a>
                     <a class="nav-link {{ Request::route()->getName() === 'admin.accommodation.index' ? 'navActivePage' : '' }}" href="{{ route('admin.accommodation.index') }}">Accommodations</a>
                     <a class="nav-link {{ Request::route()->getName() === 'admin.sponsorship.index' ? 'navActivePage' : '' }}" href="{{ route('admin.sponsorship.index') }}">Sponsorships</a>
-                </div>
+                    <a class="nav-link " href="/admin/messages">Messages</a>
 
+                    
                 {{-- User --}}
-                <div>
+
+
+                <div class="login-no">
+                    <span class="navbar-text d-flex">
+                            <div class="nav-item dropdown nav-link">
+                                    <a class="dropdown-item" href="{{ route('logout') }}"
+                                        onclick="event.preventDefault();
+                                                            document.getElementById('logout-form').submit();">
+                                        {{ __('Logout') }}
+                                    </a>
+
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                        @csrf
+                                    </form>
+                            </div>
+                    </span>
+                </div>
+                </div>
+                {{-- User --}}
+                <div class="login-view">
                     <span class="navbar-text">
                         <!-- Authentication Links -->
                         @guest
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                                <a class="nav" href="{{ route('login') }}">{{ __('Login') }}</a>
                             </li>
                             @if (Route::has('register'))
                                 <li class="nav-item">
@@ -72,7 +101,7 @@
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                         onclick="event.preventDefault();
-                                                         document.getElementById('logout-form').submit();">
+                                                            document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}
                                     </a>
 
@@ -84,7 +113,6 @@
                         @endguest
                     </span>
                 </div>
-
             </div>
         </nav>
 
