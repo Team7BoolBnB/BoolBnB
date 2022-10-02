@@ -393,6 +393,35 @@ export default {
         (this.typology_id = null),
         (this.services = []),
         (this.radius = null);
+        for (let index = 0; index < this.typologyClasses.length ; index++) {
+       
+        this.typologyClasses[index].active=false
+       
+       }
+        for (let index = 0; index < this.filterRooms.length ; index++) {
+       if(index==0){
+        this.filterRooms[index].active=true
+       }
+        else{
+          this.filterRooms[index].active=false
+        }
+       }
+       for (let index = 0; index < this.filtersBeds.length; index++) {
+       if(index==0){
+        this.filtersBeds[index].active=true
+       }
+        else{
+          this.filtersBeds[index].active=false
+        }
+       }
+       for (let index = 0; index < this.filtersBathrooms.length; index++) {
+       if(index==0){
+        this.filtersBathrooms[index].active=true
+       }
+        else{
+          this.filtersBathrooms[index].active=false
+        }
+       }
     },
     alertPopup() {
       if (this.radius) {
