@@ -1,5 +1,5 @@
 <template>
-    <div class="body-height">
+    <div class="pb-5">
         <div class="container">
                 <div class="col">
                     <a href="#" class="text-decoration-none text-reset">
@@ -30,8 +30,6 @@ export default {
 h5 {
     color: $quaternaryColor;
 }
-.body-height{
-    height: 100vh;
-}
+
 
 </style>

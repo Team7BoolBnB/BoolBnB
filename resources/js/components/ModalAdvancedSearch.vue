@@ -82,13 +82,14 @@
               </div>
               <div class="row row-cols-lg-4 row-cols-md-2 row-cols-sm-1 direction-typologies-display-sm">
                 <div
-                  v-for="typology in data.typologies"
+                  v-for="typology, index in data.typologies"
                   :key="typology.name"
                   class="col py-2"
                 >
                   <button
                     class=" btn btn-outline-dark"
-                    v-on:click="setTypology(typology.id)"
+                    :class="typologyClasses[index].active ? 'active' : '' "
+                    v-on:click="setTypology(typology.id, index)"
                   >
                     <div class="d-flex justify-content-center items-start">
                       <div><i :class="typology.icon"></i></div>
@@ -158,7 +159,7 @@
               <div class="mt-3 mb-3">
                 <h4>Services</h4>
               </div>
-              <div class="row row-cols-lg-2 row-cols-md-1 direction-services-display-sm"">
+              <div class="row row-cols-lg-2 row-cols-md-1 direction-services-display-sm">
                 <div
                   v-for="service in data.services"
                   :key="service.name"
@@ -262,6 +263,12 @@ export default {
       filterActiceClass: "",
       checkQuery: false,
       radiusCheck: false,
+      typologyClasses:[
+      {  active: false },      
+      {  active: false },
+      {  active: false },
+      {  active: false },
+      ],
       filterRooms:[
             { value: "0", active: true },
             { value: "1", active: false },
@@ -362,8 +369,18 @@ export default {
 
 
     },
-    setTypology(id) {
+    setTypology(id,value) {
       this.typology_id = id;
+
+      for (let index = 0; index < this.typologyClasses.length; index++) {
+        if(value==index){
+          this.typologyClasses[index].active=true
+        }
+        else{
+          this.typologyClasses[index].active=false
+        }
+        
+      }
     },
     coordinateSet(e) {
       this.query = e.target.value;

@@ -35,7 +35,7 @@
     <div id="app">
 
         {{-- Navbar --}}
-        <nav class="navbar navbar-expand-md navbar-light bg-white">
+        <nav class="navbar navbar-expand-md navbar-light bg-white sticky-top">
             <div class="container-fluid d-flex justify-content-between">
 
                 {{-- Logo --}}

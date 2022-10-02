@@ -130,9 +130,6 @@
         <div class="col-4">
           <div class="py-3">
 
-            <p class="m-0 text-uppercase primaryColorText">
-              mappa tom tom da sistemare
-            </p>
 
             <MapsContainer :latitude="accommodation[0].latitude" :longitude="accommodation[0].longitude"></MapsContainer>
 
