@@ -20,7 +20,7 @@ async function fetchData(query) {
      
       
 
-      if (query.length > 4) {
+      if (query.length > 10) {
             let Promise = Axios.get("https://api.tomtom.com/search/2/search/" + encodeURIComponent(query) + ".json?key=ziNw7Yn7FMXsuIsY65fMoQmyy7qrHcM3")
             let results = await Promise;
 
